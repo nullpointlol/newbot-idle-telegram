@@ -4,11 +4,11 @@
 
 ## Active Milestone: Phase 1 - MVP Core
 
-- [ ] **Task 1: [Data & Persistence] TCK-0091-C1-01 - PostgreSQL Schema & Redis Sync**
+- [x] **Task 1: [Data & Persistence] TCK-0091-C1-01 - PostgreSQL Schema & Redis Sync**
   - **Boundary**: `src/database/`, `src/cache/`
   - **Description**: Implement PostgreSQL relational schema (`users` with `version`, `assets`, `transactions`, `tasks`, `referrals`) and Redis balance caching with atomic compare-and-swap persistence.
   - **Verification Command**: `node --test tests/database_and_cache.test.js`
-  - **Status**: Pending
+  - **Status**: Completed (Exit code 0)
 
 - [ ] **Task 2: [Math Engine] TCK-0091-C1-02 - Idle Math & Offline Progression**
   - **Boundary**: `src/math/`, `src/services/offline.js`
