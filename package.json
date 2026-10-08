@@ -1,0 +1,22 @@
+{
+  "name": "newbot-idle-telegram",
+  "version": "1.0.0",
+  "description": "Telegram Mini App & Bot Idle Ecosystem (Adventure Capitalist loop, Adsgram, Telegram Stars)",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check src/server.js"
+  },
+  "keywords": [
+    "telegram-mini-app",
+    "idle-game",
+    "adventure-capitalist",
+    "adsgram",
+    "telegram-stars"
+  ],
+  "author": "SociocrAI Board & Autonomous Engineering Team",
+  "license": "MIT"
+}
