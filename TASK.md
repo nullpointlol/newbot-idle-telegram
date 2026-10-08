@@ -22,11 +22,11 @@
   - **Verification Command**: `node --test tests/monetization.test.js`
   - **Status**: Completed (Exit code 0)
 
-- [ ] **Task 4: [Virality & Tasks] TCK-0091-C1-04 - Deep Linking & Channel Verification**
+- [x] **Task 4: [Virality & Tasks] TCK-0091-C1-04 - Deep Linking & Channel Verification**
   - **Boundary**: `src/services/referral.js`, `src/services/tasks.js`
   - **Description**: Implement viral referral attribution with deep links, bilateral bonus granting, and Telegram Bot API `getChatMember` subscription verification with Redis caching.
   - **Verification Command**: `node --test tests/referral_and_tasks.test.js`
-  - **Status**: Pending
+  - **Status**: Completed (Exit code 0)
 
 - [ ] **Task 5: [Integration & TMA Foundation] Phase 1 Core Integration & Baseline TMA**
   - **Boundary**: `src/api/`, `webapp/`, `package.json`
