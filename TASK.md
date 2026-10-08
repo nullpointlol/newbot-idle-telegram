@@ -10,11 +10,11 @@
   - **Verification Command**: `node --test tests/database_and_cache.test.js`
   - **Status**: Completed (Exit code 0)
 
-- [ ] **Task 2: [Math Engine] TCK-0091-C1-02 - Idle Math & Offline Progression**
+- [x] **Task 2: [Math Engine] TCK-0091-C1-02 - Idle Math & Offline Progression**
   - **Boundary**: `src/math/`, `src/services/offline.js`
   - **Description**: Implement Adventure Capitalist geometric cost progression, CPS summation, prestige formula, and server-authoritative offline earnings calculator.
   - **Verification Command**: `node --test tests/math.test.js`
-  - **Status**: Pending
+  - **Status**: Completed (Exit code 0)
 
 - [ ] **Task 3: [Monetization] TCK-0091-C1-03 - Adsgram SDK & Telegram Stars Gateway**
   - **Boundary**: `src/services/adsgram.js`, `src/services/stars.js`, `src/security/`
