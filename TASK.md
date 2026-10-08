@@ -16,11 +16,11 @@
   - **Verification Command**: `node --test tests/math.test.js`
   - **Status**: Completed (Exit code 0)
 
-- [ ] **Task 3: [Monetization] TCK-0091-C1-03 - Adsgram SDK & Telegram Stars Gateway**
+- [x] **Task 3: [Monetization] TCK-0091-C1-03 - Adsgram SDK & Telegram Stars Gateway**
   - **Boundary**: `src/services/adsgram.js`, `src/services/stars.js`, `src/security/`
   - **Description**: Implement HMAC-SHA256 signature verification for Adsgram reward webhooks and idempotent Telegram Stars transaction ledger with unique charge IDs.
   - **Verification Command**: `node --test tests/monetization.test.js`
-  - **Status**: Pending
+  - **Status**: Completed (Exit code 0)
 
 - [ ] **Task 4: [Virality & Tasks] TCK-0091-C1-04 - Deep Linking & Channel Verification**
   - **Boundary**: `src/services/referral.js`, `src/services/tasks.js`
