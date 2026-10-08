@@ -1,0 +1,1226 @@
+[
+  {
+    "index": 1,
+    "id": "TCK-0091-C1-01",
+    "title": "Esquema relacional PostgreSQL y Redis para persistencia y sesiones",
+    "category": "Arquitectura & Negocio",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la velocidad de escritura en Redis con la consistencia relacional en PostgreSQL para balances de usuario y activos."
+  },
+  {
+    "index": 2,
+    "id": "TCK-0091-C1-02",
+    "title": "Implementación de lógica matemática idle y cálculo offline",
+    "category": "Arquitectura & Negocio",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar marcas de tiempo Unix en el servidor para evitar trampas de manipulación de reloj del cliente sin degradar la respuesta."
+  },
+  {
+    "index": 3,
+    "id": "TCK-0091-C1-03",
+    "title": "Integración del SDK de Adsgram y pasarela de Telegram Stars",
+    "category": "Arquitectura & Negocio",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar la verificación segura del lado del servidor para recompensas de anuncios y micropagos sin bloquear la interfaz de usuario."
+  },
+  {
+    "index": 4,
+    "id": "TCK-0091-C1-04",
+    "title": "Módulo de referidos profundos y verificación de tareas automáticas",
+    "category": "Arquitectura & Negocio",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar abusos de referidos falsos manteniendo un flujo de incorporación rápido y de baja fricción en Telegram."
+  },
+  {
+    "index": 5,
+    "id": "TCK-0091-C2-01",
+    "title": "Blindaje de transacciones atómicas para cálculo de ganancia offline",
+    "category": "Ciberseguridad & SRE",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión matemática de ingresos fuera de línea frente a la concurrencia de múltiples solicitudes de sincronización del cliente."
+  },
+  {
+    "index": 6,
+    "id": "TCK-0091-C2-02",
+    "title": "Sanitización estricta de parámetros initData y control OWASP",
+    "category": "Ciberseguridad & SRE",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Mantener baja latencia en la autenticación por Telegram WebApp sin comprometer la validación criptográfica de los datos de entrada."
+  },
+  {
+    "index": 7,
+    "id": "TCK-0091-C2-03",
+    "title": "Manejo resiliente de colas Redis ante fallos de red en Adsgram",
+    "category": "Ciberseguridad & SRE",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar la entrega de recompensas por anuncios cuando la red publicitaria externa experimenta interrupciones o latencia elevada."
+  },
+  {
+    "index": 8,
+    "id": "TCK-0091-C2-04",
+    "title": "Suite de pruebas QA para consistencia de estado en Telegram Stars",
+    "category": "Ciberseguridad & SRE",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Verificar microtransacciones financieras simulando interrupciones abruptas de red durante la pasarela de pagos."
+  },
+  {
+    "index": 9,
+    "id": "TCK-0091-C3-01",
+    "title": "Implementar pasarela de Telegram Stars para microtransacciones de aceleradores",
+    "category": "Facturación & Soporte",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar la confirmación atómica de pagos sin bloquear el hilo de ejecución principal de Node.js."
+  },
+  {
+    "index": 10,
+    "id": "TCK-0091-C3-02",
+    "title": "Integrar SDK de Adsgram para monetización mediante anuncios recompensados",
+    "category": "Facturación & Soporte",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la experiencia de usuario fluida con la verificación segura de visualización completa del anuncio."
+  },
+  {
+    "index": 11,
+    "id": "TCK-0091-C3-03",
+    "title": "Desarrollar consola de diagnóstico y mesa de soporte para incidencias de cobro",
+    "category": "Facturación & Soporte",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Exponer datos transaccionales sensibles al personal de soporte sin comprometer la seguridad de la base de datos."
+  },
+  {
+    "index": 12,
+    "id": "TCK-0091-C4-01",
+    "title": "Optimización de Redis para consultas de balance <50ms",
+    "category": "Desarrollo & Persistencia",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la durabilidad en PostgreSQL frente a la velocidad de lectura en memoria caché para evitar cuellos de botella."
+  },
+  {
+    "index": 13,
+    "id": "TCK-0091-C4-02",
+    "title": "Indexación de tablas PostgreSQL para cálculo offline masivo",
+    "category": "Desarrollo & Persistencia",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Optimizar los índices relacionales sin degradar el rendimiento de escritura durante las transacciones concurrentes de múltiples usuarios."
+  },
+  {
+    "index": 14,
+    "id": "TCK-0091-C4-03",
+    "title": "Reducción de huella de memoria RAM en backend Node.js",
+    "category": "Desarrollo & Persistencia",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Mantener múltiples conexiones WebSocket y procesamiento de colas consumiendo menos de 25MB de RAM por instancia."
+  },
+  {
+    "index": 15,
+    "id": "TCK-0091-C5-01",
+    "title": "Sincronización de Producción Offline mediante Comparativa de Timestamps Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión matemática en servidor vs carga computacional por cada reconexión de usuario."
+  },
+  {
+    "index": 16,
+    "id": "TCK-0091-C5-02",
+    "title": "Implementación de Webhooks para Validación de Tareas de Suscripción",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Uso de polling vs webhooks para verificar membresía en canales patrocinados."
+  },
+  {
+    "index": 17,
+    "id": "TCK-0091-C5-03",
+    "title": "Integración de Adsgram SDK para Recompensas por Video",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Retención de usuario vs frecuencia de anuncios intrusivos en la experiencia idle."
+  },
+  {
+    "index": 18,
+    "id": "TCK-0091-C5-04",
+    "title": "Gestión de Colas Redis para Notificaciones de Producción Acumulada",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Escalabilidad de notificaciones push masivas sin exceder los límites de la API de Telegram."
+  },
+  {
+    "index": 19,
+    "id": "TCK-0091-C5-05",
+    "title": "Módulo de Pagos con Telegram Stars para Aceleradores Cosméticos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Conversión de moneda local a Stars vs simplicidad de microtransacción de un solo clic."
+  },
+  {
+    "index": 20,
+    "id": "TCK-0091-C6-01",
+    "title": "Cálculo de ganancias offline tolerante a desajustes de reloj",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Procesar en cliente expone trampas, pero procesar en servidor satura la base de datos ante reconexiones masivas de usuarios."
+  },
+  {
+    "index": 21,
+    "id": "TCK-0091-C6-02",
+    "title": "Integración de webhook Adsgram con firmas criptográficas y colas",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar anuncios en frontend permite inyecciones de saldo; procesar síncronamente en base de datos genera bloqueos por concurrencia."
+  },
+  {
+    "index": 22,
+    "id": "TCK-0091-C6-03",
+    "title": "Ledger de transacciones idempotente para compras con Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Transacciones duplicadas por reintentos de red frente a la complejidad de mantener un registro distribuido estricto y bloqueante."
+  },
+  {
+    "index": 23,
+    "id": "TCK-0091-C6-04",
+    "title": "Cola de difusión masiva respetando límites de Telegram API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Rapidez en reactivación de usuarios inactivos frente al riesgo de baneo por superar límites de peticiones del protocolo."
+  },
+  {
+    "index": 24,
+    "id": "TCK-0091-C7-01",
+    "title": "Optimización del cálculo offline con Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión contable en BD relacional con la baja latencia de procesamiento temporal en memoria Redis."
+  },
+  {
+    "index": 25,
+    "id": "TCK-0091-C7-02",
+    "title": "Verificación automática de suscripciones mediante API de Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Mitigar abusos en tareas patrocinadas asegurando validación síncrona sin degradar la experiencia de usuario en la TMA."
+  },
+  {
+    "index": 26,
+    "id": "TCK-0091-C7-03",
+    "title": "Configuración de Adsgram y pasarela de Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la idempotencia en microtransacciones de Telegram Stars frente a posibles fallos de red en el SDK de Adsgram."
+  },
+  {
+    "index": 27,
+    "id": "TCK-0091-C7-04",
+    "title": "Gestión de tasa de llamadas para difusión programada en Redis",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar bloqueos por saturación de la API de Telegram al enviar notificaciones masivas a jugadores inactivos."
+  },
+  {
+    "index": 28,
+    "id": "TCK-0091-C8-01",
+    "title": "Optimización del cálculo offline de activos con Redis y Postgres",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión financiera en base de datos frente a la latencia en la recuperación de sesiones masivas inactivas."
+  },
+  {
+    "index": 29,
+    "id": "TCK-0091-C8-02",
+    "title": "Mitigación de fraudes en validación de anuncios Adsgram y Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevenir inyecciones o bypass de recompensas publicitarias sin degradar la velocidad de respuesta del SDK de Adsgram en frontend."
+  },
+  {
+    "index": 30,
+    "id": "TCK-0091-C8-03",
+    "title": "Automatización de verificación de suscripciones con API de Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear los límites de peticiones (rate limits) de la API de Telegram al verificar masivamente membresías en canales patrocinados."
+  },
+  {
+    "index": 31,
+    "id": "TCK-0091-C8-04",
+    "title": "Resiliencia y rate limiting en sistema de difusión masiva",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar la tasa de entrega de notificaciones de producción acumulada sin violar las políticas anti-spam del protocolo de Telegram."
+  },
+  {
+    "index": 32,
+    "id": "TCK-0091-C9-01",
+    "title": "Optimización del cálculo offline con Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión contable en base de datos frente a la velocidad de respuesta en Redis durante picos masivos."
+  },
+  {
+    "index": 33,
+    "id": "TCK-0091-C9-02",
+    "title": "Mitigación de fraudes en Adsgram y Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevenir manipulación de eventos de recompensa en el cliente sin degradar la fricción cero del ecosistema Telegram."
+  },
+  {
+    "index": 34,
+    "id": "TCK-0091-C9-03",
+    "title": "Automatización de verificación de canales patrocinados vía API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consumir la API de Telegram para verificar membresías sin superar los límites de peticiones (rate limits) del protocolo."
+  },
+  {
+    "index": 35,
+    "id": "TCK-0091-C9-04",
+    "title": "Despliegue de infraestructura resiliente para TMA y Webhooks",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar alta disponibilidad para picos de tráfico viral de referidos manteniendo costos operativos optimizados."
+  },
+  {
+    "index": 36,
+    "id": "TCK-0091-C10-01",
+    "title": "Optimización de cálculo offline mediante sincronización de marcas Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión de las marcas de tiempo Unix con la carga de escritura masiva en base de datos durante picos de reconexión."
+  },
+  {
+    "index": 37,
+    "id": "TCK-0091-C10-02",
+    "title": "Implementación de middleware de validación para Adsgram SDK",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar transacciones de micropagos sin introducir latencia percibida en la interfaz fluida construida en React."
+  },
+  {
+    "index": 38,
+    "id": "TCK-0091-C10-03",
+    "title": "Arquitectura de colas en Redis para notificaciones push programadas",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Mitigar abusos en tareas automáticas de referidos y suscripciones sin saturar los límites de peticiones (rate limits) de la API de Telegram."
+  },
+  {
+    "index": 39,
+    "id": "TCK-0091-C10-04",
+    "title": "Sistema de referidos con enlaces profundos y validación de tareas",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Volumen de mensajes de reactivación vs. límites de la API de Telegram para evitar bloqueos por spam."
+  },
+  {
+    "index": 40,
+    "id": "TCK-0091-C11-01",
+    "title": "Implementar motor de cálculo offline mediante sincronización Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión matemática frente a latencia de base de datos en cálculos de acumulación masiva."
+  },
+  {
+    "index": 41,
+    "id": "TCK-0091-C11-02",
+    "title": "Integración de Adsgram SDK con callback de validación segura",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar impresiones sin degradar la experiencia de usuario o permitir fraude publicitario."
+  },
+  {
+    "index": 42,
+    "id": "TCK-0091-C11-03",
+    "title": "Sistema de referidos con enlaces profundos y validación de suscripción",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre crecimiento viral agresivo y límites de tasa (rate limiting) de la API de Telegram."
+  },
+  {
+    "index": 43,
+    "id": "TCK-0091-C11-04",
+    "title": "Optimización de persistencia en PostgreSQL con caché Redis",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consistencia de datos transaccionales versus rendimiento de lectura en tiempo real."
+  },
+  {
+    "index": 44,
+    "id": "TCK-0091-C12-01",
+    "title": "Implementación de lógica de cálculo offline mediante Unix timestamps",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar desincronización entre cliente y servidor al calcular ganancias acumuladas durante periodos de inactividad prolongada."
+  },
+  {
+    "index": 45,
+    "id": "TCK-0091-C12-02",
+    "title": "Configuración de persistencia y caché con Redis para sesiones",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre latencia de lectura para clics frecuentes y consistencia de datos en PostgreSQL."
+  },
+  {
+    "index": 46,
+    "id": "TCK-0091-C12-03",
+    "title": "Integración del SDK de Adsgram con callback de recompensa",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar que la recompensa solo se otorgue tras la verificación exitosa del evento 'rewarded' del SDK."
+  },
+  {
+    "index": 47,
+    "id": "TCK-0091-C12-04",
+    "title": "Sistema de verificación de suscripciones vía Telegram API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Optimizar el número de peticiones a la API de Telegram para no exceder los límites de tasa (rate limits)."
+  },
+  {
+    "index": 48,
+    "id": "TCK-0091-C12-05",
+    "title": "Diseño de esquema relacional para activos y sistema prestigio",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Normalizar datos para permitir escalabilidad sin comprometer la velocidad de consulta del perfil de usuario."
+  },
+  {
+    "index": 49,
+    "id": "TCK-0091-C13-01",
+    "title": "Optimización de cálculo de ganancias offline mediante Unix timestamps",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión matemática vs. carga de base de datos en el cálculo recurrente de ingresos pasivos."
+  },
+  {
+    "index": 50,
+    "id": "TCK-0091-C13-02",
+    "title": "Integración de Adsgram SDK con callback de validación segura",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevención de fraude en recompensas publicitarias vs. latencia en la entrega de bonificaciones al usuario."
+  },
+  {
+    "index": 51,
+    "id": "TCK-0091-C13-03",
+    "title": "Sistema de referidos con validación de profundidad en PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Estructura de grafo para referidos vs. rendimiento en consultas de niveles de profundidad para bonificaciones."
+  },
+  {
+    "index": 52,
+    "id": "TCK-0091-C13-04",
+    "title": "Implementación de rate limiting en notificaciones push de Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Frecuencia de reactivación de usuarios vs. límites de API de Telegram (429 Too Many Requests)."
+  },
+  {
+    "index": 53,
+    "id": "TCK-0091-C14-01",
+    "title": "Implementación de motor de cálculo offline y lógica de prestigio",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión matemática vs latencia en sincronización de estado entre base de datos y cliente."
+  },
+  {
+    "index": 54,
+    "id": "TCK-0091-C14-02",
+    "title": "Integración de Adsgram SDK para multiplicadores de recompensa temporales",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Confianza en el cliente vs seguridad del lado del servidor frente a inyección de eventos."
+  },
+  {
+    "index": 55,
+    "id": "TCK-0091-C14-03",
+    "title": "Sistema de colas Redis para reactivación masiva mediante Telegram Bot",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Fricción de usuario vs tasa de conversión en el proceso de invitación."
+  },
+  {
+    "index": 56,
+    "id": "TCK-0091-C14-04",
+    "title": "Módulo de validación de tareas sociales vía API oficial",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consistencia eventual vs escalabilidad bajo picos de tráfico masivo."
+  },
+  {
+    "index": 57,
+    "id": "TCK-0091-C14-05",
+    "title": "Auditoría de integridad de marcas de tiempo y prevención de fraude",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Seguridad estricta en el lado del servidor vs. tolerancia a micro-desconexiones de red."
+  },
+  {
+    "index": 58,
+    "id": "TCK-0091-C15-01",
+    "title": "Implementación de cálculo de ganancias offline con marcas Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre precisión matemática de ganancias offline y carga de escritura en base de datos persistente."
+  },
+  {
+    "index": 59,
+    "id": "TCK-0091-C15-02",
+    "title": "Optimización de persistencia con Redis para estados de sesión",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevenir fraude en tareas de suscripción sin exceder los límites de tasa (rate limiting) de la API de Telegram."
+  },
+  {
+    "index": 60,
+    "id": "TCK-0091-C15-03",
+    "title": "Integración de Adsgram SDK con callback de verificación segura",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Trazabilidad de referidos vs. facilidad de uso mediante parámetros en el start del bot."
+  },
+  {
+    "index": 61,
+    "id": "TCK-0091-C15-04",
+    "title": "Sistema de difusión (Push) segmentado para usuarios inactivos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar la entrega de recompensa solo tras la visualización completa del anuncio sin vulnerar la integridad del cliente."
+  },
+  {
+    "index": 62,
+    "id": "TCK-0091-C15-05",
+    "title": "Auditoría de integridad de referidos mediante enlaces profundos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar origen del referido vs. evitar creación masiva de cuentas falsas (Sybil attack)."
+  },
+  {
+    "index": 63,
+    "id": "TCK-0091-C16-01",
+    "title": "Optimización del cálculo offline con marcas de tiempo Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión matemática del idle con el consumo de CPU en base de datos al recalcular ganancias masivas."
+  },
+  {
+    "index": 64,
+    "id": "TCK-0091-C16-02",
+    "title": "Mitigación de fraudes en verificación de tareas de canales",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Verificar membresía en canales sin saturar los límites de peticiones (rate limits) de la API oficial de Telegram."
+  },
+  {
+    "index": 65,
+    "id": "TCK-0091-C16-03",
+    "title": "Integración y persistencia segura de pagos con Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la entrega atómica de aceleradores cosméticos frente a fallos de red durante el webhook de Telegram Stars."
+  },
+  {
+    "index": 66,
+    "id": "TCK-0091-C16-04",
+    "title": "Automatización de difusión masiva respetando límites de Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar la reactivación de usuarios inactivos sin superar el límite de 30 mensajes por segundo de la API de Telegram."
+  },
+  {
+    "index": 67,
+    "id": "TCK-0091-C17-01",
+    "title": "Implementación de cálculo de ganancias offline mediante Unix timestamps",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar inconsistencias entre timestamps de cliente y servidor sin sobrecargar consultas SQL frecuentes."
+  },
+  {
+    "index": 68,
+    "id": "TCK-0091-C17-02",
+    "title": "Integración de Adsgram SDK con validación de eventos Webhook",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la latencia de peticiones a la API de Telegram con la experiencia de usuario inmediata."
+  },
+  {
+    "index": 69,
+    "id": "TCK-0091-C17-03",
+    "title": "Optimización de persistencia con Redis para sesiones de alta frecuencia",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la atomicidad de la entrega de activos digitales tras la confirmación de pago por Telegram."
+  },
+  {
+    "index": 70,
+    "id": "TCK-0091-C17-04",
+    "title": "Sistema de referidos con enlaces profundos y validación automática",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Enviar notificaciones de reactivación sin exceder los límites de 30 mensajes por segundo de la API."
+  },
+  {
+    "index": 71,
+    "id": "TCK-0091-C17-05",
+    "title": "Módulo de verificación de suscripción vía Telegram Bot API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Verificación de suscripción en tiempo real frente a límites de tasa (rate limits) de la API de Telegram."
+  },
+  {
+    "index": 72,
+    "id": "TCK-0091-C18-01",
+    "title": "Implementar cálculo de ganancias offline mediante diferencial Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar desincronización entre cliente y servidor manteniendo la integridad matemática del estado del usuario."
+  },
+  {
+    "index": 73,
+    "id": "TCK-0091-C18-02",
+    "title": "Estructurar esquema relacional para persistencia de activos y prestigio",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear normalización de base de datos con la velocidad de lectura necesaria para una Mini App fluida."
+  },
+  {
+    "index": 74,
+    "id": "TCK-0091-C18-03",
+    "title": "Integración de Adsgram con validación de eventos post-recompensa",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar que la recompensa solo se otorgue tras la confirmación real del SDK, evitando fraude por manipulación del cliente."
+  },
+  {
+    "index": 75,
+    "id": "TCK-0091-C18-04",
+    "title": "Sistema de difusión (Push) para reactivación de usuarios",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Cumplir con los límites de peticiones (rate limits) de la API de Telegram al enviar notificaciones masivas."
+  },
+  {
+    "index": 76,
+    "id": "TCK-0091-C19-01",
+    "title": "Implementación de cálculo offline mediante sincronización de marcas Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar el cálculo en cliente para prevenir trampas versus mantener latencia mínima en la experiencia de usuario."
+  },
+  {
+    "index": 77,
+    "id": "TCK-0091-C19-02",
+    "title": "Integración de Adsgram SDK con callback de validación segura",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Riesgo de fraude en eventos de recompensa por peticiones maliciosas versus necesidad de monetización fluida."
+  },
+  {
+    "index": 78,
+    "id": "TCK-0091-C19-03",
+    "title": "Optimización de persistencia con Redis para estados de sesión",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Carga de escritura en PostgreSQL versus velocidad de lectura para estados de sesión temporales y contadores."
+  },
+  {
+    "index": 79,
+    "id": "TCK-0091-C19-04",
+    "title": "Módulo de verificación de suscripciones vía Telegram Bot API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consumo de límites de tasa de la API de Telegram versus necesidad de verificar tareas en tiempo real."
+  },
+  {
+    "index": 80,
+    "id": "TCK-0091-C20-01",
+    "title": "Implementación de cálculo de ingresos offline mediante timestamps Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión del cálculo vs. carga de base de datos en peticiones concurrentes de usuarios que regresan tras inactividad."
+  },
+  {
+    "index": 81,
+    "id": "TCK-0091-C20-02",
+    "title": "Integración de Adsgram SDK con validación de callback segura",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar fraude en recompensas publicitarias vs. mantener baja latencia en la entrega de la recompensa al usuario."
+  },
+  {
+    "index": 82,
+    "id": "TCK-0091-C20-03",
+    "title": "Optimización de Redis para colas de eventos de referidos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consistencia de datos en tiempo real vs. escalabilidad bajo picos de tráfico viral de usuarios nuevos."
+  },
+  {
+    "index": 83,
+    "id": "TCK-0091-C20-04",
+    "title": "Arquitectura de persistencia de prestigio y multiplicadores permanentes",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Flexibilidad del árbol de multiplicadores vs. rendimiento en consultas SQL complejas de estado actual del usuario."
+  },
+  {
+    "index": 84,
+    "id": "TCK-0091-C21-01",
+    "title": "Implementar motor de cálculo offline mediante sincronización Unix timestamp",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Evitar desincronización del balance entre cliente y servidor ante manipulación del reloj local del dispositivo."
+  },
+  {
+    "index": 85,
+    "id": "TCK-0091-C21-02",
+    "title": "Optimización de colas en Redis para eventos de Adsgram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear latencia de escritura en base de datos vs. consistencia inmediata tras ver un anuncio."
+  },
+  {
+    "index": 86,
+    "id": "TCK-0091-C21-03",
+    "title": "Sistema de verificación de suscripción vía Telegram Bot API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Limitar el uso de la API oficial para evitar bloqueos por rate-limiting durante picos de tráfico."
+  },
+  {
+    "index": 87,
+    "id": "TCK-0091-C21-04",
+    "title": "Diseño de esquema relacional para sistema de prestigio y referidos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Normalización de tablas para permitir consultas rápidas de jerarquía de referidos sin penalizar el rendimiento del juego."
+  },
+  {
+    "index": 88,
+    "id": "TCK-0091-C22-01",
+    "title": "Optimización del cálculo offline con Supabase y marcas Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión matemática del idle con la sobrecarga de consultas concurrentes a PostgreSQL."
+  },
+  {
+    "index": 89,
+    "id": "TCK-0091-C22-02",
+    "title": "Integración y validación transaccional segura con Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la entrega inmediata de aceleradores cosméticos sin vulnerar la idempotencia de los pagos digitales."
+  },
+  {
+    "index": 90,
+    "id": "TCK-0091-C22-03",
+    "title": "Mitigación de abuso en la verificación de tareas de canales",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar membresías mediante la API de Telegram minimizando la latencia y evitando ataques de denegación de servicio."
+  },
+  {
+    "index": 91,
+    "id": "TCK-0091-C22-04",
+    "title": "Orquestación de notificaciones push masivas respetando límites de tasa",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Difundir avisos de producción acumulada a usuarios inactivos sin superar los límites de peticiones del protocolo de Telegram."
+  },
+  {
+    "index": 92,
+    "id": "TCK-0091-C23-01",
+    "title": "Optimización de cálculo offline con Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión contable transaccional en PostgreSQL frente a la velocidad de lectura masiva con Redis."
+  },
+  {
+    "index": 93,
+    "id": "TCK-0091-C23-02",
+    "title": "Integración y validación segura de Adsgram y Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevenir fraude en recompensas publicitarias y microtransacciones sin añadir fricción innecesaria al jugador casual."
+  },
+  {
+    "index": 94,
+    "id": "TCK-0091-C23-03",
+    "title": "Motor de verificación automatizada de suscripciones a canales",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consumir la API de Telegram para verificar membresías sin superar los límites de peticiones (rate limits) del protocolo."
+  },
+  {
+    "index": 95,
+    "id": "TCK-0091-C23-04",
+    "title": "Despliegue de infraestructura altamente disponible con Supabase y Redis",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar baja latencia global en llamadas a la Mini App minimizando costos operativos en la nube."
+  },
+  {
+    "index": 96,
+    "id": "TCK-0091-C24-01",
+    "title": "Implementación de cálculo de ganancias offline basado en Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión matemática frente a latencia de base de datos durante el cálculo de estados acumulados."
+  },
+  {
+    "index": 97,
+    "id": "TCK-0091-C24-02",
+    "title": "Integración de Adsgram SDK con eventos de recompensa",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre monetización invasiva y experiencia de usuario fluida para evitar abandono."
+  },
+  {
+    "index": 98,
+    "id": "TCK-0091-C24-03",
+    "title": "Optimización de colas de difusión con Redis",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Velocidad de envío vs. límites de tasa (rate limits) de la API de Telegram."
+  },
+  {
+    "index": 99,
+    "id": "TCK-0091-C24-04",
+    "title": "Sistema de verificación de suscripción vía API Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Verificación de cumplimiento de tareas frente a posibles ataques de spoofing en el cliente."
+  },
+  {
+    "index": 100,
+    "id": "TCK-0091-C25-01",
+    "title": "Optimización de Sincronización Offline con Redis y Supabase",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión en el cálculo de ganancias fuera de línea frente a la sobrecarga de consultas concurrentes a PostgreSQL."
+  },
+  {
+    "index": 101,
+    "id": "TCK-0091-C25-02",
+    "title": "Mitigación de Fraude en Tareas de Suscripción Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar membresías de canales mediante la API de Telegram sin superar los límites de peticiones (rate limits) del bot."
+  },
+  {
+    "index": 102,
+    "id": "TCK-0091-C25-03",
+    "title": "Integración del SDK de Adsgram y MicroPagos con Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la entrega transaccional del acelerador cosmético tras confirmar el pago con Telegram Stars sin perder consistencia ante fallos de red."
+  },
+  {
+    "index": 103,
+    "id": "TCK-0091-C25-04",
+    "title": "Estructuración del Sistema de Referidos con Enlaces Profundos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Mantener la trazabilidad viral de los enlaces profundos (deeplinks) sin degradar el rendimiento de inicialización de la TMA."
+  },
+  {
+    "index": 104,
+    "id": "TCK-0091-C26-01",
+    "title": "Optimización de cálculo fuera de línea mediante Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión matemática de ingresos offline con la latencia en la concurrencia masiva de usuarios."
+  },
+  {
+    "index": 105,
+    "id": "TCK-0091-C26-02",
+    "title": "Verificación automatizada de suscripciones a canales patrocinados vía Telegram API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar membresías de canales sin saturar los límites de peticiones (rate limits) de la API oficial de Telegram."
+  },
+  {
+    "index": 106,
+    "id": "TCK-0091-C26-03",
+    "title": "Integración del SDK de Adsgram para monetización con anuncios de recompensa",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la entrega de recompensas frontend solo tras la confirmación criptográfica o de eventos del SDK de Adsgram."
+  },
+  {
+    "index": 107,
+    "id": "TCK-0091-C26-04",
+    "title": "Estructuración y persistencia del bucle de prestigio y multiplicadores",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Rediseñar la estructura relacional para permitir reinicios masivos de activos sin corromper el historial de transacciones del usuario."
+  },
+  {
+    "index": 108,
+    "id": "TCK-0091-C27-01",
+    "title": "Optimización de cálculo offline mediante Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión financiera de la progresión pasiva con la latencia en el procesamiento masivo de reingresos."
+  },
+  {
+    "index": 109,
+    "id": "TCK-0091-C27-02",
+    "title": "Verificación automatizada de suscripciones a canales patrocinados",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Validar membresías en canales externos sin comprometer los límites de peticiones (rate limits) de la API oficial de Telegram."
+  },
+  {
+    "index": 110,
+    "id": "TCK-0091-C27-03",
+    "title": "Mitigación de fraudes en micropagos con Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Asegurar la entrega instantánea de aceleradores cosméticos frente a posibles fallos de red durante la confirmación del pago."
+  },
+  {
+    "index": 111,
+    "id": "TCK-0091-C27-04",
+    "title": "Automatización de difusión masiva con control de tasa de envío",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar la re-engagement de usuarios inactivos sin violar las políticas de spam ni los límites de peticiones por segundo de Telegram."
+  },
+  {
+    "index": 112,
+    "id": "TCK-0091-C28-01",
+    "title": "Optimización de cálculo de ganancias offline con Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión matemática de marcas de tiempo Unix con el rendimiento de consultas masivas concurrentes en Supabase."
+  },
+  {
+    "index": 113,
+    "id": "TCK-0091-C28-02",
+    "title": "Integración segura de Adsgram y validación de Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar la inmutabilidad de las recompensas publicitarias y microtransacciones previniendo inyecciones o falsificación de eventos del cliente."
+  },
+  {
+    "index": 114,
+    "id": "TCK-0091-C28-03",
+    "title": "Verificación automatizada de suscripciones a canales patrocinados vía API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Cumplir con los límites de peticiones (rate limits) de la API de Telegram al validar tareas masivas de usuarios concurrentes."
+  },
+  {
+    "index": 115,
+    "id": "TCK-0091-C28-04",
+    "title": "Motor de difusión programada para re-engagement de usuarios inactivos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar el alcance de notificaciones push pasivas sin superar las restricciones de velocidad de envío de mensajes por segundo de Telegram."
+  },
+  {
+    "index": 116,
+    "id": "TCK-0091-C29-01",
+    "title": "Implementación de validación de ganancias offline mediante marcas de tiempo Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear precisión matemática en servidor para evitar exploits de reloj local versus sobrecarga de consultas en Redis/PostgreSQL."
+  },
+  {
+    "index": 117,
+    "id": "TCK-0091-C29-02",
+    "title": "Validación criptográfica de initData de Telegram en cada petición API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Seguridad absoluta contra peticiones falsas frente a latencia adicional introducida al verificar la firma HMAC-SHA256 en cada llamada."
+  },
+  {
+    "index": 118,
+    "id": "TCK-0091-C29-03",
+    "title": "Cola de mensajería BullMQ en Redis para difusión masiva resiliente",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar la velocidad de entrega de notificaciones de reactivación versus respetar estrictamente el límite de 30 req/seg de Telegram."
+  },
+  {
+    "index": 119,
+    "id": "TCK-0091-C29-04",
+    "title": "Integración de webhook seguro de Adsgram para multiplicadores temporales",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Ofrecer recompensas instantáneas al usuario versus asegurar que el anuncio fue reproducido completamente antes de activar el multiplicador."
+  },
+  {
+    "index": 120,
+    "id": "TCK-0091-C30-01",
+    "title": "Optimización del cálculo offline con Redis y PostgreSQL",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrar la precisión contable financiera con la velocidad de lectura concurrente ante desconexiones masivas."
+  },
+  {
+    "index": 121,
+    "id": "TCK-0091-C30-02",
+    "title": "Mitigación de fraudes en verificación de tareas con API de Telegram",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Velocidad de validación automática frente a restricciones de tasa (rate limits) de la API oficial de Telegram en picos virales."
+  },
+  {
+    "index": 122,
+    "id": "TCK-0091-C30-03",
+    "title": "Resiliencia en entrega de Adsgram y webhooks de Telegram Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Consistencia transaccional distribuida entre microservicios de publicidad de terceros y pasarelas de pago internas."
+  },
+  {
+    "index": 123,
+    "id": "TCK-0091-C30-04",
+    "title": "Orquestación de difusiones masivas respetando rate limits del bot",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Velocidad de reactivación de usuarios inactivos frente a la prohibición por saturación impuesta por el protocolo de Telegram."
+  },
+  {
+    "index": 124,
+    "id": "TCK-0091-C31-01",
+    "title": "Optimización de cálculo de ganancias offline mediante Redis",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Balancear la precisión contable financiera con la latencia del servidor durante picos de reconexión masiva de usuarios."
+  },
+  {
+    "index": 125,
+    "id": "TCK-0091-C31-02",
+    "title": "Mitigación de fraudes en validación de anuncios Adsgram y Stars",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Prevenir la inyección de recompensas falsas en el cliente sin degradar la velocidad de respuesta de la interfaz."
+  },
+  {
+    "index": 126,
+    "id": "TCK-0091-C31-03",
+    "title": "Automatización de verificación de suscripciones en canales patrocinados",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Respetar los límites de tasa (rate limits) de la API de Telegram al verificar miles de usuarios concurrentes."
+  },
+  {
+    "index": 127,
+    "id": "TCK-0091-C31-04",
+    "title": "Estructuración de difusión masiva para reactivación de inactivos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Maximizar la tasa de entrega de notificaciones push sin exceder las restricciones de mensajes por segundo de Telegram."
+  },
+  {
+    "index": 128,
+    "id": "TCK-0091-C32-01",
+    "title": "Implementar motor de cálculo offline mediante diff de Unix timestamp",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Cálculo en servidor vs cliente para prevenir exploits de manipulación de tiempo local y asegurar integridad de balances."
+  },
+  {
+    "index": 129,
+    "id": "TCK-0091-C32-02",
+    "title": "Integración del SDK Adsgram con validación de eventos server-side",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Verificación de visualización de anuncios en cliente sin confiar ciegamente en el callback del frontend para prevenir fraude."
+  },
+  {
+    "index": 130,
+    "id": "TCK-0091-C32-03",
+    "title": "Sistema de referidos virales con deep linking y bonificación bidireccional",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre incentivos agresivos para crecimiento viral y protección contra ataques de bots mediante cuentas masivas."
+  },
+  {
+    "index": 131,
+    "id": "TCK-0091-C32-04",
+    "title": "Automatización de notificaciones push para reactivación de usuarios inactivos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Frecuencia de notificaciones vs límites de API de Telegram para evitar bloqueos por spam (rate limiting)."
+  },
+  {
+    "index": 132,
+    "id": "TCK-0091-C32-05",
+    "title": "Capa de persistencia con Redis para caché de sesiones de juego",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Carga excesiva en PostgreSQL vs latencia de escritura en tiempo real para estados temporales de alta frecuencia."
+  },
+  {
+    "index": 133,
+    "id": "TCK-0091-C33-01",
+    "title": "Implementar lógica de cálculo de ganancias offline vía Unix",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Precisión de cálculo en cliente vs servidor para evitar exploits de manipulación de tiempo local."
+  },
+  {
+    "index": 134,
+    "id": "TCK-0091-C33-02",
+    "title": "Integración de Adsgram SDK con validación de eventos",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Garantizar entrega de recompensa solo tras confirmación de visualización completa del anuncio."
+  },
+  {
+    "index": 135,
+    "id": "TCK-0091-C33-03",
+    "title": "Optimización de base de datos con Redis para estados",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Reducir latencia de escritura en PostgreSQL mediante cacheo de sesiones activas en memoria."
+  },
+  {
+    "index": 136,
+    "id": "TCK-0091-C33-04",
+    "title": "Automatización de verificación de suscripciones vía Telegram API",
+    "category": "Negocio & Arquitectura",
+    "priority": "Alta",
+    "status": "approved",
+    "dilemma": "Equilibrio entre peticiones permitidas por la API (Rate Limiting) y verificación masiva de tareas."
+  }
+]
