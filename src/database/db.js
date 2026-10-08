@@ -12,8 +12,9 @@ class DatabaseAdapter {
   }
 
   init() {
-    // Enable Write-Ahead Logging (WAL) for high concurrency
+    // Enable Write-Ahead Logging (WAL) and busy timeout for high concurrency
     this.sqlite.exec('PRAGMA journal_mode = WAL;');
+    this.sqlite.exec('PRAGMA busy_timeout = 5000;');
     this.sqlite.exec('PRAGMA foreign_keys = ON;');
 
     // Initialize tables identical to PostgreSQL schema
@@ -88,6 +89,10 @@ class DatabaseAdapter {
 
   // --- User Operations ---
   createUser({ telegram_id, username = '', first_name = '', initial_balance = 0.0, last_active_timestamp = Math.floor(Date.now() / 1000) }) {
+    const existing = this.getUserByTelegramId(telegram_id);
+    if (existing) {
+      return existing;
+    }
     const id = randomUUID();
     const stmt = this.sqlite.prepare(`
       INSERT INTO users (id, telegram_id, username, first_name, balance, lifetime_earnings, prestige_points, last_active_timestamp, version)

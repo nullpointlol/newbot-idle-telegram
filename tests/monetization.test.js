@@ -10,7 +10,7 @@ describe('TCK-0091-C1-03: Adsgram & Telegram Stars Monetization Suite', () => {
 
   before(() => {
     testUser = db.createUser({
-      telegram_id: 999003,
+      telegram_id: 990000 + Math.floor(Math.random() * 100000),
       username: 'monetized_trader',
       first_name: 'MoneyMaker',
       initial_balance: 500.0,

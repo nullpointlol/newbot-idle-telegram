@@ -17,7 +17,7 @@ describe('TCK-0091-C1-02: Idle Math & Offline Progression Suite', () => {
 
   before(() => {
     testUser = db.createUser({
-      telegram_id: 999002,
+      telegram_id: 995000 + Math.floor(Math.random() * 100000),
       username: 'offline_tester',
       first_name: 'IdlePro',
       initial_balance: 50.0,

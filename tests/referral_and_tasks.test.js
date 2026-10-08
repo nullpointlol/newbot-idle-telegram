@@ -11,22 +11,23 @@ describe('TCK-0091-C1-04: Referrals & Channel Task Verification Suite', () => {
   let taskUser;
 
   before(() => {
+    const runId = Math.floor(Math.random() * 100000);
     referrerUser = db.createUser({
-      telegram_id: 888001,
+      telegram_id: 888000 + runId,
       username: 'influencer_tg',
       first_name: 'Alex',
       initial_balance: 100.0
     });
 
     refereeUser = db.createUser({
-      telegram_id: 888002,
+      telegram_id: 889000 + runId,
       username: 'newbie_tg',
       first_name: 'Bob',
       initial_balance: 50.0
     });
 
     taskUser = db.createUser({
-      telegram_id: 888003,
+      telegram_id: 890000 + runId,
       username: 'task_hunter',
       first_name: 'Charlie',
       initial_balance: 0.0

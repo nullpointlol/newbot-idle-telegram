@@ -28,11 +28,11 @@
   - **Verification Command**: `node --test tests/referral_and_tasks.test.js`
   - **Status**: Completed (Exit code 0)
 
-- [ ] **Task 5: [Integration & TMA Foundation] Phase 1 Core Integration & Baseline TMA**
+- [x] **Task 5: [Integration & TMA Foundation] Phase 1 Core Integration & Baseline TMA**
   - **Boundary**: `src/api/`, `webapp/`, `package.json`
   - **Description**: Set up unified Express/Node application bootstrap, Telegram WebApp client scaffold, and run complete test suite.
   - **Verification Command**: `npm test`
-  - **Status**: Pending
+  - **Status**: Completed (Exit code 0)
 
 ---
 
