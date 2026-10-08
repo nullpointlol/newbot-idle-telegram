@@ -309,6 +309,19 @@ const isMainModule = process.argv[1] && (
 
 if (isMainModule && process.env.NODE_ENV !== 'test') {
   const server = createServer();
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      const altPort = PORT + 1;
+      console.warn(`⚠️ Puerto ${PORT} en uso. Intentando puerto alternativo ${altPort}...`);
+      server.listen(altPort, () => {
+        console.log(`🚀 Telegram Idle Ecosystem corriendo en http://localhost:${altPort}`);
+        console.log(`📱 Telegram Mini App disponible en http://localhost:${altPort}/`);
+      });
+    } else {
+      console.error('Error al iniciar el servidor:', err);
+    }
+  });
+
   server.listen(PORT, () => {
     console.log(`🚀 Telegram Idle Ecosystem running on http://localhost:${PORT}`);
     console.log(`📱 Telegram Mini App available at http://localhost:${PORT}/`);
