@@ -78,7 +78,7 @@ describe('Task 5: Core Server & Telegram Mini App Integration Suite', () => {
     const data = await res.json();
     assert.equal(data.success, true);
     assert.ok(data.cost > 0);
-    assert.equal(data.newBalance, freshUser.balance - data.cost);
+    assert.equal(data.newBalance, Math.round((freshUser.balance - data.cost) * 100) / 100);
   });
 
   test('POST /webhook/adsgram: Recibe webhook con firma HMAC y activa multiplicador', async () => {

@@ -134,4 +134,13 @@ describe('Board Evolution Cycles (Cycles 133-137) Advanced Architecture Suite', 
     assert.equal(replayCall.status, 409);
     assert.match(replayCall.error, /Replay detected/);
   });
+
+  test('TCK-0091-C3-03: Diagnostic & Support Console provides health and ledger audit', () => {
+    const stats = db.getDiagnosticStats();
+    assert.ok(stats.totalUsers >= 2);
+    assert.ok(typeof stats.totalTransactions === 'number');
+
+    const recentTx = db.getRecentTransactions(10);
+    assert.ok(Array.isArray(recentTx));
+  });
 });

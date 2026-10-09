@@ -516,6 +516,21 @@ function setupHeaderControls() {
     });
   }
 
+  // Mobile QR Modal
+  const btnQr = document.getElementById('btn-show-qr');
+  const qrModal = document.getElementById('qr-modal');
+  const btnCloseQr = document.getElementById('btn-close-qr');
+  if (btnQr && qrModal) {
+    btnQr.addEventListener('click', () => {
+      qrModal.classList.add('active');
+    });
+  }
+  if (btnCloseQr && qrModal) {
+    btnCloseQr.addEventListener('click', () => {
+      qrModal.classList.remove('active');
+    });
+  }
+
   // Multiplier Toggles
   const multButtons = document.querySelectorAll('.mult-btn');
   multButtons.forEach(btn => {

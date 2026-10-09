@@ -35,6 +35,7 @@
         </div>
         <button class="hud-square-btn" id="btn-toggle-theme" title="Alternar Color / 1-Bit">🎨</button>
         <button class="hud-square-btn" id="btn-toggle-sound" title="Sonido 8-bit">🔊</button>
+        <button class="hud-square-btn" id="btn-show-qr" title="Jugar en Celular">📱</button>
       </div>
     </header>
 
@@ -306,6 +307,27 @@
         <div class="modal-cash-highlight" id="offline-earned-amount">+ $ 0</div>
         <p class="modal-time" id="offline-time-text">Tiempo transcurrido: 0 horas</p>
         <button class="btn-modal-collect" id="btn-close-offline">RECOGER</button>
+      </div>
+    </div>
+
+    <!-- Modal Acceso Móvil (QR) -->
+    <div id="qr-modal" class="modal-backdrop">
+      <div class="modal-box" style="text-align: center; max-width: 320px;">
+        <div class="modal-pet-emoji">📱</div>
+        <h2>Jugar en tu Celular</h2>
+        <p style="font-size: 13px; color: var(--text-dim); margin-bottom: 12px;">
+          Conectado al mismo Wi-Fi:
+        </p>
+        <div style="background: #ffffff; padding: 12px; display: inline-block; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://192.168.0.61:3001/" alt="QR Celular" width="180" height="180" style="display: block;">
+        </div>
+        <div style="font-weight: 800; font-family: monospace; font-size: 14px; color: var(--accent); margin-bottom: 6px;">
+          http://192.168.0.61:3001/
+        </div>
+        <p style="font-size: 11px; color: var(--text-dim); margin-bottom: 16px;">
+          Escaneá con la cámara de tu celular.
+        </p>
+        <button class="btn-modal-collect" id="btn-close-qr" style="width: 100%;">CERRAR</button>
       </div>
     </div>
   </div>

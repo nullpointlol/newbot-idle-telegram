@@ -244,6 +244,29 @@ class DatabaseAdapter {
     return stmt.all(cutoff, maxResults);
   }
 
+  // --- Diagnostic & Support Console Queries (TCK-0091-C3-03) ---
+  getRecentTransactions(limit = 20) {
+    const stmt = this.sqlite.prepare(`
+      SELECT t.*, u.telegram_id, u.username
+      FROM transactions t
+      LEFT JOIN users u ON t.user_id = u.id
+      ORDER BY t.created_at DESC
+      LIMIT ?
+    `);
+    return stmt.all(limit);
+  }
+
+  getDiagnosticStats() {
+    const usersCount = this.sqlite.prepare('SELECT count(*) as count FROM users').get().count;
+    const assetsCount = this.sqlite.prepare('SELECT count(*) as count FROM assets').get().count;
+    const txCount = this.sqlite.prepare('SELECT count(*) as count FROM transactions').get().count;
+    return {
+      totalUsers: usersCount,
+      totalAssets: assetsCount,
+      totalTransactions: txCount
+    };
+  }
+
   close() {
     this.sqlite.close();
   }

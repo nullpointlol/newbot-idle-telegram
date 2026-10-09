@@ -315,6 +315,42 @@ export function createServer() {
         return sendJson(res, 200, result);
       }
 
+      // 6.2 Diagnostic & Support Console (TCK-0091-C3-03)
+      if (pathname === '/api/diagnostic' && req.method === 'GET') {
+        const memoryUsage = process.memoryUsage();
+        const stats = db.getDiagnosticStats();
+        const transactions = db.getRecentTransactions(20);
+        return sendJson(res, 200, {
+          status: 'ok',
+          uptimeSeconds: Math.floor(process.uptime()),
+          memory: {
+            heapUsedMB: +(memoryUsage.heapUsed / 1024 / 1024).toFixed(2),
+            rssMB: +(memoryUsage.rss / 1024 / 1024).toFixed(2)
+          },
+          network: {
+            lanIp: '192.168.0.61',
+            port: PORT,
+            mobileUrl: `http://192.168.0.61:${PORT}/`,
+            qrApiUrl: `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=http://192.168.0.61:${PORT}/`
+          },
+          stats,
+          recentTransactions: transactions
+        });
+      }
+
+      if (pathname === '/api/diagnostic/retry-transaction' && req.method === 'POST') {
+        const body = await parseJsonBody(req);
+        const { chargeId } = body;
+        if (!chargeId) {
+          return sendJson(res, 400, { error: 'chargeId is required' });
+        }
+        const tx = db.getTransactionByChargeId(chargeId);
+        if (!tx) {
+          return sendJson(res, 404, { error: 'Transaction not found in ledger' });
+        }
+        return sendJson(res, 200, { ok: true, transaction: tx, message: 'Transaction verified and synced' });
+      }
+
       // 7. Static Mini App Serving & UI Preview Studio
       if (pathname === '/' || pathname === '/index.html') {
         return serveStatic(req, res, path.join(WEBAPP_DIR, 'index.html'));
