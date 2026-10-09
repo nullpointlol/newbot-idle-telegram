@@ -1,8 +1,9 @@
-/**
- * Adventure Capitalist Mathematical Engine
- * Exact idle progression, geometric series cost calculations,
- * milestone speed multipliers, and prestige formulas.
- */
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const ASSET_DEFINITIONS = {
   feeding: {
@@ -73,6 +74,31 @@ export const ASSET_DEFINITIONS = {
   donut: { name: 'Cámara de Mutagénesis & Poder', icon: '🧬', baseCost: 103680.0, baseCps: 2160.0, growthRate: 1.12, unlockOrder: 5 },
   bank: { name: 'Templo de Ascensión & Linaje', icon: '👑', baseCost: 1244160.0, baseCps: 6480.0, growthRate: 1.11, unlockOrder: 6 }
 };
+
+// Dynamically integrate all facilities from the 10 Algorithmic Worlds
+try {
+  const worldsPath = path.join(__dirname, '..', '..', 'content', 'worlds', 'worlds_catalog.json');
+  if (fs.existsSync(worldsPath)) {
+    const worlds = JSON.parse(fs.readFileSync(worldsPath, 'utf8'));
+    for (const world of worlds) {
+      if (Array.isArray(world.facilities)) {
+        world.facilities.forEach((fac, idx) => {
+          ASSET_DEFINITIONS[fac.id] = {
+            name: fac.name,
+            icon: fac.icon,
+            baseCost: fac.baseCost,
+            baseCps: fac.baseCps,
+            growthRate: fac.growth || world.growthRate || 1.12,
+            unlockOrder: idx + 1,
+            description: world.specialMechanic
+          };
+        });
+      }
+    }
+  }
+} catch (e) {
+  // Silent fallback in isolated test environments
+}
 
 /**
  * Currency Conversion for Option A: Metales Clásicos

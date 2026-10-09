@@ -99,6 +99,46 @@ body {
   50% { opacity: 1; transform: scale(1.02); }
 }
 
+/* 10 Algorithmic Worlds & Switcher */
+.realm-selector-card {
+  background: #151a23;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.realm-selector-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.realm-select-dropdown {
+  flex: 1;
+  background: #1e293b;
+  color: var(--text-main);
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.realm-select-dropdown:focus {
+  border-color: var(--gold);
+}
+
 /* Pet Hero Card (Tamagotchi Visual Core) */
 .pet-hero-card {
   background: linear-gradient(160deg, #182232, #0d121c);
@@ -116,8 +156,19 @@ body {
   user-select: none;
 }
 
+.pet-hero-card:active .pet-pixel-canvas,
 .pet-hero-card:active .pet-avatar {
   transform: scale(1.15) rotate(-3deg);
+}
+
+.pet-pixel-canvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  z-index: 2;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.6));
 }
 
 .pet-species-badge {
@@ -134,8 +185,8 @@ body {
 
 .pet-avatar-wrapper {
   position: relative;
-  width: 96px;
-  height: 96px;
+  width: 110px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,6 +236,10 @@ body {
 
 .pet-details {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
 }
 
 .pet-details h3 {
@@ -197,6 +252,82 @@ body {
   font-size: 12px;
   color: var(--gold);
   font-weight: 600;
+}
+
+.pet-curve-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 8px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.pet-special-mechanic {
+  font-size: 11px;
+  color: var(--gold);
+  background: rgba(251, 191, 36, 0.1);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-weight: 600;
+  text-align: center;
+  border: 1px dashed rgba(251, 191, 36, 0.3);
+}
+
+.species-card {
+  background: #151a23;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.species-card.active {
+  border-color: var(--gold);
+  background: linear-gradient(170deg, #182232, #151a23);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.15);
+}
+
+.species-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.species-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.species-realm-tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.species-math-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.species-facilities-preview {
+  display: flex;
+  gap: 6px;
+  font-size: 18px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 10px;
+  border-radius: 8px;
 }
 
 /* Vitals */

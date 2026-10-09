@@ -115,6 +115,16 @@ export function createServer() {
         });
       }
 
+      // 1.1 Worlds & Algorithmic Catalog
+      if (pathname === '/api/worlds' && req.method === 'GET') {
+        const worldsPath = path.join(__dirname, '..', 'content', 'worlds', 'worlds_catalog.json');
+        if (fs.existsSync(worldsPath)) {
+          const worldsData = JSON.parse(fs.readFileSync(worldsPath, 'utf8'));
+          return sendJson(res, 200, worldsData);
+        }
+        return sendJson(res, 404, { error: 'Worlds catalog not found' });
+      }
+
       // 2. User Sync & Offline Calculation
       if (pathname === '/api/user/sync' && req.method === 'POST') {
         const body = await parseJsonBody(req);

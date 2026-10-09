@@ -23,17 +23,39 @@
       </div>
     </header>
 
+    <!-- 10 Algorithmic Worlds & Creatures Switcher -->
+    <div class="realm-selector-card">
+      <div class="realm-selector-header">
+        <span class="realm-icon">🌌</span>
+        <span class="realm-title">Reino & Dimensión:</span>
+      </div>
+      <select id="realm-select" class="realm-select-dropdown">
+        <option value="zen_cat">🐱 Jardín Zen (Adventure Capitalist • Geometric)</option>
+        <option value="frost_wolf">🐺 Tundra Glacial (Aggressive Burst)</option>
+        <option value="fire_dragon">🐲 Forja Volcánica (Caldera de Calor)</option>
+        <option value="mecha_droid">🤖 Matriz Cyberpunk (Potencia Binaria 2^n)</option>
+        <option value="cosmic_axolotl">🦎 Arrecife Abisal (Mareas Regenerativas)</option>
+        <option value="shadow_specter">👻 Necrópolis Astral (Cosecha de Almas)</option>
+        <option value="hyper_hamster">🐹 Ruleta Cuántica (Micro-Ticks Frecuencia)</option>
+        <option value="void_slime">🦠 Foso del Vacío (Asimilación Celular)</option>
+        <option value="solar_phoenix">🐦‍🔥 Nido Solar (Proporción Áurea Fibonacci)</option>
+        <option value="chronos_turtle">🐢 Santuario Temporal (Entropía No-Lineal)</option>
+      </select>
+    </div>
+
     <!-- Interactive Tamagotchi Pet Centerpiece -->
     <section class="pet-hero-card" id="pet-interactive-area">
-      <div class="pet-species-badge" id="pet-category-badge">DOMÉSTICO • RARO</div>
+      <div class="pet-species-badge" id="pet-category-badge">DOMÉSTICO • REINO ZEN</div>
       <div class="pet-avatar-wrapper" id="pet-avatar-container">
-        <div class="pet-aura"></div>
-        <div class="pet-avatar" id="pet-avatar-display">🐱</div>
+        <div class="pet-aura" id="pet-aura"></div>
+        <canvas id="pet-pixel-canvas" width="128" height="128" class="pet-pixel-canvas"></canvas>
         <div class="pet-hearts-layer" id="pet-hearts"></div>
       </div>
       <div class="pet-details">
         <h3 id="pet-name-display">Gatito Astral</h3>
         <span class="pet-stage-tag" id="pet-stage-display">Etapa I: Cachorro (Nivel 1)</span>
+        <div class="pet-curve-pill" id="pet-curve-display">📐 Curva: GeometricSmooth (r=1.07)</div>
+        <div class="pet-special-mechanic" id="pet-mechanic-display">✨ Ronroneo Constante: +10% de producción pasiva</div>
       </div>
 
       <!-- Vitals Bars -->
@@ -178,6 +200,6 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>

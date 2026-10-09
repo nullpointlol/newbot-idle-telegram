@@ -1,0 +1,192 @@
+[
+  {
+    "id": "zen_cat",
+    "name": "Jardín Zen del Gatito Astral",
+    "realm": "Reino Doméstico Tradicional",
+    "mathCurve": "GeometricSmooth",
+    "description": "Bucle clásico relajante de Adventure Capitalist con progresión suave de crecimiento (r = 1.07). Enfoque en ronroneo continuo y armonía.",
+    "avatar": "🐱",
+    "pixelColor": "#f59e0b",
+    "growthRate": 1.07,
+    "specialMechanic": "Ronroneo Constante: +10% de producción pasiva continua mientras la app esté abierta.",
+    "facilities": [
+      { "id": "zen_1", "name": "Plato de Leche Tibia", "icon": "🥛", "baseCost": 4, "baseCps": 1, "growth": 1.07 },
+      { "id": "zen_2", "name": "Cojín de Terciopelo", "icon": "🧶", "baseCost": 60, "baseCps": 20, "growth": 1.15 },
+      { "id": "zen_3", "name": "Rascador de Bambú", "icon": "🎋", "baseCost": 720, "baseCps": 90, "growth": 1.14 },
+      { "id": "zen_4", "name": "Cascabel de Plata", "icon": "🔔", "baseCost": 8640, "baseCps": 360, "growth": 1.13 },
+      { "id": "zen_5", "name": "Jardín de Catnip Arcano", "icon": "🌿", "baseCost": 103680, "baseCps": 2160, "growth": 1.12 },
+      { "id": "zen_6", "name": "Templo de la Siesta Eterna", "icon": "⛩️", "baseCost": 1244160, "baseCps": 6480, "growth": 1.11 }
+    ]
+  },
+  {
+    "id": "frost_wolf",
+    "name": "Tundra Sangrienta del Lobo Ártico",
+    "realm": "Reino Salvaje Glacial",
+    "mathCurve": "AggressiveBurst",
+    "description": "Curva empinada y agresiva (r = 1.16). Menos compras frecuentes pero saltos exponenciales gigantes en cada hito.",
+    "avatar": "🐺",
+    "pixelColor": "#38bdf8",
+    "growthRate": 1.16,
+    "specialMechanic": "Furia de la Manada: Al acumular 5 compras consecutivas, desata una ventisca con x3 temporal por 30s.",
+    "facilities": [
+      { "id": "wolf_1", "name": "Carne Helada de Reno", "icon": "🥩", "baseCost": 8, "baseCps": 2, "growth": 1.16 },
+      { "id": "wolf_2", "name": "Guarida Subterránea de Nieve", "icon": "❄️", "baseCost": 120, "baseCps": 40, "growth": 1.16 },
+      { "id": "wolf_3", "name": "Tótem del Viento Blanco", "icon": "🌬️", "baseCost": 1500, "baseCps": 200, "growth": 1.15 },
+      { "id": "wolf_4", "name": "Cumbres de Aullido Alfa", "icon": "🏔️", "baseCost": 18000, "baseCps": 800, "growth": 1.14 },
+      { "id": "wolf_5", "name": "Runas del Hielo Perenne", "icon": "💠", "baseCost": 220000, "baseCps": 4500, "growth": 1.13 },
+      { "id": "wolf_6", "name": "Trono de Hielo de Fenrir", "icon": "👑", "baseCost": 2800000, "baseCps": 15000, "growth": 1.12 }
+    ]
+  },
+  {
+    "id": "fire_dragon",
+    "name": "Forja Volcánica del Dragón de Fuego",
+    "realm": "Reino Fantasía Dracónica",
+    "mathCurve": "HeatAccumulation",
+    "description": "Algoritmo de caldera térmica: el valor base sube según el nivel de calor activo acumulado en los clics.",
+    "avatar": "🐲",
+    "pixelColor": "#ef4444",
+    "growthRate": 1.13,
+    "specialMechanic": "Reserva de Magma: Cada toque al dragón suma +1% de calor hasta un máximo de +100% de CPS global.",
+    "facilities": [
+      { "id": "drag_1", "name": "Brasas Ardientes", "icon": "🔥", "baseCost": 10, "baseCps": 2.5, "growth": 1.13 },
+      { "id": "drag_2", "name": "Pozo de Azufre", "icon": "🌋", "baseCost": 150, "baseCps": 45, "growth": 1.13 },
+      { "id": "drag_3", "name": "Yunque de Mineral Rojo", "icon": "⚒️", "baseCost": 1800, "baseCps": 220, "growth": 1.12 },
+      { "id": "drag_4", "name": "Cueva de Tesoros Fundidos", "icon": "🪙", "baseCost": 22000, "baseCps": 950, "growth": 1.12 },
+      { "id": "drag_5", "name": "Columna de Fuego Celestial", "icon": "💥", "baseCost": 260000, "baseCps": 5200, "growth": 1.11 },
+      { "id": "drag_6", "name": "Cráter de la Deidad Ígnea", "icon": "🪐", "baseCost": 3200000, "baseCps": 18000, "growth": 1.10 }
+    ]
+  },
+  {
+    "id": "mecha_droid",
+    "name": "Matriz Cyberpunk del Mecha-Droide",
+    "realm": "Reino Ciencia Ficción Sintética",
+    "mathCurve": "BinaryPowerCurve",
+    "description": "Matemática de potencias binarias ($2^n$ escalado). Cada 10 niveles duplica exactamente la frecuencia de clock.",
+    "avatar": "🤖",
+    "pixelColor": "#10b981",
+    "growthRate": 1.10,
+    "specialMechanic": "Overclocking Cuántico: Los hitos ocurren cada 16 niveles (en vez de 25), ideal para min-maxers de ritmo rápido.",
+    "facilities": [
+      { "id": "mec_1", "name": "Batería de Nano-Células", "icon": "🔋", "baseCost": 5, "baseCps": 1.2, "growth": 1.10 },
+      { "id": "mec_2", "name": "Microchip Neural v1", "icon": "💾", "baseCost": 80, "baseCps": 24, "growth": 1.11 },
+      { "id": "mec_3", "name": "Refrigeración Líquida Neón", "icon": "🧪", "baseCost": 900, "baseCps": 110, "growth": 1.11 },
+      { "id": "mec_4", "name": "Servidor Cuántico Central", "icon": "🖥️", "baseCost": 11000, "baseCps": 420, "growth": 1.10 },
+      { "id": "mec_5", "name": "Acelerador de Partículas Mini", "icon": "⚛️", "baseCost": 130000, "baseCps": 2500, "growth": 1.10 },
+      { "id": "mec_6", "name": "Singularidad Sintética A.I.", "icon": "🌐", "baseCost": 1600000, "baseCps": 8000, "growth": 1.09 }
+    ]
+  },
+  {
+    "id": "cosmic_axolotl",
+    "name": "Arrecife Abisal del Ajolote Cósmico",
+    "realm": "Reino Acuático Místico",
+    "mathCurve": "RegenerativeTides",
+    "description": "Ciclos de marea: cada 60 segundos la marea sube y baja, alternando entre producción masiva y bajo costo de mejoras.",
+    "avatar": "🦎",
+    "pixelColor": "#ec4899",
+    "growthRate": 1.09,
+    "specialMechanic": "Marea Alta / Baja: Durante Marea Alta (+50% CPS), durante Marea Baja (-20% Costo de mejoras).",
+    "facilities": [
+      { "id": "axo_1", "name": "Algas Bioluminiscentes", "icon": "🪸", "baseCost": 6, "baseCps": 1.5, "growth": 1.09 },
+      { "id": "axo_2", "name": "Perlas de Coral Rosa", "icon": "🦪", "baseCost": 90, "baseCps": 28, "growth": 1.10 },
+      { "id": "axo_3", "name": "Geiser Submarino Tibio", "icon": "🌊", "baseCost": 1000, "baseCps": 130, "growth": 1.10 },
+      { "id": "axo_4", "name": "Jardín de Anémonas Cósmicas", "icon": "🌸", "baseCost": 12000, "baseCps": 500, "growth": 1.09 },
+      { "id": "axo_5", "name": "Palacio de Nácar Sumergido", "icon": "🏰", "baseCost": 140000, "baseCps": 3000, "growth": 1.09 },
+      { "id": "axo_6", "name": "Fosa Marina Primordial", "icon": "🌀", "baseCost": 1700000, "baseCps": 9500, "growth": 1.08 }
+    ]
+  },
+  {
+    "id": "shadow_specter",
+    "name": "Necrópolis Astral del Espectro Umbrío",
+    "realm": "Reino Gótico de las Sombras",
+    "mathCurve": "SoulHarvesting",
+    "description": "Mecánica de almas residuales: cada nivel genera Almas que aumentan exponencialmente el multiplicador de prestigio.",
+    "avatar": "👻",
+    "pixelColor": "#a855f7",
+    "growthRate": 1.14,
+    "specialMechanic": "Cosecha de Almas: El prestigio se puede reclamar a partir de un umbral 5 veces menor que los otros reinos.",
+    "facilities": [
+      { "id": "sha_1", "name": "Velas Ectoplásmicas", "icon": "🕯️", "baseCost": 7, "baseCps": 1.8, "growth": 1.14 },
+      { "id": "sha_2", "name": "Cripta de Niebla Violeta", "icon": "⚰️", "baseCost": 100, "baseCps": 32, "growth": 1.14 },
+      { "id": "sha_3", "name": "Cáliz de Cenizas Negras", "icon": "🍷", "baseCost": 1200, "baseCps": 150, "growth": 1.13 },
+      { "id": "sha_4", "name": "Espejo de Almas Perdidas", "icon": "🪞", "baseCost": 14000, "baseCps": 600, "growth": 1.13 },
+      { "id": "sha_5", "name": "Mausoleo de los Caídos", "icon": "🏛️", "baseCost": 160000, "baseCps": 3500, "growth": 1.12 },
+      { "id": "sha_6", "name": "Puerta del Vacío Eterno", "icon": "🌑", "baseCost": 2000000, "baseCps": 11000, "growth": 1.11 }
+    ]
+  },
+  {
+    "id": "fairy_hummingbird",
+    "name": "Bosque Encantado del Colibrí Fada",
+    "realm": "Reino Élfico de Alta Frecuencia",
+    "mathCurve": "HighFrequencyMicroTicks",
+    "description": "Micro-ticks ultrarrápidos (20 Hz): las barras suben a toda velocidad. Gran sensación de dinamismo visual.",
+    "avatar": "🐦",
+    "pixelColor": "#14b8a6",
+    "growthRate": 1.08,
+    "specialMechanic": "Aleteo Supersónico: La tasa por segundo se acumula en ráfagas de micro-recompensas continuas.",
+    "facilities": [
+      { "id": "fai_1", "name": "Gota de Rocío Mágico", "icon": "💧", "baseCost": 4, "baseCps": 1.1, "growth": 1.08 },
+      { "id": "fai_2", "name": "Néctar de Campanilla", "icon": "🌺", "baseCost": 70, "baseCps": 22, "growth": 1.09 },
+      { "id": "fai_3", "name": "Hongo Brillante Danzante", "icon": "🍄", "baseCost": 800, "baseCps": 105, "growth": 1.09 },
+      { "id": "fai_4", "name": "Polvo de Estrellas del Musgo", "icon": "✨", "baseCost": 9500, "baseCps": 410, "growth": 1.08 },
+      { "id": "fai_5", "name": "Árbol Corazón del Bosque", "icon": "🌳", "baseCost": 110000, "baseCps": 2400, "growth": 1.08 },
+      { "id": "fai_6", "name": "Portal de la Primavera Eterna", "icon": "🌈", "baseCost": 1400000, "baseCps": 7500, "growth": 1.07 }
+    ]
+  },
+  {
+    "id": "alien_symbiote",
+    "name": "Estación Orbital del Simbionte Alien",
+    "realm": "Reino Terror Cósmico Sci-Fi",
+    "mathCurve": "CellularAssimilation",
+    "description": "Asimilación celular: las instalaciones se devoran entre sí para desbloquear multiplicadores sinérgicos cruzados.",
+    "avatar": "👾",
+    "pixelColor": "#84cc16",
+    "growthRate": 1.12,
+    "specialMechanic": "Metamorfosis Celular: Comprar un nivel en la instalación más cara potencia un +5% a todas las anteriores.",
+    "facilities": [
+      { "id": "ali_1", "name": "Caldo Primordial Mutágeno", "icon": "🧫", "baseCost": 6, "baseCps": 1.6, "growth": 1.12 },
+      { "id": "ali_2", "name": "Tentáculo Biomecánico", "icon": "🐙", "baseCost": 90, "baseCps": 27, "growth": 1.12 },
+      { "id": "ali_3", "name": "Célula de Energía Gravitatoria", "icon": "🕳️", "baseCost": 1100, "baseCps": 140, "growth": 1.11 },
+      { "id": "ali_4", "name": "Biomasa Asimiladora", "icon": "☣️", "baseCost": 13000, "baseCps": 550, "growth": 1.11 },
+      { "id": "ali_5", "name": "Cerebro Matriz de la Colmena", "icon": "🧠", "baseCost": 150000, "baseCps": 3200, "growth": 1.10 },
+      { "id": "ali_6", "name": "Nave Nodriza Leviatán", "icon": "🛸", "baseCost": 1900000, "baseCps": 10000, "growth": 1.09 }
+    ]
+  },
+  {
+    "id": "solar_scarab",
+    "name": "Templo Solar del Escarabajo de Ra",
+    "realm": "Reino Alquimia del Desierto Dorado",
+    "mathCurve": "GoldenRatioFibonacci",
+    "description": "Proporción Áurea / Fibonacci: los costos e ingresos escalan según la espiral áurea ($1.618$ base ratio).",
+    "avatar": "🪲",
+    "pixelColor": "#eab308",
+    "growthRate": 1.11,
+    "specialMechanic": "Transmutación Áurea: Convierte automáticamente bronce en plata con un +10% de ganancia extra por volumen.",
+    "facilities": [
+      { "id": "sca_1", "name": "Granos de Arena Dorada", "icon": "⌛", "baseCost": 5, "baseCps": 1.3, "growth": 1.11 },
+      { "id": "sca_2", "name": "Lapislázuli Sagrado", "icon": "💎", "baseCost": 85, "baseCps": 25, "growth": 1.11 },
+      { "id": "sca_3", "name": "Obelisco del Sol Naciente", "icon": "🏛️", "baseCost": 950, "baseCps": 120, "growth": 1.11 },
+      { "id": "sca_4", "name": "Papiro de los Secretos de Ra", "icon": "📜", "baseCost": 11500, "baseCps": 480, "growth": 1.10 },
+      { "id": "sca_5", "name": "Pirámide Alquímica de Cuarzo", "icon": "🔺", "baseCost": 135000, "baseCps": 2800, "growth": 1.10 },
+      { "id": "sca_6", "name": "Disco Solar de la Eternidad", "icon": "☀️", "baseCost": 1750000, "baseCps": 9000, "growth": 1.09 }
+    ]
+  },
+  {
+    "id": "quantum_singularity",
+    "name": "Vacío Cuántico de la Singularidad",
+    "realm": "Reino Entropía Dimensional",
+    "mathCurve": "EntropyNonLinear",
+    "description": "Entropía No-Lineal: las ganancias fuera de línea son potenciadas por distorsión temporal cuántica (x2 offline cap).",
+    "avatar": "🪐",
+    "pixelColor": "#6366f1",
+    "growthRate": 1.15,
+    "specialMechanic": "Colapso de Onda: Cada vez que abres el juego tras estar ausente, recibes un Cofre de Tiempo con bonus estocástico.",
+    "facilities": [
+      { "id": "qua_1", "name": "Partícula de Higgs Fugaz", "icon": "⚛️", "baseCost": 8, "baseCps": 2.2, "growth": 1.15 },
+      { "id": "qua_2", "name": "Bucle Temporal Cerrado", "icon": "🔄", "baseCost": 110, "baseCps": 35, "growth": 1.15 },
+      { "id": "qua_3", "name": "Agujero de Gusano Estable", "icon": "🕳️", "baseCost": 1300, "baseCps": 160, "growth": 1.14 },
+      { "id": "qua_4", "name": "Prisma de Gravedad Oscura", "icon": "🔮", "baseCost": 15000, "baseCps": 650, "growth": 1.14 },
+      { "id": "qua_5", "name": "Reactor de Antimateria Puro", "icon": "⚡", "baseCost": 180000, "baseCps": 3800, "growth": 1.13 },
+      { "id": "qua_6", "name": "Horizonte de Sucesos Infinito", "icon": "🌌", "baseCost": 2200000, "baseCps": 12000, "growth": 1.12 }
+    ]
+  }
+]
