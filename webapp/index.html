@@ -5,197 +5,307 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tamagotchi Idle - Crianza de Mascotas</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="app">
-    <!-- Top HUD / Header -->
-    <header class="header">
-      <div class="user-info">
-        <span id="user-avatar" class="avatar">🐾</span>
-        <div>
-          <h2 id="user-name">Criador Ancestral</h2>
-          <span id="prestige-badge" class="badge">Esencia Ancestral: 0 (+0%)</span>
+  <div id="app" data-theme="color">
+    <!-- Top HUD Financiero -->
+    <header class="top-hud">
+      <div class="hud-left">
+        <div class="hud-cash-row">
+          <span class="cash-currency-icon">💵</span>
+          <span class="hud-balance" id="hud-balance">$ 1.248.376</span>
         </div>
+        <div class="hud-cps" id="hud-cps">+ $ 12.430 /s</div>
       </div>
-      <div class="boost-badge" id="ad-boost-indicator">
-        ⚡ Cuidado Normal
+
+      <div class="hud-right">
+        <div class="hud-pill hud-gold">
+          <span>🪙</span>
+          <span id="hud-gold-count">42</span>
+          <button class="pill-add-btn" id="btn-add-gold">+</button>
+        </div>
+        <div class="hud-pill hud-gems">
+          <span>💎</span>
+          <span id="hud-gems-count">3</span>
+          <button class="pill-add-btn" id="btn-add-gems">+</button>
+        </div>
+        <button class="hud-square-btn" id="btn-toggle-theme" title="Alternar Color / 1-Bit">🎨</button>
+        <button class="hud-square-btn" id="btn-toggle-sound" title="Sonido 8-bit">🔊</button>
       </div>
     </header>
 
-    <!-- 10 Algorithmic Worlds & Creatures Switcher -->
-    <div class="realm-selector-card">
-      <div class="realm-selector-header">
-        <span class="realm-icon">🌌</span>
-        <span class="realm-title">Reino & Dimensión:</span>
-      </div>
-      <select id="realm-select" class="realm-select-dropdown">
-        <option value="zen_cat">🐱 Jardín Zen (Adventure Capitalist • Geometric)</option>
-        <option value="frost_wolf">🐺 Tundra Glacial (Aggressive Burst)</option>
-        <option value="fire_dragon">🐲 Forja Volcánica (Caldera de Calor)</option>
-        <option value="mecha_droid">🤖 Matriz Cyberpunk (Potencia Binaria 2^n)</option>
-        <option value="cosmic_axolotl">🦎 Arrecife Abisal (Mareas Regenerativas)</option>
-        <option value="shadow_specter">👻 Necrópolis Astral (Cosecha de Almas)</option>
-        <option value="hyper_hamster">🐹 Ruleta Cuántica (Micro-Ticks Frecuencia)</option>
-        <option value="void_slime">🦠 Foso del Vacío (Asimilación Celular)</option>
-        <option value="solar_phoenix">🐦‍🔥 Nido Solar (Proporción Áurea Fibonacci)</option>
-        <option value="chronos_turtle">🐢 Santuario Temporal (Entropía No-Lineal)</option>
-      </select>
-    </div>
-
-    <!-- Interactive Tamagotchi Pet Centerpiece -->
-    <section class="pet-hero-card" id="pet-interactive-area">
-      <div class="pet-species-badge" id="pet-category-badge">DOMÉSTICO • REINO ZEN</div>
-      <div class="pet-avatar-wrapper" id="pet-avatar-container">
-        <div class="pet-aura" id="pet-aura"></div>
-        <canvas id="pet-pixel-canvas" width="128" height="128" class="pet-pixel-canvas"></canvas>
-        <div class="pet-hearts-layer" id="pet-hearts"></div>
-      </div>
-      <div class="pet-details">
-        <h3 id="pet-name-display">Gatito Astral</h3>
-        <span class="pet-stage-tag" id="pet-stage-display">Etapa I: Cachorro (Nivel 1)</span>
-        <div class="pet-curve-pill" id="pet-curve-display">📐 Curva: GeometricSmooth (r=1.07)</div>
-        <div class="pet-special-mechanic" id="pet-mechanic-display">✨ Ronroneo Constante: +10% de producción pasiva</div>
-      </div>
-
-      <!-- Vitals Bars -->
-      <div class="pet-vitals">
-        <div class="vital-bar">
-          <span class="vital-label">🍖 Nutrición</span>
-          <div class="vital-track"><div class="vital-fill vital-nutrition" id="vital-nutrition-fill" style="width: 85%;"></div></div>
+    <!-- PANTALLA 1: INICIO (Diorama Vivo + Negocios + Tareas) -->
+    <main id="tab-home" class="tab-panel active">
+      <!-- Diorama de la Habitación Viva -->
+      <section class="diorama-room" id="diorama-room">
+        <!-- Ventana con Skyline Dinámico -->
+        <div class="diorama-window" id="diorama-window">
+          <div class="window-sky" id="window-sky"></div>
+          <div class="skyline-buildings"></div>
+          <div class="diorama-billboard">
+            <span>TUS SUEÑOS TAMBIÉN GENERAN INGRESOS</span>
+          </div>
         </div>
-        <div class="vital-bar">
-          <span class="vital-label">💖 Cariño</span>
-          <div class="vital-track"><div class="vital-fill vital-affection" id="vital-affection-fill" style="width: 90%;"></div></div>
+
+        <!-- Ficha de la Mascota y el Magnate -->
+        <div class="diorama-header-row">
+          <!-- Ficha de Quino -->
+          <div class="pet-status-card">
+            <div class="pet-status-top">
+              <span class="pet-mini-avatar">🐱</span>
+              <div>
+                <strong id="pet-name">Quino</strong>
+                <div class="pet-hearts" id="pet-hearts-display">❤❤❤❤🤍</div>
+              </div>
+            </div>
+            <div class="pet-vitals-mini">
+              <div class="vital-row">
+                <span>🍴 Hambre</span>
+                <div class="vital-track"><div class="vital-bar vital-food" id="vital-food-bar" style="width: 85%;"></div></div>
+              </div>
+              <div class="vital-row">
+                <span>😊 Felicidad</span>
+                <div class="vital-track"><div class="vital-bar vital-happy" id="vital-happy-bar" style="width: 95%;"></div></div>
+              </div>
+              <div class="vital-row">
+                <span>💤 Energía</span>
+                <div class="vital-track"><div class="vital-bar vital-energy" id="vital-energy-bar" style="width: 70%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chibi Magnate con Bocadillo -->
+          <div class="tycoon-mascot-group">
+            <div class="speech-bubble" id="tycoon-speech">
+              "Un gran imperio también necesita patas, mimos y comida. ♡"
+            </div>
+            <div class="tycoon-avatar">🎩</div>
+          </div>
         </div>
-        <div class="vital-bar">
-          <span class="vital-label">⚡ Vigor</span>
-          <div class="vital-track"><div class="vital-fill vital-energy" id="vital-energy-fill" style="width: 75%;"></div></div>
+
+        <!-- Suelo de la Habitación con Objetos Interactivos -->
+        <div class="diorama-floor">
+          <!-- Camita Pixel con la Mascota Animada -->
+          <div class="pet-bed-interactive" id="pet-interactive-bed" title="Toca para acariciar a Quino">
+            <canvas id="pet-diorama-canvas" width="130" height="130" class="pet-canvas"></canvas>
+            <div class="pet-hearts-particle-layer" id="hearts-layer"></div>
+          </div>
+
+          <!-- Cuenco de comida -->
+          <div class="room-prop prop-bowl" id="prop-bowl" title="Toca para alimentar">
+            <span class="prop-icon">🥣</span>
+            <span class="prop-tag">COMIDA</span>
+          </div>
+
+          <!-- Pelota con rebote -->
+          <div class="room-prop prop-ball" id="prop-ball" title="Toca para jugar">
+            <span class="prop-icon">🎾</span>
+            <span class="prop-tag">JUGAR</span>
+          </div>
         </div>
-      </div>
-      <div class="pet-tap-hint">✨ ¡Toca a tu mascota para acariciarla y ganar tributos!</div>
-    </section>
+      </section>
 
-    <!-- Main Treasury & CPS Card (Metales Clásicos: Bronce, Plata, Oro) -->
-    <section class="balance-card">
-      <div class="balance-label">RESERVA DE CUIDADO Y TRIBUTOS</div>
-      <div class="coin-medallion">
-        <span class="coin-icon-large" id="main-coin-icon">🥉</span>
-        <div class="balance-amount" id="balance-display">0 🥉</div>
-      </div>
-      <div class="coin-breakdown" id="coin-breakdown-display">
-        <span>0 Oro</span> • <span>0 Plata</span> • <span>0 Bronce</span>
-      </div>
-      <div class="cps-display">
-        <span class="cps-icon">🌱</span>
-        <span id="cps-amount">+0 🥉</span> / seg
-      </div>
-    </section>
+      <!-- Sección "TUS NEGOCIOS" (Adventure Capitalist) -->
+      <section class="businesses-section">
+        <div class="section-title-bar">
+          <h3>TUS NEGOCIOS</h3>
+          <div class="multiplier-toggle-group">
+            <button class="mult-btn active" data-mult="1">1x</button>
+            <button class="mult-btn" data-mult="10">10x</button>
+            <button class="mult-btn" data-mult="100">100x</button>
+            <button class="mult-btn" data-mult="max">MAX</button>
+          </div>
+        </div>
 
-    <!-- Navigation Tabs -->
-    <nav class="nav-tabs">
-      <button class="tab-btn active" data-tab="care">Cuidados 🍼</button>
-      <button class="tab-btn" data-tab="species">Especies 🥚</button>
-      <button class="tab-btn" data-tab="tasks">Alianzas 📜</button>
-      <button class="tab-btn" data-tab="shop">Tesoros ⭐</button>
-      <button class="tab-btn" data-tab="prestige">Ascensión 🧬</button>
-    </nav>
+        <!-- Lista de Negocios -->
+        <div class="businesses-list" id="businesses-list">
+          <!-- Renderizado dinámicamente -->
+        </div>
+      </section>
 
-    <!-- Tab 1: Care Facilities (Adventure Capitalist Idle Loop) -->
-    <main id="tab-care" class="tab-content active">
-      <div class="quick-actions">
-        <button id="btn-watch-ad" class="btn btn-ad">
-          🎬 Festín Mágico (Adsgram): Cuidados x2 por 4h
+      <!-- Sección "TAREAS DEL DÍA" -->
+      <section class="tasks-section">
+        <div class="tasks-card">
+          <div class="tasks-header">
+            <h4>📋 Tareas del día</h4>
+            <span class="tasks-count-pill" id="tasks-progress-label">2/3</span>
+          </div>
+
+          <div class="tasks-checklist">
+            <label class="task-item">
+              <input type="checkbox" id="task-feed" checked disabled>
+              <span class="task-checkbox-custom">✔</span>
+              <span class="task-text">Alimentar a Quino</span>
+            </label>
+            <label class="task-item">
+              <input type="checkbox" id="task-upgrade" checked disabled>
+              <span class="task-checkbox-custom">✔</span>
+              <span class="task-text">Mejorar negocios (3/4)</span>
+            </label>
+            <label class="task-item">
+              <input type="checkbox" id="task-cash">
+              <span class="task-checkbox-custom" id="task-cash-icon"></span>
+              <span class="task-text">Conseguir $ 500.000</span>
+            </label>
+          </div>
+
+          <button class="btn-claim-tasks" id="btn-claim-tasks">RECLAMAR 💎 5</button>
+        </div>
+
+        <!-- Tarjeta Motivacional -->
+        <div class="motivational-card">
+          <span>💖</span>
+          <p>Pequeños cuidados, grandes resultados. ♡</p>
+        </div>
+      </section>
+
+      <!-- Banner de Boost Publicitario (Adsgram) -->
+      <div class="ad-boost-banner">
+        <button class="btn-ad-boost" id="btn-watch-ad">
+          🎬 BOOST x2 (4 HORAS)
         </button>
-      </div>
-      <div id="assets-list" class="assets-container">
-        <!-- Dynamically rendered care facilities -->
       </div>
     </main>
 
-    <!-- Tab 2: Species Selection (Domestic, Wild, Fantasy, Sci-Fi) -->
-    <section id="tab-species" class="tab-content">
-      <div class="card">
-        <h3>🥚 Catálogo de Criaturas y Especies</h3>
-        <p>Elige la especie activa para tu guardería o haz eclosionar nuevas criaturas de reinos salvajes, fantásticos y de ciencia ficción.</p>
-        <div id="species-grid" class="species-grid">
-          <!-- Dynamically populated from content/species/species_catalog.json -->
+    <!-- PANTALLA 2: NEGOCIOS (Imperio Completo + Gerentes) -->
+    <main id="tab-businesses" class="tab-panel">
+      <div class="panel-header">
+        <h2>📈 IMPERIO COMERCIAL</h2>
+        <p>Automatiza y expande la escalera de capital</p>
+      </div>
+
+      <div class="managers-container">
+        <h3>👔 Gerentes Automatizadores</h3>
+        <p class="section-sub">Recolectan las ganancias automáticamente sin tocar la pantalla.</p>
+        <div class="managers-grid" id="managers-list">
+          <!-- Renderizado dinámicamente -->
         </div>
       </div>
-    </section>
+    </main>
 
-    <!-- Tab 3: Alliances & Viral Tasks -->
-    <section id="tab-tasks" class="tab-content">
-      <div class="card">
-        <h3>📜 Gremio de Cuidadores (Referidos Virales)</h3>
-        <p>Invita a un amigo a criar su propia mascota. Cuando ingrese con tu enlace, ambos recibirán una cesta de <strong>500 🥉</strong> de bronce al instante.</p>
-        <div class="referral-box">
+    <!-- PANTALLA 3: MASCOTA (Evolución, Especies y Ropero) -->
+    <main id="tab-pet" class="tab-panel">
+      <div class="panel-header">
+        <h2>🐱 COMPAÑERO & EVOLUCIÓN</h2>
+        <p>Elige tu especie y personaliza a tu mascota</p>
+      </div>
+
+      <div class="species-selector-grid" id="species-full-grid">
+        <!-- Renderizado dinámicamente -->
+      </div>
+
+      <div class="wardrobe-section">
+        <h3>🎩 Ropero & Accesorios (Telegram Stars)</h3>
+        <div class="wardrobe-grid">
+          <div class="shop-card">
+            <span class="shop-icon">🎩</span>
+            <div class="shop-info">
+              <h4>Gorra de Magnate</h4>
+              <p>+10% Felicidad pasiva</p>
+            </div>
+            <button class="btn-stars-buy" data-item="hat_tycoon">50 ⭐</button>
+          </div>
+          <div class="shop-card">
+            <span class="shop-icon">🕶️</span>
+            <div class="shop-info">
+              <h4>Gafas de Sol Boss</h4>
+              <p>+5% Velocidad global</p>
+            </div>
+            <button class="btn-stars-buy" data-item="glasses_boss">25 ⭐</button>
+          </div>
+          <div class="shop-card">
+            <span class="shop-icon">👑</span>
+            <div class="shop-info">
+              <h4>Corona Astral</h4>
+              <p>x2 Cuidado permanente</p>
+            </div>
+            <button class="btn-stars-buy" data-item="crown_astral">150 ⭐</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- PANTALLA 4: MOCHILA (Alianzas & Referidos) -->
+    <main id="tab-inventory" class="tab-panel">
+      <div class="panel-header">
+        <h2>🎒 MOCHILA & ALIANZAS</h2>
+        <p>Invita socios y cumple misiones oficiales</p>
+      </div>
+
+      <div class="referral-box-card">
+        <h3>👥 Gremio de Cuidadores</h3>
+        <p>Invita a un amigo. Ambos ganan <strong>$ 50.000</strong> inmediatos.</p>
+        <div class="ref-input-group">
           <input type="text" id="ref-link-input" readonly value="Cargando enlace...">
-          <button id="btn-copy-ref" class="btn btn-secondary">Copiar Enlace</button>
+          <button class="btn-copy-ref" id="btn-copy-ref">COPIAR</button>
         </div>
       </div>
 
-      <div class="card">
-        <h3>📢 Santuarios Patrocinados</h3>
-        <p>Únete a las comunidades aliadas para desbloquear una <strong>Bendición de Crianza x2.5</strong> temporal.</p>
-        <button id="btn-verify-channel" class="btn btn-primary">
-          Verificar Suscripción al Canal
-        </button>
-        <p id="task-status-text" class="status-message"></p>
+      <div class="sponsored-box-card">
+        <h3>📢 Santuarios Aliados</h3>
+        <p>Únete a las comunidades oficiales para desbloquear <strong>$ 100.000</strong> y un Boost x2.5 temporal.</p>
+        <button class="btn-verify-channel" id="btn-verify-channel">VERIFICAR (+ $ 100K)</button>
+        <p id="task-status-text" class="status-msg"></p>
       </div>
-    </section>
+    </main>
 
-    <!-- Tab 4: Stars Shop -->
-    <section id="tab-shop" class="tab-content">
-      <div class="card shop-item">
-        <div class="shop-info">
-          <h4>👑 Corona Mística de Guardián</h4>
-          <p>Cosmético ceremonial brillante para el avatar de tu criatura.</p>
-        </div>
-        <button class="btn btn-stars" data-item="cosmetic_golden_suit">50 ⭐</button>
+    <!-- PANTALLA 5: LOGROS & PRESTIGIO (Ascensión) -->
+    <main id="tab-achievements" class="tab-panel">
+      <div class="panel-header">
+        <h2>🏆 LOGROS & PRESTIGIO</h2>
+        <p>Reinicio angelical y medallas del imperio</p>
       </div>
 
-      <div class="card shop-item">
-        <div class="shop-info">
-          <h4>🧬 Elixir de Evolución Eterna x2</h4>
-          <p>Duplica para siempre el desarrollo de todas las áreas de crianza.</p>
+      <div class="prestige-card-box">
+        <h3>🧬 VENDER IMPERIO</h3>
+        <p>Vende tus negocios a un inversor ángel para renacer con <strong>Esencia Ancestral</strong> (+2% permanente por punto).</p>
+        <div class="prestige-stat-pill">
+          <span>Esencia a despertar:</span>
+          <strong id="claimable-angels">0 🧬</strong>
         </div>
-        <button class="btn btn-stars" data-item="permanent_multiplier_2x">150 ⭐</button>
-      </div>
-
-      <div class="card shop-item">
-        <div class="shop-info">
-          <h4>🧺 Canasta de Manjares Reales</h4>
-          <p>10,000 🥉 de bronce inmediatos para impulsar su crecimiento.</p>
-        </div>
-        <button class="btn btn-stars" data-item="starter_pack">25 ⭐</button>
-      </div>
-    </section>
-
-    <!-- Tab 5: Ascension / Prestige Reset -->
-    <section id="tab-prestige" class="tab-content">
-      <div class="card text-center">
-        <h3>🧬 Reencarnación y Linaje Ancestral</h3>
-        <p>Alcanza la cumbre del cuidado y permite que tu criatura ascienda al plano cósmico a cambio de <strong>Esencia Ancestral</strong>. Cada punto otorga un <strong>+2% permanente</strong> a la crianza de todas tus futuras mascotas.</p>
-        <div class="prestige-metric">
-          <span class="label">Esencia Ancestral Disponible para Despertar:</span>
-          <h2 id="claimable-angels">0</h2>
-        </div>
-        <button id="btn-claim-prestige" class="btn btn-warning" disabled>
-          Ascender Criatura y Renacer Linaje
+        <button class="btn-prestige-claim" id="btn-claim-prestige" disabled>
+          VENDER IMPERIO
         </button>
       </div>
-    </section>
+    </main>
 
-    <!-- Offline Earnings Modal -->
-    <div id="offline-modal" class="modal">
-      <div class="modal-content">
-        <div class="modal-icon">🐾</div>
-        <h2>¡Tu mascota te extrañó!</h2>
-        <p>Mientras descansabas, tus sistemas de cuidado continuaron produciendo tributos de vigor y amor:</p>
-        <div class="offline-earnings-highlight" id="offline-earned-amount">+0 🥉</div>
-        <p class="offline-time" id="offline-time-text">Tiempo transcurrido: 0 horas</p>
-        <button id="btn-close-offline" class="btn btn-primary">Abrazar y Recaudar</button>
+    <!-- Barra de Navegación Inferior (5 Pestañas Fijas de 1 Palabra) -->
+    <nav class="bottom-nav">
+      <button class="nav-btn active" data-tab="home">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">INICIO</span>
+      </button>
+      <button class="nav-btn" data-tab="businesses">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">NEGOCIOS</span>
+      </button>
+      <button class="nav-btn" data-tab="pet">
+        <span class="nav-icon">🐱</span>
+        <span class="nav-label">MASCOTA</span>
+      </button>
+      <button class="nav-btn" data-tab="inventory">
+        <span class="nav-icon">🎒</span>
+        <span class="nav-label">MOCHILA</span>
+      </button>
+      <button class="nav-btn" data-tab="achievements">
+        <span class="nav-icon">🏆</span>
+        <span class="nav-label">LOGROS</span>
+      </button>
+    </nav>
+
+    <!-- Modal Fuera de Línea (Offline Earnings) -->
+    <div id="offline-modal" class="modal-backdrop">
+      <div class="modal-box">
+        <div class="modal-pet-emoji">🐾</div>
+        <h2>¡De vuelta!</h2>
+        <p>Tus negocios y tu mascota generaron:</p>
+        <div class="modal-cash-highlight" id="offline-earned-amount">+ $ 0</div>
+        <p class="modal-time" id="offline-time-text">Tiempo transcurrido: 0 horas</p>
+        <button class="btn-modal-collect" id="btn-close-offline">RECOGER</button>
       </div>
     </div>
   </div>

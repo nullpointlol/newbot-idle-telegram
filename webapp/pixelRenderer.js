@@ -304,10 +304,12 @@ export class PixelPetRenderer {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
-    this.pixelSize = 6;
+    this.pixelSize = 5;
     this.animationTick = 0;
     this.currentSpeciesId = 'zen_cat';
     this.isBlinking = false;
+    this.isSleeping = false;
+    this.wakeTicks = 0;
   }
 
   setSpecies(speciesId) {
@@ -318,19 +320,54 @@ export class PixelPetRenderer {
     }
   }
 
+  wakeUp() {
+    this.isSleeping = false;
+    this.wakeTicks = 180; // stays excited for 3 seconds
+  }
+
   render() {
     this.animationTick++;
+    if (this.wakeTicks > 0) this.wakeTicks--;
+    else if (this.animationTick % 600 === 0) {
+      this.isSleeping = true;
+    }
+
+    const appEl = document.getElementById('app');
+    const is1Bit = appEl && appEl.dataset.theme === '1bit';
+
     const spec = PIXEL_MATRICES[this.currentSpeciesId] || PIXEL_MATRICES.zen_cat;
     const { palette, grid } = spec;
 
-    // Breathing / bobbing vertical offset
-    const bounceOffset = Math.sin(this.animationTick * 0.08) * 3;
-    const isBlinkFrame = (this.animationTick % 120 >= 115);
-
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    const centerX = Math.floor(this.canvas.width / 2);
+    const centerY = Math.floor(this.canvas.height / 2);
+
+    // 1. Draw Cozy Donut Bed
+    const bedRadiusX = 52;
+    const bedRadiusY = 28;
+    const bedY = centerY + 16;
+
+    this.ctx.beginPath();
+    this.ctx.ellipse(centerX, bedY, bedRadiusX, bedRadiusY, 0, 0, Math.PI * 2);
+    this.ctx.fillStyle = is1Bit ? '#222222' : '#2b4f8c';
+    this.ctx.fill();
+    this.ctx.lineWidth = 3;
+    this.ctx.strokeStyle = is1Bit ? '#ffffff' : '#1a325a';
+    this.ctx.stroke();
+
+    // Inner cushion
+    this.ctx.beginPath();
+    this.ctx.ellipse(centerX, bedY + 4, bedRadiusX - 10, bedRadiusY - 8, 0, 0, Math.PI * 2);
+    this.ctx.fillStyle = is1Bit ? '#111111' : '#88aee8';
+    this.ctx.fill();
+
+    // 2. Draw Pet with breathing / bobbing
+    const bounceOffset = Math.sin(this.animationTick * 0.08) * 2.5;
+    const isBlinkFrame = (this.animationTick % 120 >= 115) || this.isSleeping;
+
     const startX = Math.floor((this.canvas.width - 16 * this.pixelSize) / 2);
-    const startY = Math.floor((this.canvas.height - 16 * this.pixelSize) / 2) + Math.round(bounceOffset);
+    const startY = Math.floor((this.canvas.height - 16 * this.pixelSize) / 2) + Math.round(bounceOffset) - 6;
 
     for (let r = 0; r < 16; r++) {
       const row = grid[r];
@@ -338,12 +375,17 @@ export class PixelPetRenderer {
         let val = row[c];
         if (val === '0') continue;
 
-        // Blinking logic: if eye pixel and blink frame, render body color instead
+        // If blinking or sleeping, close eyes
         if (isBlinkFrame && val === '4') {
           val = '1';
         }
 
-        const color = palette[val];
+        let color = palette[val];
+        if (is1Bit) {
+          if (val === '1') color = '#000000';
+          else color = '#ffffff';
+        }
+
         if (color) {
           this.ctx.fillStyle = color;
           this.ctx.fillRect(
@@ -354,6 +396,13 @@ export class PixelPetRenderer {
           );
         }
       }
+    }
+
+    // 3. Sleeping 'z' particles
+    if (this.isSleeping && this.animationTick % 40 < 25) {
+      this.ctx.font = '10px "Press Start 2P", monospace';
+      this.ctx.fillStyle = is1Bit ? '#ffffff' : '#3b82f6';
+      this.ctx.fillText('zZ', centerX + 26, centerY - 14 + (this.animationTick % 30) * -0.5);
     }
   }
 }
