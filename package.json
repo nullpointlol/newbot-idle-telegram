@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "test": "node --test --test-concurrency=1 tests/*.test.js",
-    "check": "node --check src/server.js"
+    "check": "node --check src/server.js",
+    "generate:content": "node src/content/generator.js"
   },
   "keywords": [
     "telegram-mini-app",

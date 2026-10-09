@@ -1,6 +1,7 @@
 /**
- * Telegram Mini App - Imperio Antiguo (Metales Clásicos: Bronce, Plata, Oro)
- * Adventure Capitalist Mathematical Loop, Zero Dollar Signs, Clean ancient economy
+ * Telegram Mini App - Tamagotchi Idle Creature Care
+ * Classic Metals Economy (Bronce 🥉, Plata 🥈, Oro 🥇), Interactive Pet Hero,
+ * Species Catalog across Domestic, Wild, Fantasy, and Sci-Fi.
  */
 
 const tg = window.Telegram?.WebApp;
@@ -9,24 +10,46 @@ if (tg) {
   tg.expand();
 }
 
-// User state
+// User & Pet State
 let state = {
   user: null,
   assets: [],
   activeBoost: 1.0,
   claimablePrestige: 0,
   liveBalance: 0.0,
-  currentCPS: 0.0
+  currentCPS: 0.0,
+  activeSpecies: {
+    id: 'mystic_cat',
+    name: 'Gatito Astral',
+    category: 'DOMÉSTICO • RARO',
+    avatar: '🐱',
+    stageName: 'Cachorro'
+  },
+  petVitals: {
+    nutrition: 85,
+    affection: 90,
+    energy: 75
+  }
 };
 
-// Ancient Workshop Definitions
-const ASSET_CATALOG = [
-  { type: 'grain', alias: 'lemonade', name: 'Cultivo de Grano', icon: '🌾', baseCost: 4.0, baseCps: 1.0, growth: 1.07 },
-  { type: 'pottery', alias: 'newspaper', name: 'Taller de Ánforas', icon: '🏺', baseCost: 60.0, baseCps: 20.0, growth: 1.15 },
-  { type: 'smithy', alias: 'carwash', name: 'Herrería Imperial', icon: '⚒️', baseCost: 720.0, baseCps: 90.0, growth: 1.14 },
-  { type: 'vineyard', alias: 'pizza', name: 'Prensa de Viñedos', icon: '🍇', baseCost: 8640.0, baseCps: 360.0, growth: 1.13 },
-  { type: 'fleet', alias: 'donut', name: 'Flota Mercante', icon: '⛵', baseCost: 103680.0, baseCps: 2160.0, growth: 1.12 },
-  { type: 'mint', alias: 'bank', name: 'Casa de la Moneda', icon: '🏛️', baseCost: 1244160.0, baseCps: 6480.0, growth: 1.11 }
+// Care Facilities (Adventure Capitalist Mathematical Loop)
+const CARE_FACILITIES = [
+  { type: 'feeding', alias: 'lemonade', name: 'Comedero de Manjares', icon: '🍎', baseCost: 4.0, baseCps: 1.0, growth: 1.07 },
+  { type: 'hygiene', alias: 'newspaper', name: 'Baño Termal & Burbujas', icon: '🧼', baseCost: 60.0, baseCps: 20.0, growth: 1.15 },
+  { type: 'play', alias: 'carwash', name: 'Parque de Estimulación', icon: '🎾', baseCost: 720.0, baseCps: 90.0, growth: 1.14 },
+  { type: 'shelter', alias: 'pizza', name: 'Nido Acolchado & Sueño', icon: '🛌', baseCost: 8640.0, baseCps: 360.0, growth: 1.13 },
+  { type: 'training', alias: 'donut', name: 'Cámara de Mutagénesis', icon: '🧬', baseCost: 103680.0, baseCps: 2160.0, growth: 1.12 },
+  { type: 'sanctuary', alias: 'bank', name: 'Templo de Ascensión', icon: '👑', baseCost: 1244160.0, baseCps: 6480.0, growth: 1.11 }
+];
+
+// Species Catalog
+const SPECIES_CATALOG = [
+  { id: 'mystic_cat', name: 'Gatito Astral', category: 'DOMÉSTICO • RARO', avatar: '🐱', stageName: 'Cachorro' },
+  { id: 'frost_wolf', name: 'Lobo de Escarcha', category: 'SALVAJE • RARO', avatar: '🐺', stageName: 'Lobato Polar' },
+  { id: 'obsidian_dragon', name: 'Dragón de Obsidiana', category: 'FANTASÍA • ÉPICO', avatar: '🐲', stageName: 'Draco Ígneo' },
+  { id: 'cyber_droid', name: 'Ciber-Droide Quántico', category: 'SCI-FI • LEGENDARIO', avatar: '🤖', stageName: 'Nano-Bot' },
+  { id: 'phoenix_chick', name: 'Fénix del Bosque', category: 'FANTASÍA • MITO', avatar: '🐦‍🔥', stageName: 'Pichón Solar' },
+  { id: 'shiba_guardian', name: 'Shiba Guardián', category: 'DOMÉSTICO • COMÚN', avatar: '🐕', stageName: 'Cachorro Fiel' }
 ];
 
 /**
@@ -89,7 +112,7 @@ function getMilestone(level) {
 
 function computeClientCPS() {
   let sum = 0;
-  for (const cat of ASSET_CATALOG) {
+  for (const cat of CARE_FACILITIES) {
     const userAsset = state.assets.find(a => a.asset_type === cat.type || a.asset_type === cat.alias);
     const level = userAsset ? userAsset.level : 0;
     if (level > 0) {
@@ -101,14 +124,22 @@ function computeClientCPS() {
   return sum * prestigeMult * (state.activeBoost || 1.0);
 }
 
+function getOverallPetLevel() {
+  let totalLevels = 0;
+  for (const asset of state.assets) {
+    totalLevels += (asset.level || 0);
+  }
+  return Math.max(1, Math.floor(totalLevels / 2));
+}
+
 let isInitialSync = true;
 
 // Initial Sync
 async function syncUser(isBackground = false) {
   const tgUser = tg?.initDataUnsafe?.user;
   const telegramId = tgUser?.id || 123456789;
-  const username = tgUser?.username || 'patricio_romano';
-  const firstName = tgUser?.first_name || 'Gobernador';
+  const username = tgUser?.username || 'criador_ancestral';
+  const firstName = tgUser?.first_name || 'Guardián';
 
   try {
     const res = await fetch('/api/user/sync', {
@@ -126,7 +157,8 @@ async function syncUser(isBackground = false) {
     state.currentCPS = computeClientCPS();
 
     updateHUD();
-    renderAssets();
+    renderCareFacilities();
+    renderSpeciesGrid();
 
     // Show offline modal ONLY on first visit and ONLY if away for at least 60s
     if (!isBackground && isInitialSync && data.offlineEarnings && data.offlineEarnings.earned > 0 && data.offlineEarnings.cappedSeconds >= 60) {
@@ -138,23 +170,35 @@ async function syncUser(isBackground = false) {
   }
 }
 
-// Update HUD
+// Update HUD & Pet Details
 function updateHUD() {
-  document.getElementById('user-name').textContent = state.user?.first_name || 'Gobernador';
+  document.getElementById('user-name').textContent = state.user?.first_name || 'Guardián';
   const points = state.user?.prestige_points || 0;
   const pct = (points * 2);
-  document.getElementById('prestige-badge').textContent = `Favor Divino: ${points} (+${pct}%)`;
+  document.getElementById('prestige-badge').textContent = `Esencia: ${points} (+${pct}%)`;
 
   const boostBadge = document.getElementById('ad-boost-indicator');
   if (state.activeBoost > 1.0) {
-    boostBadge.textContent = `⚡ Bendición ${state.activeBoost}x Activa`;
+    boostBadge.textContent = `⚡ Cuidado ${state.activeBoost}x Activo`;
     boostBadge.classList.add('active');
   } else {
-    boostBadge.textContent = '⚡ Sin Bendición Activa';
+    boostBadge.textContent = '⚡ Cuidado Normal';
     boostBadge.classList.remove('active');
   }
 
-  // Update coin icon according to wealth tier
+  // Pet Display
+  const petLvl = getOverallPetLevel();
+  let stageTitle = 'Etapa I: Cría';
+  if (petLvl >= 100) stageTitle = 'Etapa IV: Ascendido Cósmico';
+  else if (petLvl >= 50) stageTitle = 'Etapa III: Adulto';
+  else if (petLvl >= 25) stageTitle = 'Etapa II: Joven';
+
+  document.getElementById('pet-category-badge').textContent = state.activeSpecies.category;
+  document.getElementById('pet-name-display').textContent = state.activeSpecies.name;
+  document.getElementById('pet-stage-display').textContent = `${stageTitle} (Nivel ${petLvl})`;
+  document.getElementById('pet-avatar-display').textContent = state.activeSpecies.avatar;
+
+  // Update coin icon
   const mainIcon = document.getElementById('main-coin-icon');
   if (state.liveBalance >= 10000) {
     mainIcon.textContent = '🥇';
@@ -177,12 +221,12 @@ function updateHUD() {
   document.getElementById('ref-link-input').value = refLink;
 }
 
-// Render Asset Cards
-function renderAssets() {
+// Render Care Facilities
+function renderCareFacilities() {
   const container = document.getElementById('assets-list');
   container.innerHTML = '';
 
-  for (const cat of ASSET_CATALOG) {
+  for (const cat of CARE_FACILITIES) {
     const userAsset = state.assets.find(a => a.asset_type === cat.type || a.asset_type === cat.alias);
     const level = userAsset ? userAsset.level : 0;
     const cost1 = calculateCost(cat.baseCost, cat.growth, level, 1);
@@ -206,33 +250,63 @@ function renderAssets() {
         <div class="progress-fill" style="width: ${progressPct}%"></div>
       </div>
       <div class="asset-metrics">
-        <span>Próxima Gracia: ${nextMilestone}</span>
+        <span>Próxima Evolución: ${nextMilestone}</span>
         <span class="asset-cps">+${formatCoins(assetCps)}/s</span>
       </div>
       <div class="asset-controls">
         <button class="btn btn-buy" data-type="${cat.type}" data-count="1" ${state.liveBalance < cost1 ? 'disabled' : ''}>
-          Forjar 1x (${formatCoins(cost1)})
+          Cuidar 1x (${formatCoins(cost1)})
         </button>
         <button class="btn btn-buy" data-type="${cat.type}" data-count="10" ${state.liveBalance < cost10 ? 'disabled' : ''}>
-          Forjar 10x (${formatCoins(cost10)})
+          Cuidar 10x (${formatCoins(cost10)})
         </button>
       </div>
     `;
     container.appendChild(card);
   }
 
-  // Attach purchase listeners
+  // Purchase listeners
   container.querySelectorAll('.btn-buy').forEach(btn => {
     btn.addEventListener('click', async () => {
       const assetType = btn.dataset.type;
       const count = parseInt(btn.dataset.count, 10);
-      await buyAsset(assetType, count);
+      await buyCareFacility(assetType, count);
     });
   });
 }
 
-// Buy asset API call
-async function buyAsset(assetType, count) {
+// Render Species Grid
+function renderSpeciesGrid() {
+  const grid = document.getElementById('species-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  for (const spec of SPECIES_CATALOG) {
+    const isActive = spec.id === state.activeSpecies.id;
+    const card = document.createElement('div');
+    card.className = `species-card ${isActive ? 'active' : ''}`;
+    card.innerHTML = `
+      <div class="species-icon">${spec.avatar}</div>
+      <div class="species-title">${spec.name}</div>
+      <div class="species-category">${spec.category}</div>
+      <button class="btn ${isActive ? 'btn-warning' : 'btn-secondary'}" style="padding: 4px 8px; font-size: 11px;">
+        ${isActive ? 'Activo' : 'Cuidar'}
+      </button>
+    `;
+
+    card.addEventListener('click', () => {
+      state.activeSpecies = spec;
+      updateHUD();
+      renderSpeciesGrid();
+      if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+    });
+
+    grid.appendChild(card);
+  }
+}
+
+// Buy Care Facility
+async function buyCareFacility(assetType, count) {
   if (!state.user) return;
   try {
     const res = await fetch('/api/asset/buy', {
@@ -251,13 +325,34 @@ async function buyAsset(assetType, count) {
       }
       state.currentCPS = computeClientCPS();
       updateHUD();
-      renderAssets();
+      renderCareFacilities();
       if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
   } catch (err) {
-    console.error('Purchase failed:', err);
+    console.error('Care purchase failed:', err);
   }
 }
+
+// Interactive Pet Tap (Acariciar)
+document.getElementById('pet-interactive-area').addEventListener('click', (e) => {
+  // Give instant affection and bronze click reward
+  const clickBonus = Math.max(1, Math.round(state.currentCPS * 0.05));
+  state.liveBalance += clickBonus;
+  document.getElementById('balance-display').textContent = formatCoins(state.liveBalance);
+
+  // Floating heart animation
+  const heartsLayer = document.getElementById('pet-hearts');
+  const heart = document.createElement('span');
+  heart.className = 'floating-heart';
+  heart.textContent = '💖';
+  heart.style.left = `${Math.random() * 60 + 20}%`;
+  heart.style.top = `${Math.random() * 40 + 20}%`;
+  heartsLayer.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 800);
+
+  if (tg?.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+});
 
 // Offline Modal
 function showOfflineModal(offlineData) {
@@ -307,8 +402,8 @@ document.getElementById('btn-watch-ad').addEventListener('click', async () => {
   state.activeBoost = 2.0;
   state.currentCPS = computeClientCPS();
   updateHUD();
-  renderAssets();
-  alert('🏛️ ¡Ofrenda completada! Los dioses otorgan Producción x2 durante 4 horas.');
+  renderCareFacilities();
+  alert('🐾 ¡Festín Mágico consumado! Producción y vitalidad x2 durante 4 horas.');
   if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
@@ -342,20 +437,20 @@ document.querySelectorAll('.btn-stars').forEach(btn => {
 document.getElementById('btn-copy-ref').addEventListener('click', () => {
   const input = document.getElementById('ref-link-input');
   navigator.clipboard.writeText(input.value);
-  alert('📜 Edicto de reclutamiento copiado al portapapeles');
+  alert('📜 Enlace de guardería copiado al portapapeles');
   if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
 // Verify channel task
 document.getElementById('btn-verify-channel').addEventListener('click', async () => {
-  document.getElementById('task-status-text').textContent = '✅ ¡Alianza confirmada con el senado! Multiplicador x2.5 activo.';
+  document.getElementById('task-status-text').textContent = '✅ ¡Santuario aliado verificado! Multiplicador x2.5 activo.';
   state.activeBoost = 2.5;
   state.currentCPS = computeClientCPS();
   updateHUD();
   if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
-// Claim Prestige
+// Claim Prestige (Ascensión de Mascota)
 document.getElementById('btn-claim-prestige').addEventListener('click', async () => {
   if (!state.user || state.claimablePrestige <= 0) return;
   const res = await fetch('/api/prestige/claim', {
@@ -365,7 +460,7 @@ document.getElementById('btn-claim-prestige').addEventListener('click', async ()
   });
   const data = await res.json();
   if (data.success) {
-    alert(`⚡ ¡Ascenso divino consumado! Has obtenido ${data.claimedPoints} Gratias Celestiales.`);
+    alert(`🧬 ¡Ascensión completada! Tu linaje ha obtenido ${data.claimedPoints} Esencias Ancestrales permanentes.`);
     if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
     await syncUser();
   }

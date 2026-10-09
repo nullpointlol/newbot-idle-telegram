@@ -1,0 +1,230 @@
+[
+  {
+    "id": "mystic_cat",
+    "name": "Gatito Astral",
+    "category": "domestic",
+    "rarity": "common",
+    "avatar": "🐱",
+    "description": "Un pequeño felino de ojos brillantes capaz de ronronear en armonía cósmica.",
+    "carePreferences": {
+      "favoriteActivity": "shelter",
+      "bonusMultiplier": 1.15
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Cachorro",
+        "icon": "🐱",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Felino Astral",
+        "icon": "😼",
+        "growthMultiplier": 2
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Pantera Cósmica",
+        "icon": "🐆",
+        "growthMultiplier": 4
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Deidad Felina Primordial",
+        "icon": "🦁",
+        "growthMultiplier": 8
+      }
+    ]
+  },
+  {
+    "id": "frost_wolf",
+    "name": "Lobo de Escarcha",
+    "category": "wild",
+    "rarity": "rare",
+    "avatar": "🐺",
+    "description": "Espíritu cazador de las tundras nevadas que aúlla para potenciar las manadas aliadas.",
+    "carePreferences": {
+      "favoriteActivity": "training",
+      "bonusMultiplier": 1.25
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Lobato de Nieve",
+        "icon": "🐺",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Lobo Alfa Polar",
+        "icon": "🐺❄️",
+        "growthMultiplier": 2.2
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Espectro de la Ventisca",
+        "icon": "🌪️🐺",
+        "growthMultiplier": 4.5
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Fenrir Celestial",
+        "icon": "⚡🐺",
+        "growthMultiplier": 9
+      }
+    ]
+  },
+  {
+    "id": "obsidian_dragon",
+    "name": "Cría de Dragón de Obsidiana",
+    "category": "fantasy",
+    "rarity": "epic",
+    "avatar": "🐲",
+    "description": "Engendrado en el corazón de volcanes arcanos. Sus escamas acumulan calor y metales preciosos.",
+    "carePreferences": {
+      "favoriteActivity": "feeding",
+      "bonusMultiplier": 1.35
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Dragón Bebé",
+        "icon": "🐲",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Draco Ígneo",
+        "icon": "🐉",
+        "growthMultiplier": 2.5
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Leviatán Volcánico",
+        "icon": "🌋🐉",
+        "growthMultiplier": 5
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Señor de las Sombras Arcanas",
+        "icon": "👑🐉",
+        "growthMultiplier": 10
+      }
+    ]
+  },
+  {
+    "id": "cyber_droid",
+    "name": "Ciber-Droide Quántico",
+    "category": "scifi",
+    "rarity": "legendary",
+    "avatar": "🤖",
+    "description": "Un autómata con núcleo de fusión de antimateria que auto-ensambla mejoras cibernéticas a alta velocidad.",
+    "carePreferences": {
+      "favoriteActivity": "sanctuary",
+      "bonusMultiplier": 1.5
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Nano-Bot",
+        "icon": "🤖",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Ciber-Centinela",
+        "icon": "🦾",
+        "growthMultiplier": 2.8
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Mecha Titánico",
+        "icon": "🛸",
+        "growthMultiplier": 6
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Inteligencia Omnipresente 9000",
+        "icon": "🌐",
+        "growthMultiplier": 12
+      }
+    ]
+  },
+  {
+    "id": "hiper_espacial_sonda_biomec_nica_de_alfa_centauri",
+    "name": "Hiper-Espacial Sonda Biomecánica de Alfa Centauri",
+    "category": "scifi",
+    "rarity": "epic",
+    "avatar": "🛰️",
+    "description": "Especie generada proceduralmente del reino scifi. Posee una afinidad ancestral con la actividad de training.",
+    "carePreferences": {
+      "favoriteActivity": "training",
+      "bonusMultiplier": 1.45
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Cría Hiper-Espacial",
+        "icon": "🛰️",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Sonda Biomecánica Joven",
+        "icon": "🛰️✨",
+        "growthMultiplier": 2
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Hiper-Espacial Adulto",
+        "icon": "🔥🛰️",
+        "growthMultiplier": 4.5
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Titán Sonda Biomecánica",
+        "icon": "👑🛰️",
+        "growthMultiplier": 10
+      }
+    ]
+  },
+  {
+    "id": "gil_hur_n_de_seda_del_jard_n",
+    "name": "Ágil Hurón de Seda del Jardín",
+    "category": "domestic",
+    "rarity": "celestial",
+    "avatar": "🦡",
+    "description": "Especie generada proceduralmente del reino domestic. Posee una afinidad ancestral con la actividad de sanctuary.",
+    "carePreferences": {
+      "favoriteActivity": "sanctuary",
+      "bonusMultiplier": 2.2
+    },
+    "stages": [
+      {
+        "levelRequired": 1,
+        "stageName": "Cría Ágil",
+        "icon": "🦡",
+        "growthMultiplier": 1
+      },
+      {
+        "levelRequired": 25,
+        "stageName": "Hurón de Seda Joven",
+        "icon": "🦡✨",
+        "growthMultiplier": 2
+      },
+      {
+        "levelRequired": 50,
+        "stageName": "Ágil Adulto",
+        "icon": "🔥🦡",
+        "growthMultiplier": 4.5
+      },
+      {
+        "levelRequired": 100,
+        "stageName": "Titán Hurón de Seda",
+        "icon": "👑🦡",
+        "growthMultiplier": 10
+      }
+    ]
+  }
+]

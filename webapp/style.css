@@ -8,6 +8,7 @@
   --silver: #cbd5e1;
   --gold: #fbbf24;
   --gold-glow: rgba(251, 191, 36, 0.25);
+  --accent-pink: #ec4899;
   --accent-purple: #a855f7;
   --accent-green: #34d399;
   --btn-primary: #3b82f6;
@@ -38,7 +39,7 @@ body {
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 /* Header */
@@ -64,7 +65,7 @@ body {
 }
 
 .user-info h2 {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
@@ -98,22 +99,167 @@ body {
   50% { opacity: 1; transform: scale(1.02); }
 }
 
+/* Pet Hero Card (Tamagotchi Visual Core) */
+.pet-hero-card {
+  background: linear-gradient(160deg, #182232, #0d121c);
+  border: 1.5px solid #2e3d54;
+  border-radius: 20px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  user-select: none;
+}
+
+.pet-hero-card:active .pet-avatar {
+  transform: scale(1.15) rotate(-3deg);
+}
+
+.pet-species-badge {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 800;
+  color: #60a5fa;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.pet-avatar-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pet-aura {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.35), transparent 70%);
+  border-radius: 50%;
+  animation: breathe 3s infinite ease-in-out;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(0.9); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0.9; }
+}
+
+.pet-avatar {
+  font-size: 58px;
+  z-index: 2;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.6));
+}
+
+.pet-hearts-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp 0.8s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 1; transform: translateY(0) scale(0.8); }
+  100% { opacity: 0; transform: translateY(-50px) scale(1.4); }
+}
+
+.pet-details {
+  text-align: center;
+}
+
+.pet-details h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.pet-stage-tag {
+  font-size: 12px;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Vitals */
+.pet-vitals {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.vital-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.vital-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.vital-track {
+  width: 100%;
+  height: 5px;
+  background: #0b0f17;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.vital-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.vital-nutrition { background: #f59e0b; }
+.vital-affection { background: #ec4899; }
+.vital-energy { background: #10b981; }
+
+.pet-tap-hint {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 600;
+}
+
 /* Treasury Balance Card */
 .balance-card {
-  background: linear-gradient(145deg, #18202d, #0d121a);
+  background: linear-gradient(145deg, #161e2a, #0c1017);
   border: 1px solid var(--card-border);
   border-radius: 18px;
-  padding: 20px 16px;
+  padding: 16px;
   text-align: center;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .balance-label {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 2px;
   color: var(--text-muted);
   font-weight: 700;
@@ -123,17 +269,16 @@ body {
 .coin-medallion {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin: 6px 0;
+  gap: 8px;
+  margin: 4px 0;
 }
 
 .coin-icon-large {
-  font-size: 32px;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+  font-size: 28px;
 }
 
 .balance-amount {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 800;
   color: var(--gold);
   font-variant-numeric: tabular-nums;
@@ -141,21 +286,21 @@ body {
 }
 
 .coin-breakdown {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
-  background: rgba(0, 0, 0, 0.25);
-  padding: 4px 12px;
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 3px 10px;
+  border-radius: 10px;
   font-weight: 600;
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .cps-display {
   font-size: 13px;
   color: var(--accent-green);
   font-weight: 700;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 /* Nav Tabs */
@@ -164,7 +309,7 @@ body {
   background: var(--card-bg);
   padding: 4px;
   border-radius: 12px;
-  gap: 4px;
+  gap: 3px;
   border: 1px solid var(--card-border);
 }
 
@@ -173,9 +318,9 @@ body {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  padding: 10px 2px;
+  padding: 9px 2px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -267,7 +412,7 @@ body {
   padding: 14px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
   transition: border-color 0.2s ease;
 }
 
@@ -347,6 +492,50 @@ body {
   height: 100%;
   background: linear-gradient(90deg, #10b981, #34d399);
   transition: width 0.3s ease;
+}
+
+/* Species Catalog Grid */
+.species-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.species-card {
+  background: #101622;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.species-card.active {
+  border-color: var(--gold);
+  box-shadow: 0 0 12px var(--gold-glow);
+  background: #172133;
+}
+
+.species-icon {
+  font-size: 36px;
+}
+
+.species-title {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.species-category {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #60a5fa;
+  font-weight: 700;
 }
 
 /* Cards & Shop */

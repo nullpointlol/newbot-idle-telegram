@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PetSpeciesSchema",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "category",
+    "rarity",
+    "avatar",
+    "description",
+    "carePreferences",
+    "stages"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": {
+      "type": "string",
+      "enum": ["domestic", "wild", "fantasy", "scifi"]
+    },
+    "rarity": {
+      "type": "string",
+      "enum": ["common", "rare", "epic", "legendary", "celestial"]
+    },
+    "avatar": { "type": "string" },
+    "description": { "type": "string" },
+    "carePreferences": {
+      "type": "object",
+      "required": ["favoriteActivity", "bonusMultiplier"],
+      "properties": {
+        "favoriteActivity": { "type": "string" },
+        "bonusMultiplier": { "type": "number", "minimum": 1.0 }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["levelRequired", "stageName", "icon", "growthMultiplier"],
+        "properties": {
+          "levelRequired": { "type": "integer", "minimum": 0 },
+          "stageName": { "type": "string" },
+          "icon": { "type": "string" },
+          "growthMultiplier": { "type": "number", "minimum": 1.0 }
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Imperio Antiguo - Telegram Idle</title>
+  <title>Tamagotchi Idle - Crianza de Mascotas</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,20 +12,51 @@
     <!-- Top HUD / Header -->
     <header class="header">
       <div class="user-info">
-        <span id="user-avatar" class="avatar">🏛️</span>
+        <span id="user-avatar" class="avatar">🐾</span>
         <div>
-          <h2 id="user-name">Patricio Romano</h2>
-          <span id="prestige-badge" class="badge">Favor Divino: 0 (+0%)</span>
+          <h2 id="user-name">Criador Ancestral</h2>
+          <span id="prestige-badge" class="badge">Esencia Ancestral: 0 (+0%)</span>
         </div>
       </div>
       <div class="boost-badge" id="ad-boost-indicator">
-        ⚡ Sin Bendición Activa
+        ⚡ Cuidado Normal
       </div>
     </header>
 
+    <!-- Interactive Tamagotchi Pet Centerpiece -->
+    <section class="pet-hero-card" id="pet-interactive-area">
+      <div class="pet-species-badge" id="pet-category-badge">DOMÉSTICO • RARO</div>
+      <div class="pet-avatar-wrapper" id="pet-avatar-container">
+        <div class="pet-aura"></div>
+        <div class="pet-avatar" id="pet-avatar-display">🐱</div>
+        <div class="pet-hearts-layer" id="pet-hearts"></div>
+      </div>
+      <div class="pet-details">
+        <h3 id="pet-name-display">Gatito Astral</h3>
+        <span class="pet-stage-tag" id="pet-stage-display">Etapa I: Cachorro (Nivel 1)</span>
+      </div>
+
+      <!-- Vitals Bars -->
+      <div class="pet-vitals">
+        <div class="vital-bar">
+          <span class="vital-label">🍖 Nutrición</span>
+          <div class="vital-track"><div class="vital-fill vital-nutrition" id="vital-nutrition-fill" style="width: 85%;"></div></div>
+        </div>
+        <div class="vital-bar">
+          <span class="vital-label">💖 Cariño</span>
+          <div class="vital-track"><div class="vital-fill vital-affection" id="vital-affection-fill" style="width: 90%;"></div></div>
+        </div>
+        <div class="vital-bar">
+          <span class="vital-label">⚡ Vigor</span>
+          <div class="vital-track"><div class="vital-fill vital-energy" id="vital-energy-fill" style="width: 75%;"></div></div>
+        </div>
+      </div>
+      <div class="pet-tap-hint">✨ ¡Toca a tu mascota para acariciarla y ganar tributos!</div>
+    </section>
+
     <!-- Main Treasury & CPS Card (Metales Clásicos: Bronce, Plata, Oro) -->
     <section class="balance-card">
-      <div class="balance-label">TESORERÍA DEL IMPERIO</div>
+      <div class="balance-label">RESERVA DE CUIDADO Y TRIBUTOS</div>
       <div class="coin-medallion">
         <span class="coin-icon-large" id="main-coin-icon">🥉</span>
         <div class="balance-amount" id="balance-display">0 🥉</div>
@@ -34,90 +65,102 @@
         <span>0 Oro</span> • <span>0 Plata</span> • <span>0 Bronce</span>
       </div>
       <div class="cps-display">
-        <span class="cps-icon">⚡</span>
+        <span class="cps-icon">🌱</span>
         <span id="cps-amount">+0 🥉</span> / seg
       </div>
     </section>
 
     <!-- Navigation Tabs -->
     <nav class="nav-tabs">
-      <button class="tab-btn active" data-tab="businesses">Talleres 🏛️</button>
+      <button class="tab-btn active" data-tab="care">Cuidados 🍼</button>
+      <button class="tab-btn" data-tab="species">Especies 🥚</button>
       <button class="tab-btn" data-tab="tasks">Alianzas 📜</button>
       <button class="tab-btn" data-tab="shop">Tesoros ⭐</button>
-      <button class="tab-btn" data-tab="prestige">Panteón ⚡</button>
+      <button class="tab-btn" data-tab="prestige">Ascensión 🧬</button>
     </nav>
 
-    <!-- Tab 1: Workshops / Talleres (Adventure Capitalist Loop) -->
-    <main id="tab-businesses" class="tab-content active">
+    <!-- Tab 1: Care Facilities (Adventure Capitalist Idle Loop) -->
+    <main id="tab-care" class="tab-content active">
       <div class="quick-actions">
         <button id="btn-watch-ad" class="btn btn-ad">
-          🎬 Ofrenda Sagrada (Adsgram): Producción x2 por 4h
+          🎬 Festín Mágico (Adsgram): Cuidados x2 por 4h
         </button>
       </div>
       <div id="assets-list" class="assets-container">
-        <!-- Dynamically rendered ancient workshops -->
+        <!-- Dynamically rendered care facilities -->
       </div>
     </main>
 
-    <!-- Tab 2: Decrees & Alliances (Viral Referrals & Tasks) -->
+    <!-- Tab 2: Species Selection (Domestic, Wild, Fantasy, Sci-Fi) -->
+    <section id="tab-species" class="tab-content">
+      <div class="card">
+        <h3>🥚 Catálogo de Criaturas y Especies</h3>
+        <p>Elige la especie activa para tu guardería o haz eclosionar nuevas criaturas de reinos salvajes, fantásticos y de ciencia ficción.</p>
+        <div id="species-grid" class="species-grid">
+          <!-- Dynamically populated from content/species/species_catalog.json -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Alliances & Viral Tasks -->
     <section id="tab-tasks" class="tab-content">
       <div class="card">
-        <h3>📜 Pacto de Alianza (Referidos Virales)</h3>
-        <p>Envía emisarios para reclutar aliados. Cuando un gobernador se una mediante tu edicto, ambos recibirán un cofre con <strong>500 🥉</strong> de bronce al instante.</p>
+        <h3>📜 Gremio de Cuidadores (Referidos Virales)</h3>
+        <p>Invita a un amigo a criar su propia mascota. Cuando ingrese con tu enlace, ambos recibirán una cesta de <strong>500 🥉</strong> de bronce al instante.</p>
         <div class="referral-box">
-          <input type="text" id="ref-link-input" readonly value="Cargando edicto...">
-          <button id="btn-copy-ref" class="btn btn-secondary">Copiar Edicto</button>
+          <input type="text" id="ref-link-input" readonly value="Cargando enlace...">
+          <button id="btn-copy-ref" class="btn btn-secondary">Copiar Enlace</button>
         </div>
       </div>
 
       <div class="card">
-        <h3>📢 Canales de la Legión Patrocinada</h3>
-        <p>Suscríbete al senado y canal oficial para ganar una <strong>Bendición Temporal x2.5</strong> en toda la producción del imperio.</p>
+        <h3>📢 Santuarios Patrocinados</h3>
+        <p>Únete a las comunidades aliadas para desbloquear una <strong>Bendición de Crianza x2.5</strong> temporal.</p>
         <button id="btn-verify-channel" class="btn btn-primary">
-          Verificar Alianza en el Canal
+          Verificar Suscripción al Canal
         </button>
         <p id="task-status-text" class="status-message"></p>
       </div>
     </section>
 
-    <!-- Tab 3: Stars Shop -->
+    <!-- Tab 4: Stars Shop -->
     <section id="tab-shop" class="tab-content">
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>👔 Túnica del Emperador Dorado</h4>
-          <p>Distingue tu perfil y estandarte con ropajes imperiales.</p>
+          <h4>👑 Corona Mística de Guardián</h4>
+          <p>Cosmético ceremonial brillante para el avatar de tu criatura.</p>
         </div>
         <button class="btn btn-stars" data-item="cosmetic_golden_suit">50 ⭐</button>
       </div>
 
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>⚡ Bendición de los Dioses x2</h4>
-          <p>Duplica permanentemente la producción de todos tus talleres.</p>
+          <h4>🧬 Elixir de Evolución Eterna x2</h4>
+          <p>Duplica para siempre el desarrollo de todas las áreas de crianza.</p>
         </div>
         <button class="btn btn-stars" data-item="permanent_multiplier_2x">150 ⭐</button>
       </div>
 
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>💰 Cofre del Tesoro Arcaico</h4>
-          <p>Tesoros inmediatos de 10,000 🥉 de bronce para expandir tus tierras.</p>
+          <h4>🧺 Canasta de Manjares Reales</h4>
+          <p>10,000 🥉 de bronce inmediatos para impulsar su crecimiento.</p>
         </div>
         <button class="btn btn-stars" data-item="starter_pack">25 ⭐</button>
       </div>
     </section>
 
-    <!-- Tab 4: Pantheon (Prestige Reset) -->
+    <!-- Tab 5: Ascension / Prestige Reset -->
     <section id="tab-prestige" class="tab-content">
       <div class="card text-center">
-        <h3>⚡ Ascenso al Panteón (Favor Divino)</h3>
-        <p>Ofrece tus talleres terrenales a los dioses antiguos a cambio de <strong>Favor Divino</strong>. Cada gracia celestial concede un <strong>+2% permanente</strong> a la producción de todas tus futuras eras.</p>
+        <h3>🧬 Reencarnación y Linaje Ancestral</h3>
+        <p>Alcanza la cumbre del cuidado y permite que tu criatura ascienda al plano cósmico a cambio de <strong>Esencia Ancestral</strong>. Cada punto otorga un <strong>+2% permanente</strong> a la crianza de todas tus futuras mascotas.</p>
         <div class="prestige-metric">
-          <span class="label">Puntos de Favor Divino Disponibles:</span>
+          <span class="label">Esencia Ancestral Disponible para Despertar:</span>
           <h2 id="claimable-angels">0</h2>
         </div>
         <button id="btn-claim-prestige" class="btn btn-warning" disabled>
-          Reclamar Favor Divino y Renacer
+          Ascender Criatura y Renacer Linaje
         </button>
       </div>
     </section>
@@ -125,12 +168,12 @@
     <!-- Offline Earnings Modal -->
     <div id="offline-modal" class="modal">
       <div class="modal-content">
-        <div class="modal-icon">🏺</div>
-        <h2>¡Las arcas han prosperado!</h2>
-        <p>Tus artesanos y siervos continuaron forjando tributos mientras estabas ausente:</p>
+        <div class="modal-icon">🐾</div>
+        <h2>¡Tu mascota te extrañó!</h2>
+        <p>Mientras descansabas, tus sistemas de cuidado continuaron produciendo tributos de vigor y amor:</p>
         <div class="offline-earnings-highlight" id="offline-earned-amount">+0 🥉</div>
         <p class="offline-time" id="offline-time-text">Tiempo transcurrido: 0 horas</p>
-        <button id="btn-close-offline" class="btn btn-primary">Recaudar Tributos</button>
+        <button id="btn-close-offline" class="btn btn-primary">Abrazar y Recaudar</button>
       </div>
     </div>
   </div>

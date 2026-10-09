@@ -5,61 +5,73 @@
  */
 
 export const ASSET_DEFINITIONS = {
-  grain: {
-    name: 'Cultivo de Grano',
-    icon: '🌾',
+  feeding: {
+    name: 'Comedero de Manjares',
+    icon: '🍎',
     baseCost: 4.0,
     baseCps: 1.0,
     growthRate: 1.07,
-    unlockOrder: 1
+    unlockOrder: 1,
+    description: 'Frutas arcanas y néctar nutritivo para alimentar a tu compañero.'
   },
-  pottery: {
-    name: 'Taller de Ánforas',
-    icon: '🏺',
+  hygiene: {
+    name: 'Baño Termal & Burbujas',
+    icon: '🧼',
     baseCost: 60.0,
     baseCps: 20.0,
     growthRate: 1.15,
-    unlockOrder: 2
+    unlockOrder: 2,
+    description: 'Aguas cristalinas y esponjas suaves para mantener su pelaje impecable.'
   },
-  smithy: {
-    name: 'Herrería Imperial',
-    icon: '⚒️',
+  play: {
+    name: 'Parque de Juegos & Estimulación',
+    icon: '🎾',
     baseCost: 720.0,
     baseCps: 90.0,
     growthRate: 1.14,
-    unlockOrder: 3
+    unlockOrder: 3,
+    description: 'Pelotas saltarinas y circuitos de agilidad para disparar su alegría.'
   },
-  vineyard: {
-    name: 'Prensa de Viñedos',
-    icon: '🍇',
+  shelter: {
+    name: 'Nido Acolchado & Descanso',
+    icon: '🛌',
     baseCost: 8640.0,
     baseCps: 360.0,
     growthRate: 1.13,
-    unlockOrder: 4
+    unlockOrder: 4,
+    description: 'Cápsula mullida donde tu mascota sueña y regenera vigor pasivo.'
   },
-  fleet: {
-    name: 'Flota Mercante',
-    icon: '⛵',
+  training: {
+    name: 'Cámara de Mutagénesis & Poder',
+    icon: '🧬',
     baseCost: 103680.0,
     baseCps: 2160.0,
     growthRate: 1.12,
-    unlockOrder: 5
+    unlockOrder: 5,
+    description: 'Entrenamiento ancestral para despertar sus dones genéticos ocultos.'
   },
-  mint: {
-    name: 'Casa de la Moneda',
-    icon: '🏛️',
+  sanctuary: {
+    name: 'Templo de Ascensión & Linaje',
+    icon: '👑',
     baseCost: 1244160.0,
     baseCps: 6480.0,
     growthRate: 1.11,
-    unlockOrder: 6
+    unlockOrder: 6,
+    description: 'Monumento sagrado que consagra a tu criatura como leyenda viva.'
   },
   // Backward compatibility aliases
-  lemonade: { name: 'Cultivo de Grano', icon: '🌾', baseCost: 4.0, baseCps: 1.0, growthRate: 1.07, unlockOrder: 1 },
-  newspaper: { name: 'Taller de Ánforas', icon: '🏺', baseCost: 60.0, baseCps: 20.0, growthRate: 1.15, unlockOrder: 2 },
-  carwash: { name: 'Herrería Imperial', icon: '⚒️', baseCost: 720.0, baseCps: 90.0, growthRate: 1.14, unlockOrder: 3 },
-  pizza: { name: 'Prensa de Viñedos', icon: '🍇', baseCost: 8640.0, baseCps: 360.0, growthRate: 1.13, unlockOrder: 4 },
-  donut: { name: 'Flota Mercante', icon: '⛵', baseCost: 103680.0, baseCps: 2160.0, growthRate: 1.12, unlockOrder: 5 },
-  bank: { name: 'Casa de la Moneda', icon: '🏛️', baseCost: 1244160.0, baseCps: 6480.0, growthRate: 1.11, unlockOrder: 6 }
+  grain: { name: 'Comedero de Manjares', icon: '🍎', baseCost: 4.0, baseCps: 1.0, growthRate: 1.07, unlockOrder: 1 },
+  pottery: { name: 'Baño Termal & Burbujas', icon: '🧼', baseCost: 60.0, baseCps: 20.0, growthRate: 1.15, unlockOrder: 2 },
+  smithy: { name: 'Parque de Juegos & Estimulación', icon: '🎾', baseCost: 720.0, baseCps: 90.0, growthRate: 1.14, unlockOrder: 3 },
+  vineyard: { name: 'Nido Acolchado & Descanso', icon: '🛌', baseCost: 8640.0, baseCps: 360.0, growthRate: 1.13, unlockOrder: 4 },
+  fleet: { name: 'Cámara de Mutagénesis & Poder', icon: '🧬', baseCost: 103680.0, baseCps: 2160.0, growthRate: 1.12, unlockOrder: 5 },
+  mint: { name: 'Templo de Ascensión & Linaje', icon: '👑', baseCost: 1244160.0, baseCps: 6480.0, growthRate: 1.11, unlockOrder: 6 },
+  lemonade: { name: 'Comedero de Manjares', icon: '🍎', baseCost: 4.0, baseCps: 1.0, growthRate: 1.07, unlockOrder: 1 },
+  newspaper: { name: 'Baño Termal & Burbujas', icon: '🧼', baseCost: 60.0, baseCps: 20.0, growthRate: 1.15, unlockOrder: 2 },
+  carwash: { name: 'Parque de Juegos & Estimulación', icon: '🎾', baseCost: 720.0, baseCps: 90.0, growthRate: 1.14, unlockOrder: 3 },
+  pizza: { name: 'Nido Acolchado & Descanso', icon: '🛌', baseCost: 8640.0, baseCps: 360.0, growthRate: 1.13, unlockOrder: 4 },
+  donut: { name: 'Cámara de Mutagénesis & Poder', icon: '🧬', baseCost: 103680.0, baseCps: 2160.0, growthRate: 1.12, unlockOrder: 5 },
+  bank: { name: 'Templo de Ascensión & Linaje', icon: '👑', baseCost: 1244160.0, baseCps: 6480.0, growthRate: 1.11, unlockOrder: 6 }
 };
 
 /**

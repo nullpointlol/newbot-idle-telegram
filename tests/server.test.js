@@ -137,7 +137,7 @@ describe('Task 5: Core Server & Telegram Mini App Integration Suite', () => {
     const res = await fetch(`${baseUrl}/`);
     assert.equal(res.status, 200);
     const html = await res.text();
-    assert.match(html, /<title>Imperio Antiguo - Telegram Idle<\/title>/);
+    assert.match(html, /<title>Tamagotchi Idle - Crianza de Mascotas<\/title>/);
     assert.match(html, /telegram-web-app\.js/);
   });
 });
