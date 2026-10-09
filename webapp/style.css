@@ -1,15 +1,17 @@
 :root {
-  --bg-color: #0f141c;
-  --card-bg: #1a2230;
-  --card-border: #283548;
-  --text-main: #f0f4f8;
-  --text-muted: #8b9bb4;
-  --accent-gold: #f59e0b;
-  --accent-green: #10b981;
-  --accent-blue: #3b82f6;
-  --accent-purple: #8b5cf6;
-  --btn-primary: #2563eb;
-  --btn-hover: #1d4ed8;
+  --bg-color: #0b0e14;
+  --card-bg: #151a23;
+  --card-border: #263042;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --bronze: #cd7f32;
+  --silver: #cbd5e1;
+  --gold: #fbbf24;
+  --gold-glow: rgba(251, 191, 36, 0.25);
+  --accent-purple: #a855f7;
+  --accent-green: #34d399;
+  --btn-primary: #3b82f6;
+  --btn-hover: #2563eb;
   --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -53,9 +55,10 @@ body {
 }
 
 .avatar {
-  font-size: 28px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  font-size: 26px;
+  background: radial-gradient(circle, #2d3748, #1a202c);
+  border: 1px solid var(--gold);
+  box-shadow: 0 0 10px var(--gold-glow);
   padding: 6px;
   border-radius: 50%;
 }
@@ -63,57 +66,96 @@ body {
 .user-info h2 {
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .badge {
   font-size: 11px;
-  color: var(--accent-gold);
+  color: var(--gold);
+  font-weight: 600;
 }
 
 .boost-badge {
-  font-size: 12px;
+  font-size: 11px;
   padding: 6px 10px;
   border-radius: 20px;
-  background: #374151;
-  color: #9ca3af;
+  background: #1e293b;
+  color: #64748b;
   font-weight: 600;
+  border: 1px solid #334155;
 }
 
 .boost-badge.active {
-  background: rgba(245, 158, 11, 0.2);
-  color: var(--accent-gold);
-  border: 1px solid var(--accent-gold);
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px var(--gold-glow);
+  animation: pulse-glow 2s infinite ease-in-out;
 }
 
-/* Balance Card */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.02); }
+}
+
+/* Treasury Balance Card */
 .balance-card {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+  background: linear-gradient(145deg, #18202d, #0d121a);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 18px;
+  padding: 20px 16px;
   text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
 
 .balance-label {
-  font-size: 12px;
-  letter-spacing: 1.5px;
+  font-size: 11px;
+  letter-spacing: 2px;
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.coin-medallion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.coin-icon-large {
+  font-size: 32px;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
 }
 
 .balance-amount {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
-  color: var(--accent-gold);
-  margin: 6px 0;
+  color: var(--gold);
   font-variant-numeric: tabular-nums;
+  letter-spacing: -0.5px;
+}
+
+.coin-breakdown {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.25);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  display: flex;
+  gap: 8px;
 }
 
 .cps-display {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--accent-green);
-  font-weight: 600;
+  font-weight: 700;
+  margin-top: 4px;
 }
 
 /* Nav Tabs */
@@ -131,17 +173,19 @@ body {
   background: transparent;
   border: none;
   color: var(--text-muted);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 10px 4px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 10px 2px;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .tab-btn.active {
-  background: var(--btn-primary);
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
   color: #fff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
 /* Tab Contents */
@@ -155,7 +199,7 @@ body {
   display: flex;
 }
 
-/* Buttons */
+/* Action Buttons */
 .btn {
   border: none;
   border-radius: 10px;
@@ -171,7 +215,7 @@ body {
 }
 
 .btn-primary {
-  background: var(--btn-primary);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: #fff;
 }
 
@@ -181,32 +225,35 @@ body {
 }
 
 .btn-warning {
-  background: var(--accent-gold);
-  color: #000;
+  background: linear-gradient(135deg, var(--gold), #d97706);
+  color: #0f172a;
 }
 
 .btn-warning:disabled {
-  background: #4b5563;
-  color: #9ca3af;
+  background: #334155;
+  color: #64748b;
   cursor: not-allowed;
 }
 
 .btn-ad {
-  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
   color: #fff;
   width: 100%;
   padding: 12px;
-  font-size: 14px;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+  font-size: 13px;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35);
+  border: 1px solid rgba(167, 139, 250, 0.3);
 }
 
 .btn-stars {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #f59e0b, #b45309);
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
+  border: 1px solid #fde68a;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
 }
 
-/* Assets */
+/* Asset Cards */
 .assets-container {
   display: flex;
   flex-direction: column;
@@ -216,11 +263,16 @@ body {
 .asset-card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  transition: border-color 0.2s ease;
+}
+
+.asset-card:hover {
+  border-color: #3b82f6;
 }
 
 .asset-header {
@@ -238,11 +290,13 @@ body {
 }
 
 .asset-level-badge {
-  background: #334155;
-  padding: 2px 8px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  padding: 3px 8px;
   border-radius: 10px;
-  font-size: 12px;
-  color: var(--text-muted);
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 .asset-metrics {
@@ -254,7 +308,7 @@ body {
 
 .asset-cps {
   color: var(--accent-green);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .asset-controls {
@@ -264,16 +318,19 @@ body {
 
 .btn-buy {
   flex: 1;
-  background: #1e293b;
-  border: 1px solid #3b82f6;
-  color: #60a5fa;
+  background: #152238;
+  border: 1px solid #2563eb;
+  color: #93c5fd;
   padding: 8px 10px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .btn-buy:disabled {
-  border-color: #374151;
-  color: #6b7280;
+  border-color: #263042;
+  background: #0f141c;
+  color: #475569;
   cursor: not-allowed;
 }
 
@@ -281,22 +338,22 @@ body {
 .progress-bar {
   width: 100%;
   height: 6px;
-  background: #0f172a;
+  background: #0b0f17;
   border-radius: 3px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: var(--accent-green);
+  background: linear-gradient(90deg, #10b981, #34d399);
   transition: width 0.3s ease;
 }
 
-/* Card & Shop */
+/* Cards & Shop */
 .card {
   background: var(--card-bg);
   border: 1px solid var(--card-border);
-  border-radius: 14px;
+  border-radius: 16px;
   padding: 16px;
   display: flex;
   flex-direction: column;
@@ -316,7 +373,7 @@ body {
 
 .referral-box input {
   flex: 1;
-  background: #0f172a;
+  background: #0b0f17;
   border: 1px solid var(--card-border);
   padding: 10px;
   border-radius: 8px;
@@ -332,7 +389,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(4px);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -343,9 +401,9 @@ body {
 }
 
 .modal-content {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
+  background: linear-gradient(160deg, #1e293b, #0f172a);
+  border: 1px solid var(--gold);
+  border-radius: 22px;
   padding: 24px;
   width: 90%;
   max-width: 360px;
@@ -353,16 +411,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
 }
 
 .modal-icon {
-  font-size: 40px;
+  font-size: 44px;
 }
 
 .offline-earnings-highlight {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 800;
-  color: var(--accent-green);
+  color: var(--gold);
   margin: 8px 0;
 }
 

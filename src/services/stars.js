@@ -3,26 +3,26 @@ import db from '../database/db.js';
 export const STARS_CATALOG = {
   cosmetic_golden_suit: {
     id: 'cosmetic_golden_suit',
-    name: 'Traje Dorado de Magnate',
+    name: 'Túnica del Emperador Dorado',
     starsCost: 50,
     type: 'COSMETIC',
-    description: 'Acelerador estético que personaliza el avatar en la Mini App'
+    description: 'Atuendo imperial ceremonial para distinguir tu perfil en el reino'
   },
   permanent_multiplier_2x: {
     id: 'permanent_multiplier_2x',
-    name: 'Multiplicador Permanente x2',
+    name: 'Bendición de los Dioses x2',
     starsCost: 150,
     type: 'ACCELERATOR',
     multiplier: 2.0,
-    description: 'Duplica permanentemente la producción de todos los activos'
+    description: 'Duplica para siempre la producción de todas tus posesiones y talleres'
   },
   starter_pack: {
     id: 'starter_pack',
-    name: 'Pack Inicial de Capitalista',
+    name: 'Cofre del Tesoro Arcaico',
     starsCost: 25,
     type: 'BUNDLE',
     instantBonus: 10000.0,
-    description: '10,000 monedas instantáneas para acelerar el inicio'
+    description: '10,000 monedas de bronce instantáneas para fundar tu imperio'
   }
 };
 

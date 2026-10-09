@@ -5,49 +5,94 @@
  */
 
 export const ASSET_DEFINITIONS = {
-  lemonade: {
-    name: 'Puesto de Limonadas',
+  grain: {
+    name: 'Cultivo de Grano',
+    icon: '🌾',
     baseCost: 4.0,
     baseCps: 1.0,
     growthRate: 1.07,
     unlockOrder: 1
   },
-  newspaper: {
-    name: 'Reparto de Periódicos',
+  pottery: {
+    name: 'Taller de Ánforas',
+    icon: '🏺',
     baseCost: 60.0,
     baseCps: 20.0,
     growthRate: 1.15,
     unlockOrder: 2
   },
-  carwash: {
-    name: 'Lavadero de Autos',
+  smithy: {
+    name: 'Herrería Imperial',
+    icon: '⚒️',
     baseCost: 720.0,
     baseCps: 90.0,
     growthRate: 1.14,
     unlockOrder: 3
   },
-  pizza: {
-    name: 'Pizzería Artesanal',
+  vineyard: {
+    name: 'Prensa de Viñedos',
+    icon: '🍇',
     baseCost: 8640.0,
     baseCps: 360.0,
     growthRate: 1.13,
     unlockOrder: 4
   },
-  donut: {
-    name: 'Cadena de Donas',
+  fleet: {
+    name: 'Flota Mercante',
+    icon: '⛵',
     baseCost: 103680.0,
     baseCps: 2160.0,
     growthRate: 1.12,
     unlockOrder: 5
   },
-  bank: {
-    name: 'Banco Privado',
+  mint: {
+    name: 'Casa de la Moneda',
+    icon: '🏛️',
     baseCost: 1244160.0,
     baseCps: 6480.0,
     growthRate: 1.11,
     unlockOrder: 6
-  }
+  },
+  // Backward compatibility aliases
+  lemonade: { name: 'Cultivo de Grano', icon: '🌾', baseCost: 4.0, baseCps: 1.0, growthRate: 1.07, unlockOrder: 1 },
+  newspaper: { name: 'Taller de Ánforas', icon: '🏺', baseCost: 60.0, baseCps: 20.0, growthRate: 1.15, unlockOrder: 2 },
+  carwash: { name: 'Herrería Imperial', icon: '⚒️', baseCost: 720.0, baseCps: 90.0, growthRate: 1.14, unlockOrder: 3 },
+  pizza: { name: 'Prensa de Viñedos', icon: '🍇', baseCost: 8640.0, baseCps: 360.0, growthRate: 1.13, unlockOrder: 4 },
+  donut: { name: 'Flota Mercante', icon: '⛵', baseCost: 103680.0, baseCps: 2160.0, growthRate: 1.12, unlockOrder: 5 },
+  bank: { name: 'Casa de la Moneda', icon: '🏛️', baseCost: 1244160.0, baseCps: 6480.0, growthRate: 1.11, unlockOrder: 6 }
 };
+
+/**
+ * Currency Conversion for Option A: Metales Clásicos
+ * 100 Bronce = 1 Plata
+ * 100 Plata = 1 Oro (= 10,000 Bronce)
+ */
+export function formatAncientCurrency(totalBronze) {
+  const amount = Math.floor(totalBronze || 0);
+  if (amount < 0) return '0 🥉';
+
+  if (amount < 100) {
+    return `${amount} 🥉`;
+  }
+
+  const gold = Math.floor(amount / 10000);
+  const silver = Math.floor((amount % 10000) / 100);
+  const bronze = amount % 100;
+
+  if (gold >= 1000000) {
+    return `${(gold / 1000000).toFixed(2)}M 🥇`;
+  }
+  if (gold >= 1000) {
+    return `${(gold / 1000).toFixed(1)}K 🥇`;
+  }
+
+  const parts = [];
+  if (gold > 0) parts.push(`${gold} 🥇`);
+  if (silver > 0) parts.push(`${silver} 🥈`);
+  if (bronze > 0 && gold === 0) parts.push(`${bronze} 🥉`);
+
+  return parts.join(' ') || `${amount} 🥉`;
+}
 
 /**
  * Milestone multiplier:

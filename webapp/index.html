@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Idle Capitalist - Telegram Mini App</title>
+  <title>Imperio Antiguo - Telegram Idle</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -12,63 +12,69 @@
     <!-- Top HUD / Header -->
     <header class="header">
       <div class="user-info">
-        <span id="user-avatar" class="avatar">👑</span>
+        <span id="user-avatar" class="avatar">🏛️</span>
         <div>
-          <h2 id="user-name">Inversionista</h2>
-          <span id="prestige-badge" class="badge">Ángeles: 0 (+0%)</span>
+          <h2 id="user-name">Patricio Romano</h2>
+          <span id="prestige-badge" class="badge">Favor Divino: 0 (+0%)</span>
         </div>
       </div>
       <div class="boost-badge" id="ad-boost-indicator">
-        ⚡ Boost Inactivo
+        ⚡ Sin Bendición Activa
       </div>
     </header>
 
-    <!-- Main Balance & CPS Card -->
+    <!-- Main Treasury & CPS Card (Metales Clásicos: Bronce, Plata, Oro) -->
     <section class="balance-card">
-      <div class="balance-label">CAPITAL TOTAL</div>
-      <div class="balance-amount" id="balance-display">$0.00</div>
+      <div class="balance-label">TESORERÍA DEL IMPERIO</div>
+      <div class="coin-medallion">
+        <span class="coin-icon-large" id="main-coin-icon">🥉</span>
+        <div class="balance-amount" id="balance-display">0 🥉</div>
+      </div>
+      <div class="coin-breakdown" id="coin-breakdown-display">
+        <span>0 Oro</span> • <span>0 Plata</span> • <span>0 Bronce</span>
+      </div>
       <div class="cps-display">
-        <span class="cps-icon">📈</span>
-        <span id="cps-amount">+$0.00</span> / seg
+        <span class="cps-icon">⚡</span>
+        <span id="cps-amount">+0 🥉</span> / seg
       </div>
     </section>
 
     <!-- Navigation Tabs -->
     <nav class="nav-tabs">
-      <button class="tab-btn active" data-tab="businesses">Negocios</nav>
-      <button class="tab-btn" data-tab="tasks">Tareas & Referidos</button>
-      <button class="tab-btn" data-tab="shop">Tienda Stars ⭐</button>
-      <button class="tab-btn" data-tab="prestige">Prestigio 🔄</button>
+      <button class="tab-btn active" data-tab="businesses">Talleres 🏛️</button>
+      <button class="tab-btn" data-tab="tasks">Alianzas 📜</button>
+      <button class="tab-btn" data-tab="shop">Tesoros ⭐</button>
+      <button class="tab-btn" data-tab="prestige">Panteón ⚡</button>
     </nav>
 
-    <!-- Tab 1: Businesses (Adventure Capitalist Loop) -->
+    <!-- Tab 1: Workshops / Talleres (Adventure Capitalist Loop) -->
     <main id="tab-businesses" class="tab-content active">
       <div class="quick-actions">
         <button id="btn-watch-ad" class="btn btn-ad">
-          🎬 Ver Anuncio Adsgram (+2x por 4h)
+          🎬 Ofrenda Sagrada (Adsgram): Producción x2 por 4h
         </button>
       </div>
       <div id="assets-list" class="assets-container">
-        <!-- Dynamically rendered assets -->
+        <!-- Dynamically rendered ancient workshops -->
       </div>
     </main>
 
-    <!-- Tab 2: Tasks & Viral Referrals -->
+    <!-- Tab 2: Decrees & Alliances (Viral Referrals & Tasks) -->
     <section id="tab-tasks" class="tab-content">
       <div class="card">
-        <h3>🔗 Sistema Viral de Referidos</h3>
-        <p>Invita a un amigo y ambos ganan <strong>$500.00</strong> de bonificación instantánea.</p>
+        <h3>📜 Pacto de Alianza (Referidos Virales)</h3>
+        <p>Envía emisarios para reclutar aliados. Cuando un gobernador se una mediante tu edicto, ambos recibirán un cofre con <strong>500 🥉</strong> de bronce al instante.</p>
         <div class="referral-box">
-          <input type="text" id="ref-link-input" readonly value="Cargando link...">
-          <button id="btn-copy-ref" class="btn btn-secondary">Copiar</button>
+          <input type="text" id="ref-link-input" readonly value="Cargando edicto...">
+          <button id="btn-copy-ref" class="btn btn-secondary">Copiar Edicto</button>
         </div>
       </div>
 
       <div class="card">
-        <h3>📢 Canales Patrocinados</h3>
-        <p>Únete a nuestro canal oficial para desbloquear un <strong>multiplicador x2.5</strong> temporal.</p>
+        <h3>📢 Canales de la Legión Patrocinada</h3>
+        <p>Suscríbete al senado y canal oficial para ganar una <strong>Bendición Temporal x2.5</strong> en toda la producción del imperio.</p>
         <button id="btn-verify-channel" class="btn btn-primary">
-          Verificar Suscripción al Canal
+          Verificar Alianza en el Canal
         </button>
         <p id="task-status-text" class="status-message"></p>
       </div>
@@ -78,40 +84,40 @@
     <section id="tab-shop" class="tab-content">
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>👔 Traje Dorado de Magnate</h4>
-          <p>Personalización cosmética premium para tu perfil.</p>
+          <h4>👔 Túnica del Emperador Dorado</h4>
+          <p>Distingue tu perfil y estandarte con ropajes imperiales.</p>
         </div>
         <button class="btn btn-stars" data-item="cosmetic_golden_suit">50 ⭐</button>
       </div>
 
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>🚀 Multiplicador Permanente x2</h4>
-          <p>Duplica para siempre la producción de todos tus negocios.</p>
+          <h4>⚡ Bendición de los Dioses x2</h4>
+          <p>Duplica permanentemente la producción de todos tus talleres.</p>
         </div>
         <button class="btn btn-stars" data-item="permanent_multiplier_2x">150 ⭐</button>
       </div>
 
       <div class="card shop-item">
         <div class="shop-info">
-          <h4>💰 Pack Inicial de Capitalista</h4>
-          <p>Acreditación inmediata de $10,000 en tu balance.</p>
+          <h4>💰 Cofre del Tesoro Arcaico</h4>
+          <p>Tesoros inmediatos de 10,000 🥉 de bronce para expandir tus tierras.</p>
         </div>
         <button class="btn btn-stars" data-item="starter_pack">25 ⭐</button>
       </div>
     </section>
 
-    <!-- Tab 4: Prestige Reset -->
+    <!-- Tab 4: Pantheon (Prestige Reset) -->
     <section id="tab-prestige" class="tab-content">
       <div class="card text-center">
-        <h3>Reinicio por Prestigio (Inversionistas Ángeles)</h3>
-        <p>Reinicia tus negocios y balance actual a cambio de Inversionistas Ángeles que otorgan un <strong>+2% permanente</strong> a toda tu producción por cada uno.</p>
+        <h3>⚡ Ascenso al Panteón (Favor Divino)</h3>
+        <p>Ofrece tus talleres terrenales a los dioses antiguos a cambio de <strong>Favor Divino</strong>. Cada gracia celestial concede un <strong>+2% permanente</strong> a la producción de todas tus futuras eras.</p>
         <div class="prestige-metric">
-          <span class="label">Ángeles Disponibles para Reclamar:</span>
+          <span class="label">Puntos de Favor Divino Disponibles:</span>
           <h2 id="claimable-angels">0</h2>
         </div>
         <button id="btn-claim-prestige" class="btn btn-warning" disabled>
-          Reclamar Ángeles y Reiniciar
+          Reclamar Favor Divino y Renacer
         </button>
       </div>
     </section>
@@ -119,12 +125,12 @@
     <!-- Offline Earnings Modal -->
     <div id="offline-modal" class="modal">
       <div class="modal-content">
-        <div class="modal-icon">💼</div>
-        <h2>¡Bienvenido de vuelta!</h2>
-        <p>Tus negocios siguieron produciendo mientras estabas fuera:</p>
-        <div class="offline-earnings-highlight" id="offline-earned-amount">+$0.00</div>
+        <div class="modal-icon">🏺</div>
+        <h2>¡Las arcas han prosperado!</h2>
+        <p>Tus artesanos y siervos continuaron forjando tributos mientras estabas ausente:</p>
+        <div class="offline-earnings-highlight" id="offline-earned-amount">+0 🥉</div>
         <p class="offline-time" id="offline-time-text">Tiempo transcurrido: 0 horas</p>
-        <button id="btn-close-offline" class="btn btn-primary">Recaudar Ganancias</button>
+        <button id="btn-close-offline" class="btn btn-primary">Recaudar Tributos</button>
       </div>
     </div>
   </div>

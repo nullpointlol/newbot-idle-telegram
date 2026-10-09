@@ -1,6 +1,6 @@
 /**
- * Telegram Mini App Frontend Application
- * Idle Loop, Live Rendering, Telegram WebApp & Adsgram/Stars Integrations
+ * Telegram Mini App - Imperio Antiguo (Metales Clásicos: Bronce, Plata, Oro)
+ * Adventure Capitalist Mathematical Loop, Zero Dollar Signs, Clean ancient economy
  */
 
 const tg = window.Telegram?.WebApp;
@@ -19,34 +19,66 @@ let state = {
   currentCPS: 0.0
 };
 
+// Ancient Workshop Definitions
 const ASSET_CATALOG = [
-  { type: 'lemonade', name: 'Puesto de Limonadas', icon: '🍋', baseCost: 4.0, baseCps: 1.0, growth: 1.07 },
-  { type: 'newspaper', name: 'Reparto de Diarios', icon: '📰', baseCost: 60.0, baseCps: 20.0, growth: 1.15 },
-  { type: 'carwash', name: 'Lavadero de Autos', icon: '🚗', baseCost: 720.0, baseCps: 90.0, growth: 1.14 },
-  { type: 'pizza', name: 'Pizzería Artesanal', icon: '🍕', baseCost: 8640.0, baseCps: 360.0, growth: 1.13 },
-  { type: 'donut', name: 'Cadena de Donas', icon: '🍩', baseCost: 103680.0, baseCps: 2160.0, growth: 1.12 },
-  { type: 'bank', name: 'Banco Privado', icon: '🏦', baseCost: 1244160.0, baseCps: 6480.0, growth: 1.11 }
+  { type: 'grain', alias: 'lemonade', name: 'Cultivo de Grano', icon: '🌾', baseCost: 4.0, baseCps: 1.0, growth: 1.07 },
+  { type: 'pottery', alias: 'newspaper', name: 'Taller de Ánforas', icon: '🏺', baseCost: 60.0, baseCps: 20.0, growth: 1.15 },
+  { type: 'smithy', alias: 'carwash', name: 'Herrería Imperial', icon: '⚒️', baseCost: 720.0, baseCps: 90.0, growth: 1.14 },
+  { type: 'vineyard', alias: 'pizza', name: 'Prensa de Viñedos', icon: '🍇', baseCost: 8640.0, baseCps: 360.0, growth: 1.13 },
+  { type: 'fleet', alias: 'donut', name: 'Flota Mercante', icon: '⛵', baseCost: 103680.0, baseCps: 2160.0, growth: 1.12 },
+  { type: 'mint', alias: 'bank', name: 'Casa de la Moneda', icon: '🏛️', baseCost: 1244160.0, baseCps: 6480.0, growth: 1.11 }
 ];
 
-// Helper formatting
-function formatMoney(num) {
-  if (num >= 1e12) return '$' + (num / 1e12).toFixed(2) + 'T';
-  if (num >= 1e9) return '$' + (num / 1e9).toFixed(2) + 'B';
-  if (num >= 1e6) return '$' + (num / 1e6).toFixed(2) + 'M';
-  if (num >= 1e3) return '$' + (num / 1e3).toFixed(2) + 'K';
-  return '$' + Number(num).toFixed(2);
+/**
+ * Currency Formatting: Option A (Metales Clásicos)
+ * 100 Bronce = 1 Plata
+ * 100 Plata = 1 Oro (= 10,000 Bronce)
+ */
+function formatCoins(totalBronze) {
+  const amount = Math.floor(totalBronze || 0);
+  if (amount < 0) return '0 🥉';
+
+  if (amount < 100) {
+    return `${amount} 🥉`;
+  }
+
+  const gold = Math.floor(amount / 10000);
+  const silver = Math.floor((amount % 10000) / 100);
+  const bronze = amount % 100;
+
+  if (gold >= 1000000) {
+    return `${(gold / 1000000).toFixed(2)}M 🥇`;
+  }
+  if (gold >= 1000) {
+    return `${(gold / 1000).toFixed(1)}K 🥇`;
+  }
+
+  const parts = [];
+  if (gold > 0) parts.push(`${gold} 🥇`);
+  if (silver > 0) parts.push(`${silver} 🥈`);
+  if (bronze > 0 && gold === 0) parts.push(`${bronze} 🥉`);
+
+  return parts.join(' ') || `${amount} 🥉`;
+}
+
+function getDetailedBreakdown(totalBronze) {
+  const amount = Math.floor(totalBronze || 0);
+  const gold = Math.floor(amount / 10000);
+  const silver = Math.floor((amount % 10000) / 100);
+  const bronze = amount % 100;
+
+  return `<span>${gold.toLocaleString()} Oro</span> • <span>${silver} Plata</span> • <span>${bronze} Bronce</span>`;
 }
 
 function calculateCost(baseCost, growth, currentLevel, count = 1) {
   if (count === 1) {
-    return Math.round(baseCost * Math.pow(growth, currentLevel) * 100) / 100;
+    return Math.round(baseCost * Math.pow(growth, currentLevel));
   }
   const first = baseCost * Math.pow(growth, currentLevel);
   const total = first * (Math.pow(growth, count) - 1) / (growth - 1);
-  return Math.round(total * 100) / 100;
+  return Math.round(total);
 }
 
-// Milestone multiplier
 function getMilestone(level) {
   let m = 1;
   if (level >= 25) m *= 2;
@@ -55,11 +87,10 @@ function getMilestone(level) {
   return m;
 }
 
-// Calculate total CPS on client
 function computeClientCPS() {
   let sum = 0;
   for (const cat of ASSET_CATALOG) {
-    const userAsset = state.assets.find(a => a.asset_type === cat.type);
+    const userAsset = state.assets.find(a => a.asset_type === cat.type || a.asset_type === cat.alias);
     const level = userAsset ? userAsset.level : 0;
     if (level > 0) {
       sum += cat.baseCps * level * getMilestone(level) * (userAsset.multiplier || 1.0);
@@ -70,12 +101,14 @@ function computeClientCPS() {
   return sum * prestigeMult * (state.activeBoost || 1.0);
 }
 
+let isInitialSync = true;
+
 // Initial Sync
-async function syncUser() {
+async function syncUser(isBackground = false) {
   const tgUser = tg?.initDataUnsafe?.user;
   const telegramId = tgUser?.id || 123456789;
-  const username = tgUser?.username || 'inversionista_local';
-  const firstName = tgUser?.first_name || 'Magnate';
+  const username = tgUser?.username || 'patricio_romano';
+  const firstName = tgUser?.first_name || 'Gobernador';
 
   try {
     const res = await fetch('/api/user/sync', {
@@ -95,10 +128,11 @@ async function syncUser() {
     updateHUD();
     renderAssets();
 
-    // Check offline popup
-    if (data.offlineEarnings && data.offlineEarnings.earned > 0) {
+    // Show offline modal ONLY on first visit and ONLY if away for at least 60s
+    if (!isBackground && isInitialSync && data.offlineEarnings && data.offlineEarnings.earned > 0 && data.offlineEarnings.cappedSeconds >= 60) {
       showOfflineModal(data.offlineEarnings);
     }
+    isInitialSync = false;
   } catch (err) {
     console.error('Error syncing with backend:', err);
   }
@@ -106,21 +140,33 @@ async function syncUser() {
 
 // Update HUD
 function updateHUD() {
-  document.getElementById('user-name').textContent = state.user?.first_name || 'Inversionista';
+  document.getElementById('user-name').textContent = state.user?.first_name || 'Gobernador';
   const points = state.user?.prestige_points || 0;
   const pct = (points * 2);
-  document.getElementById('prestige-badge').textContent = `Ángeles: ${points} (+${pct}%)`;
+  document.getElementById('prestige-badge').textContent = `Favor Divino: ${points} (+${pct}%)`;
 
   const boostBadge = document.getElementById('ad-boost-indicator');
   if (state.activeBoost > 1.0) {
-    boostBadge.textContent = `⚡ Boost ${state.activeBoost}x Activo`;
+    boostBadge.textContent = `⚡ Bendición ${state.activeBoost}x Activa`;
     boostBadge.classList.add('active');
   } else {
-    boostBadge.textContent = '⚡ Boost Inactivo';
+    boostBadge.textContent = '⚡ Sin Bendición Activa';
     boostBadge.classList.remove('active');
   }
 
-  document.getElementById('cps-amount').textContent = `+${formatMoney(state.currentCPS)}`;
+  // Update coin icon according to wealth tier
+  const mainIcon = document.getElementById('main-coin-icon');
+  if (state.liveBalance >= 10000) {
+    mainIcon.textContent = '🥇';
+  } else if (state.liveBalance >= 100) {
+    mainIcon.textContent = '🥈';
+  } else {
+    mainIcon.textContent = '🥉';
+  }
+
+  document.getElementById('balance-display').textContent = formatCoins(state.liveBalance);
+  document.getElementById('coin-breakdown-display').innerHTML = getDetailedBreakdown(state.liveBalance);
+  document.getElementById('cps-amount').textContent = `+${formatCoins(state.currentCPS)}`;
   document.getElementById('claimable-angels').textContent = state.claimablePrestige;
 
   const btnPrestige = document.getElementById('btn-claim-prestige');
@@ -137,7 +183,7 @@ function renderAssets() {
   container.innerHTML = '';
 
   for (const cat of ASSET_CATALOG) {
-    const userAsset = state.assets.find(a => a.asset_type === cat.type);
+    const userAsset = state.assets.find(a => a.asset_type === cat.type || a.asset_type === cat.alias);
     const level = userAsset ? userAsset.level : 0;
     const cost1 = calculateCost(cat.baseCost, cat.growth, level, 1);
     const cost10 = calculateCost(cat.baseCost, cat.growth, level, 10);
@@ -160,15 +206,15 @@ function renderAssets() {
         <div class="progress-fill" style="width: ${progressPct}%"></div>
       </div>
       <div class="asset-metrics">
-        <span>Próximo Hito: ${nextMilestone}</span>
-        <span class="asset-cps">+${formatMoney(assetCps)}/s</span>
+        <span>Próxima Gracia: ${nextMilestone}</span>
+        <span class="asset-cps">+${formatCoins(assetCps)}/s</span>
       </div>
       <div class="asset-controls">
         <button class="btn btn-buy" data-type="${cat.type}" data-count="1" ${state.liveBalance < cost1 ? 'disabled' : ''}>
-          Comprar 1x (${formatMoney(cost1)})
+          Forjar 1x (${formatCoins(cost1)})
         </button>
         <button class="btn btn-buy" data-type="${cat.type}" data-count="10" ${state.liveBalance < cost10 ? 'disabled' : ''}>
-          Comprar 10x (${formatMoney(cost10)})
+          Forjar 10x (${formatCoins(cost10)})
         </button>
       </div>
     `;
@@ -177,7 +223,7 @@ function renderAssets() {
 
   // Attach purchase listeners
   container.querySelectorAll('.btn-buy').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', async () => {
       const assetType = btn.dataset.type;
       const count = parseInt(btn.dataset.count, 10);
       await buyAsset(assetType, count);
@@ -197,7 +243,7 @@ async function buyAsset(assetType, count) {
     const data = await res.json();
     if (data.success) {
       state.liveBalance = data.newBalance;
-      const idx = state.assets.findIndex(a => a.asset_type === assetType);
+      const idx = state.assets.findIndex(a => a.asset_type === assetType || a.asset_type === data.asset.asset_type);
       if (idx >= 0) {
         state.assets[idx] = data.asset;
       } else {
@@ -216,7 +262,7 @@ async function buyAsset(assetType, count) {
 // Offline Modal
 function showOfflineModal(offlineData) {
   const modal = document.getElementById('offline-modal');
-  document.getElementById('offline-earned-amount').textContent = `+${formatMoney(offlineData.earned)}`;
+  document.getElementById('offline-earned-amount').textContent = `+${formatCoins(offlineData.earned)}`;
   const hours = (offlineData.cappedSeconds / 3600).toFixed(1);
   document.getElementById('offline-time-text').textContent = `Tiempo acumulado: ${hours} horas (${offlineData.cappedSeconds} seg)`;
   modal.classList.add('active');
@@ -224,6 +270,7 @@ function showOfflineModal(offlineData) {
 
 document.getElementById('btn-close-offline').addEventListener('click', () => {
   document.getElementById('offline-modal').classList.remove('active');
+  if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
 // Tab navigation
@@ -233,6 +280,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(`tab-${btn.dataset.tab}`).classList.add('active');
+    if (tg?.HapticFeedback) tg.HapticFeedback.selectionChanged();
   });
 });
 
@@ -247,22 +295,21 @@ document.getElementById('btn-watch-ad').addEventListener('click', async () => {
     timestamp: Math.floor(Date.now() / 1000)
   };
 
-  // Compute signature via test secret
-  const res = await fetch('/webhook/adsgram', {
+  await fetch('/webhook/adsgram', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Adsgram-Signature': 'adsgram_test_signature' // Mocked or direct
+      'X-Adsgram-Signature': 'adsgram_test_signature'
     },
     body: JSON.stringify(payload)
   });
 
-  // Client boost activation simulation
   state.activeBoost = 2.0;
   state.currentCPS = computeClientCPS();
   updateHUD();
   renderAssets();
-  alert('🎉 ¡Anuncio completado! Multiplicador x2 activado por 4 horas.');
+  alert('🏛️ ¡Ofrenda completada! Los dioses otorgan Producción x2 durante 4 horas.');
+  if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
 // Telegram Stars shop buy
@@ -271,7 +318,7 @@ document.querySelectorAll('.btn-stars').forEach(btn => {
     const item = btn.dataset.item;
     const chargeId = 'stars_charge_' + Date.now();
 
-    const res = await fetch('/webhook/telegram', {
+    await fetch('/webhook/telegram', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -285,8 +332,8 @@ document.querySelectorAll('.btn-stars').forEach(btn => {
         }
       })
     });
-    const data = await res.json();
-    alert('⭐ ¡Pago con Telegram Stars procesado con éxito!');
+    alert('⭐ ¡Tributo con Telegram Stars confirmado! Tus bendiciones han sido concedidas.');
+    if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
     await syncUser();
   });
 });
@@ -295,15 +342,17 @@ document.querySelectorAll('.btn-stars').forEach(btn => {
 document.getElementById('btn-copy-ref').addEventListener('click', () => {
   const input = document.getElementById('ref-link-input');
   navigator.clipboard.writeText(input.value);
-  alert('📋 Enlace de referido copiado al portapapeles');
+  alert('📜 Edicto de reclutamiento copiado al portapapeles');
+  if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
 // Verify channel task
 document.getElementById('btn-verify-channel').addEventListener('click', async () => {
-  document.getElementById('task-status-text').textContent = '✅ ¡Suscripción verificada! Multiplicador x2.5 desbloqueado.';
+  document.getElementById('task-status-text').textContent = '✅ ¡Alianza confirmada con el senado! Multiplicador x2.5 activo.';
   state.activeBoost = 2.5;
   state.currentCPS = computeClientCPS();
   updateHUD();
+  if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
 });
 
 // Claim Prestige
@@ -316,22 +365,24 @@ document.getElementById('btn-claim-prestige').addEventListener('click', async ()
   });
   const data = await res.json();
   if (data.success) {
-    alert(`👑 ¡Reinicio por Prestigio completado! Has obtenido ${data.claimedPoints} Ángeles.`);
+    alert(`⚡ ¡Ascenso divino consumado! Has obtenido ${data.claimedPoints} Gratias Celestiales.`);
+    if (tg?.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
     await syncUser();
   }
 });
 
-// High-frequency UI tick (every 100ms) for smooth balance incrementation
+// High-frequency UI tick (every 100ms) for smooth coin accumulation
 setInterval(() => {
   if (state.currentCPS > 0) {
     state.liveBalance += state.currentCPS * 0.1;
-    document.getElementById('balance-display').textContent = formatMoney(state.liveBalance);
+    document.getElementById('balance-display').textContent = formatCoins(state.liveBalance);
+    document.getElementById('coin-breakdown-display').innerHTML = getDetailedBreakdown(state.liveBalance);
   }
 }, 100);
 
-// Background server sync every 15s
+// Background server sync every 15s (silent)
 setInterval(() => {
-  syncUser();
+  syncUser(true);
 }, 15000);
 
 // Initialize on boot
