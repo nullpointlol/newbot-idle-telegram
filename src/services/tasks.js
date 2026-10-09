@@ -98,6 +98,32 @@ export class TaskVerificationService {
       expiresAt: new Date(Date.now() + durationSeconds * 1000).toISOString()
     };
   }
+
+  /**
+   * Handle real-time chat_member_updated webhook event from Telegram API
+   * Immediately updates Redis cache without waiting for TTL expiration (TCK-0091-C136-02)
+   */
+  static handleChatMemberUpdated(payload) {
+    if (!payload) return null;
+    const data = payload.chat_member || payload;
+    const { chat, from, new_chat_member } = data;
+    if (!chat || !from || !new_chat_member) return null;
+
+    const channelId = chat.id;
+    const userTelegramId = from.id;
+    const status = new_chat_member.status;
+    const isMember = ['creator', 'administrator', 'member', 'restricted'].includes(status);
+
+    const cacheKey = `task:membership:${channelId}:${userTelegramId}`;
+    cache.set(cacheKey, isMember, 900);
+
+    return {
+      channelId,
+      userTelegramId,
+      isMember,
+      status
+    };
+  }
 }
 
 export default TaskVerificationService;

@@ -233,6 +233,17 @@ class DatabaseAdapter {
     return stmt.run(id).changes > 0;
   }
 
+  getInactiveUsers(inactiveThresholdSeconds = 14400, maxResults = 100) {
+    const cutoff = Math.floor(Date.now() / 1000) - inactiveThresholdSeconds;
+    const stmt = this.sqlite.prepare(`
+      SELECT * FROM users
+      WHERE last_active_timestamp < ?
+      ORDER BY last_active_timestamp ASC
+      LIMIT ?
+    `);
+    return stmt.all(cutoff, maxResults);
+  }
+
   close() {
     this.sqlite.close();
   }

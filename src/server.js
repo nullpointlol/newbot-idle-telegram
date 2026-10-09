@@ -10,6 +10,7 @@ import { AdsgramService } from './services/adsgram.js';
 import { TelegramStarsService } from './services/stars.js';
 import { ReferralService } from './services/referral.js';
 import { TaskVerificationService } from './services/tasks.js';
+import { NotificationBroadcastService } from './services/notificationBroadcast.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -250,6 +251,12 @@ export function createServer() {
       if (pathname === '/webhook/telegram' && req.method === 'POST') {
         const update = await parseJsonBody(req);
 
+        // Real-time chat_member_updated handling for task verification (TCK-0091-C136-02)
+        if (update.chat_member) {
+          const memberResult = TaskVerificationService.handleChatMemberUpdated(update);
+          return sendJson(res, 200, { ok: true, chatMemberUpdated: memberResult });
+        }
+
         // Pre-checkout query handling (Telegram Stars)
         if (update.pre_checkout_query) {
           const preCheck = TelegramStarsService.handlePreCheckoutQuery(update.pre_checkout_query);
@@ -296,6 +303,16 @@ export function createServer() {
         }
 
         return sendJson(res, 200, { ok: true });
+      }
+
+      // 6.1 Push Reactivation Broadcast (TCK-0091-C137-04 / TCK-0091-C133-04)
+      if (pathname === '/api/broadcast/reactivation' && req.method === 'POST') {
+        const body = await parseJsonBody(req);
+        const result = await NotificationBroadcastService.runReactivationBroadcast({
+          inactiveThresholdSeconds: body.inactiveThresholdSeconds || 14400,
+          maxUsers: body.maxUsers || 50
+        });
+        return sendJson(res, 200, result);
       }
 
       // 7. Static Mini App Serving & UI Preview Studio
