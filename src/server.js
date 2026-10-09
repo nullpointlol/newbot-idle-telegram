@@ -15,7 +15,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const WEBAPP_DIR = path.join(__dirname, '..', 'webapp');
 
-const PORT = parseInt(process.env.PORT || '3000', 10);
+if (typeof process.loadEnvFile === 'function') {
+  try {
+    process.loadEnvFile();
+  } catch (e) {}
+}
+
+const PORT = parseInt(process.env.PORT || '3001', 10);
 
 /**
  * Helper to parse JSON body
@@ -322,22 +328,22 @@ const isMainModule = process.argv[1] && (
 );
 
 if (isMainModule && process.env.NODE_ENV !== 'test') {
-  const server = createServer();
-  server.on('error', (err) => {
-    if (err.code === 'EADDRINUSE') {
-      const altPort = PORT + 1;
-      console.warn(`⚠️ Puerto ${PORT} en uso. Intentando puerto alternativo ${altPort}...`);
-      server.listen(altPort, () => {
-        console.log(`🚀 Telegram Idle Ecosystem corriendo en http://localhost:${altPort}`);
-        console.log(`📱 Telegram Mini App disponible en http://localhost:${altPort}/`);
-      });
-    } else {
-      console.error('Error al iniciar el servidor:', err);
-    }
-  });
+  function startServerOnPort(port, attemptsLeft = 5) {
+    const server = createServer();
+    server.on('error', (err) => {
+      if (err.code === 'EADDRINUSE' && attemptsLeft > 0) {
+        console.warn(`⚠️ Puerto ${port} en uso. Intentando puerto ${port + 1}...`);
+        startServerOnPort(port + 1, attemptsLeft - 1);
+      } else {
+        console.error('Error al iniciar el servidor:', err);
+      }
+    });
 
-  server.listen(PORT, () => {
-    console.log(`🚀 Telegram Idle Ecosystem running on http://localhost:${PORT}`);
-    console.log(`📱 Telegram Mini App available at http://localhost:${PORT}/`);
-  });
+    server.listen(port, () => {
+      console.log(`🚀 Telegram Idle Ecosystem running on http://localhost:${port}`);
+      console.log(`📱 Telegram Mini App available at http://localhost:${port}/`);
+    });
+  }
+
+  startServerOnPort(PORT);
 }
