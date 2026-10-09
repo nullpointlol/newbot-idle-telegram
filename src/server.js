@@ -292,9 +292,13 @@ export function createServer() {
         return sendJson(res, 200, { ok: true });
       }
 
-      // 7. Static Mini App Serving
+      // 7. Static Mini App Serving & UI Preview Studio
       if (pathname === '/' || pathname === '/index.html') {
         return serveStatic(req, res, path.join(WEBAPP_DIR, 'index.html'));
+      }
+
+      if (pathname === '/preview' || pathname === '/preview/' || pathname === '/preview.html') {
+        return serveStatic(req, res, path.join(WEBAPP_DIR, 'preview.html'));
       }
 
       const requestedStaticFile = path.join(WEBAPP_DIR, pathname);

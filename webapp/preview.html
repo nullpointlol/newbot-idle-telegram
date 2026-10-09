@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Tamagotchi Idle - UI/UX Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --panel: #111827;
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --accent: #3b82f6;
+      --gold: #fbbf24;
+      --silver: #cbd5e1;
+      --bronze: #cd7f32;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+      padding-bottom: 40px;
+    }
+
+    /* Top Navigation Studio Bar */
+    .studio-header {
+      width: 100%;
+      background: rgba(17, 24, 39, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #1f2937;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .studio-top-row {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .studio-title-group h1 {
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #60a5fa, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .studio-title-group p {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .sound-toggle-btn {
+      background: #1f2937;
+      color: #94a3b8;
+      border: 1px solid #374151;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .sound-toggle-btn.active {
+      color: #10b981;
+      border-color: #059669;
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    /* Theme Switcher Pills */
+    .theme-pills-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: none;
+    }
+    .theme-pills-container::-webkit-scrollbar { display: none; }
+
+    .theme-pill {
+      background: #1f2937;
+      border: 1.5px solid #374151;
+      color: #9ca3af;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .theme-pill:hover {
+      border-color: #60a5fa;
+      color: #fff;
+    }
+
+    .theme-pill.active {
+      background: #3b82f6;
+      border-color: #60a5fa;
+      color: #fff;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+      transform: scale(1.03);
+    }
+
+    /* Creature Selector */
+    .creature-bar {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      padding: 0 16px;
+    }
+
+    .creature-chip {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+
+    .creature-chip:hover {
+      border-color: var(--gold);
+      color: #fff;
+    }
+
+    .creature-chip.active {
+      border-color: var(--gold);
+      background: rgba(251, 191, 36, 0.15);
+      color: var(--gold);
+      font-weight: 800;
+    }
+
+    /* Main Showcase Canvas / Stage */
+    .showcase-stage {
+      width: 100%;
+      max-width: 480px;
+      margin-top: 20px;
+      padding: 0 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* ========================================================
+       TEMA 1: RETRO TAMAGOTCHI 90s VINTAGE (NES / LCD SCREEN)
+       ======================================================== */
+    .theme-retro-tamagotchi {
+      width: 100%;
+      max-width: 380px;
+      background: radial-gradient(circle at 35% 20%, #4dd0e1, #00838f);
+      border-radius: 190px 190px 240px 240px;
+      padding: 28px 20px 36px 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 6px 12px rgba(255, 255, 255, 0.4), inset 0 -10px 20px rgba(0,0,0,0.5);
+      border: 5px solid #006064;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      font-family: 'Press Start 2P', monospace;
+      user-select: none;
+    }
+
+    /* Keychain Ring */
+    .tamagotchi-chain-loop {
+      position: absolute;
+      top: -24px;
+      width: 38px;
+      height: 38px;
+      border: 6px solid #b0bec5;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      z-index: 1;
+    }
+
+    .tamagotchi-brand {
+      font-size: 10px;
+      color: #ffffff;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+    }
+
+    /* Screen Bezel */
+    .tamagotchi-screen-bezel {
+      width: 100%;
+      background: #cfd8dc;
+      border-radius: 24px;
+      padding: 12px;
+      border: 4px solid #78909c;
+      box-shadow: inset 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* 8 Iconic Tamagotchi Menu Icons Top/Bottom */
+    .tamagotchi-icon-strip {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      font-size: 15px;
+      padding: 4px 0;
+      color: #546e7a;
+    }
+
+    .tamagotchi-icon-strip .t-icon {
+      padding: 2px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .tamagotchi-icon-strip .t-icon.selected {
+      background: #78909c;
+      color: #fff;
+      transform: scale(1.2);
+    }
+
+    /* Classic LCD Green Matrix Screen */
+    .tamagotchi-lcd-display {
+      width: 100%;
+      height: 200px;
+      background: #9bbc0f;
+      border: 3px solid #8bac0f;
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 20px rgba(15, 56, 15, 0.4);
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* LCD Scanlines */
+    .tamagotchi-lcd-display::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(0deg, rgba(15, 56, 15, 0.08) 0px, rgba(15, 56, 15, 0.08) 2px, transparent 2px, transparent 4px);
+      pointer-events: none;
+    }
+
+    .lcd-balance-bar {
+      position: absolute;
+      top: 8px;
+      font-size: 9px;
+      color: #0f380f;
+      font-weight: 700;
+      display: flex;
+      gap: 8px;
+    }
+
+    .lcd-status-banner {
+      position: absolute;
+      bottom: 8px;
+      font-size: 8px;
+      color: #0f380f;
+      text-align: center;
+      padding: 2px 4px;
+      background: rgba(139, 172, 15, 0.5);
+      border-radius: 4px;
+    }
+
+    .retro-pet-canvas {
+      image-rendering: pixelated;
+      image-rendering: -moz-crisp-edges;
+      image-rendering: crisp-edges;
+      filter: contrast(140%) brightness(90%) hue-rotate(40deg);
+    }
+
+    /* 3 Physical Rubber Buttons (A, B, C) */
+    .tamagotchi-buttons-row {
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      margin-top: 24px;
+      gap: 16px;
+    }
+
+    .tamagotchi-btn-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tamagotchi-rubber-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #ffeb3b, #f57f17);
+      border: 3px solid #bc5100;
+      box-shadow: 0 6px 0 #8c3b00, 0 8px 12px rgba(0, 0, 0, 0.4);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #5d2600;
+      font-weight: 900;
+      font-family: 'Press Start 2P', monospace;
+      transition: all 0.08s ease;
+    }
+
+    .tamagotchi-rubber-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 1px 0 #8c3b00, 0 3px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .tamagotchi-btn-label {
+      font-size: 8px;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* ========================================================
+       TEMA 2: MODERN TELEGRAM GLASSMORPHISM (CATIZEN / IOS)
+       ======================================================== */
+    .theme-modern-glass {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Top Floating Glass HUD */
+    .glass-hud {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .glass-user-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .glass-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 0 16px rgba(139, 92, 246, 0.4);
+    }
+
+    .glass-user-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .glass-essence-badge {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Metals Medallion Banner */
+    .glass-treasury-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+      backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      padding: 18px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .glass-treasury-card::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.08), transparent 60%);
+      pointer-events: none;
+    }
+
+    .glass-treasury-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: #94a3b8;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .glass-balance-display {
+      font-size: 32px;
+      font-weight: 900;
+      color: #fff;
+      margin: 6px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .glass-breakdown {
+      font-size: 12px;
+      color: #cbd5e1;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    /* Pet Centerpiece Card */
+    .glass-pet-hero {
+      background: radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.15), rgba(15, 23, 42, 0.85));
+      border: 1.5px solid rgba(59, 130, 246, 0.3);
+      border-radius: 28px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.15s, border-color 0.2s;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+      user-select: none;
+    }
+
+    .glass-pet-hero:active {
+      transform: scale(0.98);
+      border-color: var(--gold);
+    }
+
+    .glass-pet-canvas {
+      image-rendering: pixelated;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+      margin: 10px 0;
+    }
+
+    .glass-vitals-row {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .glass-vital {
+      flex: 1;
+      background: rgba(0,0,0,0.25);
+      border-radius: 12px;
+      padding: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .glass-vital-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .glass-vital-bar {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .glass-vital-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+    .fill-food { background: #f59e0b; }
+    .fill-love { background: #ec4899; }
+    .fill-energy { background: #3b82f6; }
+
+    /* Action facilities list */
+    .glass-actions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .glass-action-card {
+      background: rgba(30, 41, 59, 0.5);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .glass-action-card:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    .glass-action-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .glass-action-icon {
+      font-size: 26px;
+    }
+
+    .glass-action-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .glass-action-cps {
+      font-size: 11px;
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .glass-btn-buy {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+      transition: all 0.15s;
+    }
+
+    .glass-btn-buy:active {
+      transform: scale(0.95);
+    }
+
+    /* ========================================================
+       TEMA 3: FANTASY SANCTUARY (RPGUI / MEDIEVAL GRIMOIRE)
+       ======================================================== */
+    .theme-fantasy-sanctuary {
+      width: 100%;
+      background: #2b1f14;
+      border: 6px solid #8d5b2d;
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.8), 0 10px 40px rgba(0,0,0,0.9);
+      position: relative;
+      font-family: 'Outfit', serif;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .fantasy-header {
+      background: #4a3319;
+      border: 2px solid #caa359;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .fantasy-header h3 {
+      font-size: 16px;
+      color: #ffd700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 4px #000;
+    }
+
+    .fantasy-frame {
+      background: #1c140c;
+      border: 3px double #caa359;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       TEMA 4: CYBER ARCADIA (SYNTHWAVE / NEON HUD)
+       ======================================================== */
+    .theme-cyber-arcadia {
+      width: 100%;
+      background: #050510;
+      border: 2px solid #00f3ff;
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: 0 0 25px rgba(0, 243, 255, 0.25), inset 0 0 20px rgba(255, 0, 85, 0.15);
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cyber-header {
+      display: flex;
+      justify-content: space-between;
+      color: #00f3ff;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(0, 243, 255, 0.3);
+      padding-bottom: 6px;
+    }
+
+    .cyber-terminal {
+      background: rgba(0, 243, 255, 0.05);
+      border: 1px dashed #ff0055;
+      padding: 16px;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    /* Design Details & Decision Box */
+    .comparison-notes {
+      width: 100%;
+      max-width: 900px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .comparison-notes h3 {
+      font-size: 16px;
+      color: #60a5fa;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .comparison-card {
+      background: #1f2937;
+      border: 1px solid #374151;
+      border-radius: 12px;
+      padding: 12px;
+      font-size: 12px;
+    }
+
+    .comparison-card h4 {
+      font-size: 13px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .comparison-card ul {
+      list-style-type: disc;
+      padding-left: 18px;
+      color: #9ca3af;
+      line-height: 1.5;
+    }
+
+    .btn-apply-theme {
+      background: linear-gradient(90deg, #10b981, #059669);
+      color: #fff;
+      border: none;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 12px;
+      cursor: pointer;
+      align-self: center;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+      transition: all 0.2s;
+    }
+
+    .btn-apply-theme:hover {
+      transform: scale(1.03);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Studio Header -->
+  <header class="studio-header">
+    <div class="studio-top-row">
+      <div class="studio-title-group">
+        <h1>🎨 Tamagotchi UI/UX Design Studio</h1>
+        <p>Previsualización interactiva de templates y estilos visuales en tiempo real</p>
+      </div>
+      <button id="btn-toggle-sound" class="sound-toggle-btn active">
+        🔊 Sonido 8-bit Activado
+      </button>
+    </div>
+
+    <!-- Theme Selection Tabs -->
+    <div class="theme-pills-container">
+      <button class="theme-pill active" data-theme="retro-tamagotchi">
+        🥚 1. Retro Tamagotchi 90s (NES.css & Carcasa LCD)
+      </button>
+      <button class="theme-pill" data-theme="modern-glass">
+        💎 2. Telegram Glassmorphism (Catizen / iOS Style)
+      </button>
+      <button class="theme-pill" data-theme="fantasy-sanctuary">
+        📜 3. Fantasy RPG Grimoire (RPGUI Medieval)
+      </button>
+      <button class="theme-pill" data-theme="cyber-arcadia">
+        ⚡ 4. Cyber Arcadia (Synthwave Neón HUD)
+      </button>
+    </div>
+  </header>
+
+  <!-- Creature Selection Chips -->
+  <div class="creature-bar">
+    <span style="font-size: 12px; color: var(--text-muted); font-weight: 700;">Criatura Activa:</span>
+    <button class="creature-chip active" data-species="zen_cat">🐱 Gatito Astral</button>
+    <button class="creature-chip" data-species="frost_wolf">🐺 Lobo Ártico</button>
+    <button class="creature-chip" data-species="fire_dragon">🐲 Dragón de Fuego</button>
+    <button class="creature-chip" data-species="mecha_droid">🤖 Mecha-Droide</button>
+    <button class="creature-chip" data-species="cosmic_axolotl">🦎 Ajolote Cósmico</button>
+  </div>
+
+  <!-- Showcase Stage Container -->
+  <main class="showcase-stage" id="showcase-container">
+
+    <!-- VARIATION 1: RETRO TAMAGOTCHI 90s (Active by default) -->
+    <div id="view-retro-tamagotchi" class="theme-retro-tamagotchi">
+      <div class="tamagotchi-chain-loop"></div>
+      <div class="tamagotchi-brand">TAMAGOTCHI VINTAGE 90s</div>
+
+      <div class="tamagotchi-screen-bezel">
+        <!-- 4 Top Icons -->
+        <div class="tamagotchi-icon-strip">
+          <span class="t-icon selected" data-act="feed" title="Alimentar">🍖</span>
+          <span class="t-icon" data-act="light" title="Luz / Dormir">💡</span>
+          <span class="t-icon" data-act="play" title="Jugar">🎾</span>
+          <span class="t-icon" data-act="med" title="Medicina">💊</span>
+        </div>
+
+        <!-- LCD Screen -->
+        <div class="tamagotchi-lcd-display" id="tamagotchi-lcd">
+          <div class="lcd-balance-bar">
+            <span id="retro-balance">1,420 🥉</span>
+            <span id="retro-cps">+18/s</span>
+          </div>
+
+          <canvas id="retro-pixel-canvas" width="128" height="128" class="retro-pet-canvas"></canvas>
+
+          <div class="lcd-status-banner" id="retro-status-banner">
+            FELIZ • VIGOR: 95%
+          </div>
+        </div>
+
+        <!-- 4 Bottom Icons -->
+        <div class="tamagotchi-icon-strip" style="margin-top: 4px;">
+          <span class="t-icon" data-act="bath" title="Baño">🚿</span>
+          <span class="t-icon" data-act="stats" title="Estadísticas">📊</span>
+          <span class="t-icon" data-act="discipline" title="Disciplinar">📢</span>
+          <span class="t-icon" data-act="alert" title="Alerta">⚠️</span>
+        </div>
+      </div>
+
+      <!-- 3 Physical Buttons A, B, C -->
+      <div class="tamagotchi-buttons-row">
+        <div class="tamagotchi-btn-wrapper">
+          <button class="tamagotchi-rubber-btn" id="btn-t-a">A</button>
+          <span class="tamagotchi-btn-label">ELEGIR</span>
+        </div>
+        <div class="tamagotchi-btn-wrapper">
+          <button class="tamagotchi-rubber-btn" id="btn-t-b" style="margin-top: 8px;">B</button>
+          <span class="tamagotchi-btn-label">CUIDAR</span>
+        </div>
+        <div class="tamagotchi-btn-wrapper">
+          <button class="tamagotchi-rubber-btn" id="btn-t-c">C</button>
+          <span class="tamagotchi-btn-label">CANCEL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- VARIATION 2: MODERN TELEGRAM GLASSMORPHISM -->
+    <div id="view-modern-glass" class="theme-modern-glass" style="display: none;">
+      <!-- HUD -->
+      <div class="glass-hud">
+        <div class="glass-user-group">
+          <div class="glass-avatar">🐾</div>
+          <div>
+            <div class="glass-user-name">Criador Ancestral</div>
+            <div class="glass-essence-badge">🧬 Esencia: 42 (+84%)</div>
+          </div>
+        </div>
+        <div style="font-size: 11px; color: #10b981; font-weight: 700; background: rgba(16, 185, 129, 0.15); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.3);">
+          ⚡ x2 Activo
+        </div>
+      </div>
+
+      <!-- Treasury Card (Option A Metals) -->
+      <div class="glass-treasury-card">
+        <div class="glass-treasury-label">TESORERÍA DE CUIDADOS</div>
+        <div class="glass-balance-display">
+          <span id="glass-coin-icon">🥇</span>
+          <span id="glass-balance">1 Oro 42 Plata</span>
+        </div>
+        <div class="glass-breakdown">
+          <span>1 🥇 Oro</span> • <span>42 🥈 Plata</span> • <span>80 🥉 Bronce</span>
+        </div>
+      </div>
+
+      <!-- Pet Hero Card -->
+      <div class="glass-pet-hero" id="glass-pet-area">
+        <div style="font-size: 11px; font-weight: 800; color: #60a5fa; letter-spacing: 1px;">
+          REINO ZEN • DOMÉSTICO
+        </div>
+        <canvas id="glass-pixel-canvas" width="128" height="128" class="glass-pet-canvas"></canvas>
+        <h3 id="glass-pet-name" style="color: #fff; font-size: 18px; font-weight: 800;">Gatito Astral</h3>
+        <p style="font-size: 12px; color: var(--gold); font-weight: 600;">Etapa II: Joven (Nivel 28)</p>
+
+        <!-- Vitals -->
+        <div class="glass-vitals-row">
+          <div class="glass-vital">
+            <div class="glass-vital-header"><span>🍖 Hambre</span><span>85%</span></div>
+            <div class="glass-vital-bar"><div class="glass-vital-fill fill-food" style="width: 85%;"></div></div>
+          </div>
+          <div class="glass-vital">
+            <div class="glass-vital-header"><span>💖 Amor</span><span>92%</span></div>
+            <div class="glass-vital-bar"><div class="glass-vital-fill fill-love" style="width: 92%;"></div></div>
+          </div>
+          <div class="glass-vital">
+            <div class="glass-vital-header"><span>⚡ Vigor</span><span>78%</span></div>
+            <div class="glass-vital-bar"><div class="glass-vital-fill fill-energy" style="width: 78%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Care Facilities List -->
+      <div class="glass-actions-grid">
+        <div class="glass-action-card">
+          <div class="glass-action-left">
+            <div class="glass-action-icon">🥛</div>
+            <div>
+              <div class="glass-action-title">Plato de Leche Tibia (Nv 14)</div>
+              <div class="glass-action-cps">+14 🥉/seg</div>
+            </div>
+          </div>
+          <button class="glass-btn-buy" id="btn-glass-buy1">Cuidar (12 🥉)</button>
+        </div>
+
+        <div class="glass-action-card">
+          <div class="glass-action-left">
+            <div class="glass-action-icon">🧶</div>
+            <div>
+              <div class="glass-action-title">Cojín de Terciopelo (Nv 6)</div>
+              <div class="glass-action-cps">+120 🥉/seg</div>
+            </div>
+          </div>
+          <button class="glass-btn-buy">Cuidar (1 🥈 40 🥉)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VARIATION 3: FANTASY SANCTUARY -->
+    <div id="view-fantasy-sanctuary" class="theme-fantasy-sanctuary" style="display: none;">
+      <div class="fantasy-header">
+        <h3>📜 SANTUARIO DE CRIATURAS ANCESTRALES</h3>
+        <p style="font-size: 11px; color: #caa359; margin-top: 4px;">Grimorio de Alquimia y Especies Míticas</p>
+      </div>
+
+      <div class="fantasy-frame" id="fantasy-pet-area">
+        <canvas id="fantasy-pixel-canvas" width="128" height="128" style="image-rendering: pixelated; filter: sepia(0.3);"></canvas>
+        <h4 style="color: #ffd700; margin-top: 8px;">Bestia Sagrada del Edén</h4>
+        <p style="font-size: 12px; color: #caa359;">Tributo Acumulado: 4,890 Monedas de Bronce</p>
+        <div style="margin-top: 10px; font-size: 11px; color: #e2d9b6; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; border: 1px dashed #caa359;">
+          ✨ Bendición Alquímica: +15% de poder en cada luna llena
+        </div>
+      </div>
+    </div>
+
+    <!-- VARIATION 4: CYBER ARCADIA -->
+    <div id="view-cyber-arcadia" class="theme-cyber-arcadia" style="display: none;">
+      <div class="cyber-header">
+        <span>[SYS.STATUS: ONLINE]</span>
+        <span>FREQ: 144Hz</span>
+        <span>METALS: 10.4K 🥉</span>
+      </div>
+
+      <div class="cyber-terminal" id="cyber-pet-area">
+        <div style="font-size: 10px; color: #ff0055; margin-bottom: 6px;">&gt; BIOMETRIC DATA STREAM: ACTIVE</div>
+        <canvas id="cyber-pixel-canvas" width="128" height="128" style="image-rendering: pixelated; filter: drop-shadow(0 0 10px #00f3ff);"></canvas>
+        <h4 style="color: #00f3ff; margin-top: 8px;">SINTÉTICO UNIT-07</h4>
+        <p style="font-size: 11px; color: #94a3b8;">OVERCLOCKING: 2^n BINARY PULSE</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Architectural & UX Comparison Notes -->
+  <section class="comparison-notes">
+    <h3>🔍 Comparativa de Rendimiento y Experiencia de Usuario</h3>
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <h4>🥚 1. Retro Tamagotchi 90s</h4>
+        <ul>
+          <li><strong>Engagement:</strong> Máxima nostalgia y curiosidad instantánea.</li>
+          <li><strong>Interacción:</strong> 3 botones mecánicos A, B, C con sonidos 8-bit reales.</li>
+          <li><strong>Ideal para:</strong> Viralidad en redes sociales (TikTok / Reels / Canales de Telegram).</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card">
+        <h4>💎 2. Telegram Glassmorphism</h4>
+        <ul>
+          <li><strong>Look & Feel:</strong> Estándar de la industria (Catizen, Hamster Kombat, Notcoin).</li>
+          <li><strong>Ergonomía:</strong> Creado para el dedo pulgar con bottom navigation y tarjetas amplias.</li>
+          <li><strong>Ideal para:</strong> Retención a largo plazo y facilidad para compras con Telegram Stars.</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card">
+        <h4>📜 3. Fantasy Grimoire</h4>
+        <ul>
+          <li><strong>Inmersión:</strong> Estilo RPG clásico medieval / alquimia.</li>
+          <li><strong>Ideal para:</strong> Jugadores de rol que aprecian coleccionismo y lore profundo.</li>
+        </ul>
+      </div>
+
+      <div class="comparison-card">
+        <h4>⚡ 4. Cyber Arcadia</h4>
+        <ul>
+          <li><strong>Estética:</strong> Sci-fi arcade retro-futurista con paletas neón.</li>
+          <li><strong>Ideal para:</strong> Comunidades web3, programadores y amantes del cyberpunk.</li>
+        </ul>
+      </div>
+    </div>
+
+    <button id="btn-choose-winner" class="btn-apply-theme">
+      🚀 Quiero elegir y aplicar este diseño al juego
+    </button>
+  </section>
+
+  <!-- Procedural Pixel Engine Import & Studio Controller -->
+  <script type="module">
+    import { PixelPetRenderer, PIXEL_MATRICES } from './pixelRenderer.js';
+
+    // Audio Synthesizer (Nostalgic 8-bit Tamagotchi Beeps via Web Audio API)
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function play8BitBeep(freq = 2000, duration = 0.08, type = 'square') {
+      if (!soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        if (audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        // Ignore audio restrictions
+      }
+    }
+
+    function playTamagotchiHappyChime() {
+      play8BitBeep(1800, 0.06);
+      setTimeout(() => play8BitBeep(2400, 0.08), 70);
+    }
+
+    function playTamagotchiSelectBeep() {
+      play8BitBeep(3200, 0.04);
+    }
+
+    // Toggle Sound Button
+    const btnSound = document.getElementById('btn-toggle-sound');
+    btnSound.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      btnSound.classList.toggle('active', soundEnabled);
+      btnSound.textContent = soundEnabled ? '🔊 Sonido 8-bit Activado' : '🔇 Sonido Silenciado';
+      if (soundEnabled) playTamagotchiSelectBeep();
+    });
+
+    // Initialize Pixel Renderers for each canvas
+    const canvases = {
+      'retro-tamagotchi': document.getElementById('retro-pixel-canvas'),
+      'modern-glass': document.getElementById('glass-pixel-canvas'),
+      'fantasy-sanctuary': document.getElementById('fantasy-pixel-canvas'),
+      'cyber-arcadia': document.getElementById('cyber-pixel-canvas')
+    };
+
+    const renderers = {};
+    let currentSpecies = 'zen_cat';
+
+    for (const [key, canvas] of Object.entries(canvases)) {
+      if (canvas) {
+        const r = new PixelPetRenderer(canvas);
+        r.setSpecies(currentSpecies);
+        renderers[key] = r;
+      }
+    }
+
+    // 60FPS animation loop
+    function animateAll() {
+      for (const r of Object.values(renderers)) {
+        r.render();
+      }
+      requestAnimationFrame(animateAll);
+    }
+    requestAnimationFrame(animateAll);
+
+    // Theme Switching Logic
+    const themePills = document.querySelectorAll('.theme-pill');
+    let activeThemeId = 'retro-tamagotchi';
+
+    themePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        themePills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        activeThemeId = pill.dataset.theme;
+
+        // Hide all views and show active
+        document.getElementById('view-retro-tamagotchi').style.display = activeThemeId === 'retro-tamagotchi' ? 'flex' : 'none';
+        document.getElementById('view-modern-glass').style.display = activeThemeId === 'modern-glass' ? 'flex' : 'none';
+        document.getElementById('view-fantasy-sanctuary').style.display = activeThemeId === 'fantasy-sanctuary' ? 'flex' : 'none';
+        document.getElementById('view-cyber-arcadia').style.display = activeThemeId === 'cyber-arcadia' ? 'flex' : 'none';
+
+        playTamagotchiSelectBeep();
+      });
+    });
+
+    // Creature Switching Logic
+    const creatureChips = document.querySelectorAll('.creature-chip');
+    creatureChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        creatureChips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        currentSpecies = chip.dataset.species;
+
+        for (const r of Object.values(renderers)) {
+          r.setSpecies(currentSpecies);
+        }
+        playTamagotchiHappyChime();
+      });
+    });
+
+    // Tamagotchi Handheld 3-Button Mechanics
+    let selectedIconIndex = 0;
+    const icons = Array.from(document.querySelectorAll('.tamagotchi-icon-strip .t-icon'));
+
+    // Button A: Select / Cycle
+    document.getElementById('btn-t-a').addEventListener('click', () => {
+      icons[selectedIconIndex].classList.remove('selected');
+      selectedIconIndex = (selectedIconIndex + 1) % icons.length;
+      icons[selectedIconIndex].classList.add('selected');
+      playTamagotchiSelectBeep();
+    });
+
+    // Button B: Care / Execute Action
+    document.getElementById('btn-t-b').addEventListener('click', () => {
+      const activeIcon = icons[selectedIconIndex];
+      const action = activeIcon.dataset.act;
+      const banner = document.getElementById('retro-status-banner');
+
+      playTamagotchiHappyChime();
+
+      if (action === 'feed') {
+        banner.textContent = '🍖 ¡ALIMENTADO! +10 BRONCE';
+      } else if (action === 'light') {
+        banner.textContent = '💤 ZZZ... DESCANSANDO';
+      } else if (action === 'play') {
+        banner.textContent = '🎾 ¡JUGANDO Y RONRONEANDO!';
+      } else if (action === 'bath') {
+        banner.textContent = '🚿 ¡BAÑO DE BURBUJAS LIMPIO!';
+      } else {
+        banner.textContent = '✨ CUIDADO REALIZADO';
+      }
+
+      setTimeout(() => {
+        banner.textContent = 'FELIZ • VIGOR: 99%';
+      }, 1500);
+    });
+
+    // Button C: Cancel / Pet
+    document.getElementById('btn-t-c').addEventListener('click', () => {
+      play8BitBeep(1200, 0.05);
+      const banner = document.getElementById('retro-status-banner');
+      banner.textContent = '💖 ¡ACARICIADO CON AMOR!';
+      setTimeout(() => {
+        banner.textContent = 'FELIZ • VIGOR: 95%';
+      }, 1200);
+    });
+
+    // LCD Tap
+    document.getElementById('tamagotchi-lcd').addEventListener('click', () => {
+      playTamagotchiHappyChime();
+      const banner = document.getElementById('retro-status-banner');
+      banner.textContent = '🐾 ¡RONRONEO ACTIVO!';
+      setTimeout(() => {
+        banner.textContent = 'FELIZ • VIGOR: 95%';
+      }, 1000);
+    });
+
+    // Glass Tap
+    const glassPetArea = document.getElementById('glass-pet-area');
+    if (glassPetArea) {
+      glassPetArea.addEventListener('click', () => {
+        playTamagotchiHappyChime();
+      });
+    }
+
+    // Apply Button Alert
+    document.getElementById('btn-choose-winner').addEventListener('click', () => {
+      const themeNames = {
+        'retro-tamagotchi': 'Opción 1: Retro Tamagotchi 90s (NES.css & Carcasa LCD)',
+        'modern-glass': 'Opción 2: Telegram Native Glassmorphism (Catizen / iOS Style)',
+        'fantasy-sanctuary': 'Opción 3: Fantasy RPG Grimoire',
+        'cyber-arcadia': 'Opción 4: Cyber Arcadia Synthwave'
+      };
+      alert(`Has seleccionado: ${themeNames[activeThemeId]}.\n¡Dime en el chat si quieres que apliquemos este diseño como la interfaz oficial del juego principal!`);
+    });
+  </script>
+</body>
+</html>
