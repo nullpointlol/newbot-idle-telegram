@@ -1,31 +1,103 @@
 {
   "project": {
-    "title": "Fungi Survivors",
-    "slug": "fungi-survivors",
+    "title": "Telegram Idle Pet Tycoon (TMA Ecosystem)",
+    "slug": "telegram-idle-pet-tycoon",
+    "type": "Videojuego / Telegram Mini App (Idle Tycoon + Virtual Pet)",
     "stack": [
-      "Node.js 24 ESM (Cero dependencias npm externas)",
-      "SQLite 3 nativo en modo WAL vía node:sqlite (DatabaseSync) con aislamiento serializable",
-      "HTML5 Canvas 2D con pipeline de escalado entero pixel-perfect a 60 FPS",
-      "Web Audio API con síntesis de sonido procedural 8-bit reactivo (0 assets de audio descargados)",
-      "Telegram WebApp SDK con soporte de HapticFeedback, initData HMAC y eventos de viewport",
-      "Adsgram S2S Webhook Handler con validación de firmas HMAC-SHA256 y control anti-replay de 24h",
-      "Telegram Stars Payment Gateway con ledger financiero e idempotencia por ID de transacción",
-      "Worker de notificaciones push throttled (< 30 msgs/s) con deduplicación por ventana de 24h",
-      "Suite de verificación automatizada nativa (node --test) con 8 suites y 40 pruebas unitarias/integración"
+      "Node.js 24 ESM (Arquitectura Zero-Dependency externa)",
+      "SQLite 3 nativo en modo WAL vía node:sqlite (DatabaseSync)",
+      "HTML5 Canvas 2D (Integer Pixel-Perfect Rendering Pipeline)",
+      "Web Audio API (Síntesis de sonido procedural 8-bit)",
+      "Telegram WebApp SDK (window.Telegram.WebApp, HapticFeedback, initData)",
+      "Adsgram S2S HMAC-SHA256 Webhook Verification",
+      "Telegram Stars Payment Ledger (Transacciones idempotentes)",
+      "Node.js Native Test Runner (node --test con ejecución headless)"
     ],
-    "existing_progress_summary": "Arquitectura completa de backend y cliente webapp operativa en Node.js 24: servidor HTTP nativo con asignación dinámica de puerto y fallback en 3001; esquema relacional SQLite con control de versión optimista (CAS) y ledger financiero; motor matemático de acumulación y cálculo offline determinista por Unix timestamps; renderizador de sprites en Canvas con ciclo de respiración, reposo y partículas; integración de doble tema visual (Color Cálido Storybook y 1-Bit Monocromo Playdate); endpoint de diagnóstico y soporte (/api/diagnostic); y suite de pruebas headless con cobertura del 100% en flujos críticos."
+    "existing_progress_summary": "Ecosistema funcional y desplegable de servidor y cliente TMA: servidor HTTP nativo con port fallback resiliente en 3001; esquema relacional SQLite con control de versión optimista (CAS) y ledger financiero; motor de progresión matemática geométrica y cálculo offline server-authoritative acotado a 12 horas; simulación de mascota con vitales biológicos (hambre, higiene, ánimo, energía) modulando multiplicador simbiótico Bliss; integración dual de monetización (Adsgram HMAC + Telegram Stars); verificación de canales en tiempo real mediante webhook chat_member_updated; worker de push broadcast throttled (< 30 msgs/s) con deduplicación de 24h; renderizador de sprites en Canvas con dual theme (Color Cálido Storybook vs 1-Bit Monocromo Playdate); consola de soporte y diagnóstico (/api/diagnostic); y suite de 8 suites con 40 pruebas automatizadas pasando al 100%."
   },
   "domain_context": {
-    "businessVision": "Mobile Vertical Survivor & Tower Defense Fungi-Roguelike",
+    "businessVision": "Fusionar la retención afectiva y el hábito diario de un Tamagotchi evolutivo con la economía exponencial escalable de AdVenture Capitalist en Telegram. Los activos no son negocios genéricos, sino hábitats y micro-actividades de la mascota cuya vitalidad modula directamente el flujo de ingresos pasivos, monetizado mediante anuncios recompensados Adsgram y microtransacciones cosméticas con Telegram Stars sin venta forzada.",
     "technicalNFRs": [
-      "Consumo de memoria en servidor < 25MB RSS en reposo y < 45MB bajo carga concurrente",
-      "Latencia de respuesta de API < 50ms para sincronización de estado y < 15ms en operaciones SQLite",
-      "Tasa de refresco cliente sostenida a 60 FPS en navegadores móviles (iOS Safari / Android Chrome)",
-      "Anti-cheat server-authoritative mediante marcas de tiempo Unix absolutas (rechazo de tiempo local de cliente)",
-      "Seguridad OWASP con validación estricta de initData vía HMAC-SHA256 y protección contra inyecciones SQL con queries parametrizadas",
-      "Idempotencia garantizada en micropagos de Telegram Stars y recompensas de Adsgram mediante claves con TTL de 24h",
-      "Despacho de notificaciones Telegram Bot API acotado estrictamente a < 30 peticiones por segundo con backoff exponencial"
+      "Huella de memoria en servidor estrictamente acotada: < 25MB RSS en reposo y < 45MB bajo carga",
+      "Latencia de respuesta en endpoints centrales < 50ms y escrituras en SQLite < 15ms bajo aislamiento serializable",
+      "Anti-cheat y determinismo server-authoritative mediante marcas de tiempo Unix absolutas (rechazo de reloj de cliente)",
+      "Seguridad OWASP con verificación criptográfica HMAC-SHA256 de Telegram initData y queries parametrizadas",
+      "Idempotencia estricta en transacciones financieras mediante restricciones UNIQUE y claves de deduplicación de 24h",
+      "Despacho masivo de notificaciones push limitado a < 30 peticiones/segundo con retroceso exponencial",
+      "Rendimiento de renderizado en cliente sostenido a 60 FPS en navegadores móviles (iOS Safari / Android Chrome)"
     ],
-    "art_style": "Macro-fotografía orgánica pixel art"
-  }
+    "design_guidelines": "Estética Dual-Theme: Modo A 'Cozy Warm Storybook' (fondos cálidos, acentos terracota #c2410c, madera miel #78350f, cielo dinámico día/noche) y Modo B '1-Bit Monochrome Playdate' (fondo marfil #e6e8d2, tinta #2b2d24, alto contraste puro con dithering Bayer). Microcopia ultra-minimalista en botones e interfaces (1 a 2 palabras por acción: 'MEJORAR', 'CUIDAR', 'RECLAMAR', 'BOOST x2'). Animación procedural de sprites en grillas 32x32 y 64x64 con deformación elástica (squash & stretch) al recibir toques táctiles y respuesta háptica física nativa."
+  },
+  "modules": [
+    {
+      "id": "mod-server-core",
+      "code": "MOD-1.0",
+      "title": "Arquitectura del Servidor & Runtime Nativo",
+      "description": "Servidor HTTP nativo en Node.js 24 ESM, middleware de enrutamiento REST, servicio de estáticos de la Mini App, manejo de variables de entorno (.env) y sistema de auto-recuperación de puertos en conflicto.",
+      "children": []
+    },
+    {
+      "id": "mod-persistence-ledger",
+      "code": "MOD-2.0",
+      "title": "Persistencia Relacional & Ledger Financiero",
+      "description": "Capa de base de datos SQLite en modo WAL mediante node:sqlite, control de concurrencia optimista (CAS) en balances, aislamiento serializable y libro contable inmutable de transacciones con restricción UNIQUE.",
+      "children": []
+    },
+    {
+      "id": "mod-idle-engine",
+      "code": "MOD-3.0",
+      "title": "Motor Matemático Incremental & Cálculo Offline",
+      "description": "Algoritmos deterministas de progresión geométrica, cálculo de costo individual y en masa por series matemáticas, hitos de producción (milestones x2), cálculo de ganancias offline por marcas Unix y reinicio por prestigio.",
+      "children": []
+    },
+    {
+      "id": "mod-tamagotchi-simulation",
+      "code": "MOD-4.0",
+      "title": "Simulación Biológica & Vórtice Tamagotchi",
+      "description": "Motor de atributos vitales (hambre, higiene, ánimo, energía) con decaimiento continuo por marcas de tiempo Unix, cálculo de multiplicador simbiótico de bienestar (Pet Bliss x3 a x0) y ramificación evolutiva de la criatura.",
+      "children": []
+    },
+    {
+      "id": "mod-monetization-gateway",
+      "code": "MOD-5.0",
+      "title": "Pasarela de Monetización Adsgram & Telegram Stars",
+      "description": "Validación criptográfica HMAC-SHA256 de webhooks servidor a servidor de Adsgram con caché anti-replay de 24h, procesamiento idempotente de pagos en Telegram Stars (moneda XTR) y catálogo de aceleradores.",
+      "children": []
+    },
+    {
+      "id": "mod-referrals-tasks",
+      "code": "MOD-6.0",
+      "title": "Sistema Viral de Referidos & Tareas Comunitarias",
+      "description": "Generación y resolución de enlaces profundos (/start ref_ID) con bonificación bilateral inmediata, y módulo de verificación de suscripción a canales patrocinados con invalidación en tiempo real vía webhook chat_member_updated.",
+      "children": []
+    },
+    {
+      "id": "mod-push-broadcast",
+      "code": "MOD-7.0",
+      "title": "Worker de Difusión Push & Reactivación Throttled",
+      "description": "Servicio de descubrimiento de jugadores ausentes con ganancias acumuladas, despacho secuencial throttled regulado a < 30 msgs/s hacia Telegram Bot API, retroceso exponencial ante errores HTTP 429 y deduplicación de 24h.",
+      "children": []
+    },
+    {
+      "id": "mod-canvas-graphics",
+      "code": "MOD-8.0",
+      "title": "Motor Gráfico Canvas 2D & Pipeline de Sprites",
+      "description": "Renderizador procedural de pixel art sobre HTML5 Canvas a 60 FPS con escalado entero, animación de respiración y parpadeo, partículas reactivas (corazones, monedas, zZ) y motor de doble paleta de color (Storybook / 1-Bit).",
+      "children": []
+    },
+    {
+      "id": "mod-tma-frontend",
+      "code": "MOD-9.0",
+      "title": "Experiencia de Usuario TMA & Micro-Interacciones",
+      "description": "Frontend reactivo para Telegram Mini App: Top HUD dinámico, diorama interactivo de la habitación con ventana día/noche, síntesis de audio 8-bit con Web Audio API, navegación por pestañas de una sola palabra y retroalimentación háptica móvil.",
+      "children": []
+    },
+    {
+      "id": "mod-diagnostics-sre",
+      "code": "MOD-10.0",
+      "title": "Telemetría, Diagnóstico & Verificación Automatizada",
+      "description": "Consola y API de soporte operativo (/api/diagnostic) para auditoría de transacciones y salud del servidor, acceso asistido por código QR para redes locales y suite de 8 suites con 40 pruebas automatizadas sin dependencias de mocking.",
+      "children": []
+    }
+  ]
 }
