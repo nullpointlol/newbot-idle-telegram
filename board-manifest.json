@@ -1,193 +1,31 @@
 {
   "project": {
-    "title": "Idle Pet Tycoon (Telegram Bot Híbrido: AdVenture Capitalist + Tamagotchi)",
-    "slug": "idle-pet-tycoon-telegram",
-    "stack": {
-      "runtime": "Node.js 24 ESM",
-      "database": "SQLite (node:sqlite DatabaseSync) con modo WAL y transacciones serializables",
-      "cache": "Memory LRU / Redis Protocol Client con TTL determinista y locking Redlock",
-      "graphics": "HTML5 Canvas 2D Pixel Renderer con escalado nearest-neighbor y procedural spritesheets",
-      "audio": "Web Audio API 8-bit Sound Synthesizer con modulación de frecuencia reactiva (cero assets externos)",
-      "client": "Telegram WebApp SDK (window.Telegram.WebApp) con HapticFeedback, initData HMAC y viewport expandido",
-      "monetization": "Adsgram S2S HMAC-SHA256 Webhooks + Telegram Stars Invoice Ledger con restricción de unicidad",
-      "notifications": "Telegram Bot API Throttled Push Broadcast Worker (<30 msgs/s) con deduplicación de 24h",
-      "testing": "Node.js Native Test Runner (node --test) con 8 suites y 40 pruebas automatizadas sin mocks"
-    },
-    "existing_progress_summary": "Arquitectura base operativa con servidor HTTP nativo en puerto fallback 3001, motor de cálculo offline acotado a 12 horas por Unix timestamps, ledger financiero con restricción UNIQUE contra doble gasto, sistema de referidos bilateral con deep links, verificación de canales patrocinados con invalidación en tiempo real vía chat_member_updated, HUD Cozy Pet Tycoon con diorama interactivo (Living Room), switch de temas (Color Cálido Storybook vs 1-Bit Monochrome Playdate), consola de soporte diagnóstico (/api/diagnostic) y acceso móvil LAN asistido por modal QR."
+    "title": "Fungi Survivors",
+    "slug": "fungi-survivors",
+    "stack": [
+      "Node.js 24 ESM (Cero dependencias npm externas)",
+      "SQLite 3 nativo en modo WAL vía node:sqlite (DatabaseSync) con aislamiento serializable",
+      "HTML5 Canvas 2D con pipeline de escalado entero pixel-perfect a 60 FPS",
+      "Web Audio API con síntesis de sonido procedural 8-bit reactivo (0 assets de audio descargados)",
+      "Telegram WebApp SDK con soporte de HapticFeedback, initData HMAC y eventos de viewport",
+      "Adsgram S2S Webhook Handler con validación de firmas HMAC-SHA256 y control anti-replay de 24h",
+      "Telegram Stars Payment Gateway con ledger financiero e idempotencia por ID de transacción",
+      "Worker de notificaciones push throttled (< 30 msgs/s) con deduplicación por ventana de 24h",
+      "Suite de verificación automatizada nativa (node --test) con 8 suites y 40 pruebas unitarias/integración"
+    ],
+    "existing_progress_summary": "Arquitectura completa de backend y cliente webapp operativa en Node.js 24: servidor HTTP nativo con asignación dinámica de puerto y fallback en 3001; esquema relacional SQLite con control de versión optimista (CAS) y ledger financiero; motor matemático de acumulación y cálculo offline determinista por Unix timestamps; renderizador de sprites en Canvas con ciclo de respiración, reposo y partículas; integración de doble tema visual (Color Cálido Storybook y 1-Bit Monocromo Playdate); endpoint de diagnóstico y soporte (/api/diagnostic); y suite de pruebas headless con cobertura del 100% en flujos críticos."
   },
-  "focus_directive": "ANTI-FLAT GAMEPLAY LOOP: Diseñar y complejizar la experiencia interactiva del bot de Telegram fusionando la economía incremental exponencial de AdVenture Capitalist con la crianza biológica y el apego emocional de un Tamagotchi evolutivo (estilo Pokémon/Digimon).",
   "domain_context": {
-    "businessVision": "Superar la monotonía de los clickers planos de Telegram convirtiendo el loop pasivo en una experiencia de afecto y custodia biológica. Los jugadores no gestionan empresas genéricas, sino la biósfera y los hábitos de una criatura viva cuya felicidad, energía y linaje genético dictan el retorno financiero del imperio. La monetización (Adsgram y Telegram Stars) se articula orgánicamente como aceleradores de crianza, suplementos vitales y reliquias de linaje.",
-    "technicalNFRs": {
-      "memoryFootprint": "< 25MB RSS en reposo y < 40MB en carga máxima bajo Node.js 24",
-      "latency": "< 50ms en sincronización /api/user/sync y < 15ms en transacciones atómicas SQLite",
-      "antiCheat": "Cálculo 100% server-authoritative de decaimiento y producción mediante deltas de tiempo Unix (T_server_now - T_last_sync); rechazo absoluto de marcas de tiempo enviadas por el cliente",
-      "resilience": "Idempotencia estricta mediante claves SETNX de 24h en recompensas y restricción UNIQUE en telegram_payment_charge_id",
-      "telegramRateLimits": "Despacho de notificaciones y push batch limitado estrictamente a 25 msgs/s (intervalo de 40ms) con retroceso exponencial"
-    },
-    "art_style": {
-      "renderingPipeline": "Pixel Art 2D sobre Canvas con escalado entero (integer scaling pixel-perfect)",
-      "colorPaletteA": "Warm Cozy Storybook (Madera miel #78350f, Trigo suave #fef3c7, Terracota #c2410c, Menta #10b981, Azul crepúsculo #1e293b)",
-      "colorPaletteB": "1-Bit Monochrome Playdate (Fondo marfil #e6e8d2, Tinta fósforo #2b2d24, Alto contraste puro)",
-      "spriteDimensions": {
-        "babyStage": "32x32 píxeles",
-        "childStage": "32x32 píxeles",
-        "juvenileStage": "48x48 píxeles",
-        "adultStage": "64x64 píxeles",
-        "mythicStage": "64x64 píxeles con partículas procedurales"
-      }
-    }
-  },
-  "tasks": [
-    {
-      "title": "Refactorización Asimétrica del Catálogo de Hábitats y Monedas Temáticas por Especie",
-      "assigned_area": "Gameplay Mechanics",
-      "category": "Sistemas de Juego & Economía",
-      "phase": "FASE_1_ASIMETRIA_CORE",
-      "severity": "CRITICAL",
-      "technical_spec": "Reemplazar los 7 negocios genéricos heredados de AdVenture Capitalist (lemonade, newspaper, carwash, etc.) por árboles de hábitats asimétricos acoplados a la especie activa del jugador. Implementar 4 monedas temáticas nativas: Chispas Celestiales (Gatito Astral), Rocío Glacial (Lobo Ártico), Resina de Magma (Dragón de Fuego) y Bytes Cuánticos (Droide Centinela). Cada hábitat representa una micro-actividad de la criatura (ej. 'Plato de Leche Tibia', 'Rascador Cósmico', 'Cueva de Caza', 'Reactor de Fusión') con fórmulas de coste geométricas basadas en ratio r específico (1.07 a 1.16).",
-      "acceptance_criteria": "Dado que el jugador selecciona la especie 'mystic_cat', cuando consulta sus opciones de inversión, entonces el sistema entrega exclusivamente hábitats felinos que generan 'Chispas Celestiales', y el balance general adopta el prefijo y metadata de dicha moneda temática sin colisión con otras especies.",
-      "developer_instructions": "Modificar `content/worlds/worlds_catalog.json` y `src/math/worldsEngine.js` para desacoplar completamente los IDs heredados. Actualizar `src/database/schema.sql` agregando la columna `species_id` y `theme_currency` en la tabla `assets`. Actualizar `src/server.js` en `/api/asset/buy` para validar que el asset solicitado pertenezca al catálogo del mundo de la especie del usuario."
-    },
-    {
-      "title": "Motor de Fricción Sistémica y Dilemas de Balance (Bienestar vs Producción)",
-      "assigned_area": "Gameplay Mechanics",
-      "category": "Mecánicas de Juego & Pacing",
-      "phase": "FASE_1_ASIMETRIA_CORE",
-      "severity": "HIGH",
-      "technical_spec": "Implementar un bucle de compensación y trade-off dinámico donde aumentar la producción pasiva de los hábitats genere efectos secundarios sobre los atributos vitales de la mascota. Parámetros de fricción: Nivel acumulado de hábitats avanzados incrementa la tasa de decaimiento de Energía en un factor delta = log10(TotalLevels) * 0.05 por minuto. Sobrecalentar hábitats industriales o de combate reduce el Humor en -10% por hora si no se atienden actividades de mimo o juego. Introducir un estado de 'Sobreesfuerzo' que penaliza la producción global en un -50% si la Energía cae por debajo del 15%.",
-      "acceptance_criteria": "Dado que un jugador eleva sus hábitats de nivel rápidamente sin alimentar ni descansar a la criatura, cuando la energía cae por debajo del 15%, el servidor reduce automáticamente el CPS efectivo en un 50% y marca el estado vital como 'exhausted'.",
-      "developer_instructions": "Crear `src/engine/frictionEngine.js` que reciba el vector de assets y el estado vital de la mascota. Conectar este cálculo dentro de `computeTotalCPS` en `src/math/engine.js` y en la lógica offline de `src/services/offline.js`."
-    },
-    {
-      "title": "Motor Determinista de Vórtice Biológico y Modulación de Multiplicadores por Decaimiento Unix",
-      "assigned_area": "Gameplay Mechanics",
-      "category": "Crianza & Simulación Tamagotchi",
-      "phase": "FASE_1_ASIMETRIA_CORE",
-      "severity": "CRITICAL",
-      "technical_spec": "Diseñar e implementar el algoritmo de decaimiento vital determinista en backend basado en marcas de tiempo Unix absolutas. Ecuación: Stat(T_now) = clamp(0, 100, Stat(T_sync) - DecayRate * (T_now - T_sync)). Tasas de decaimiento por hora: Hambre: 12.5 pts/h (8h a 0), Higiene: 8.3 pts/h (12h a 0), Humor: 10 pts/h (10h a 0), Energía: 6.25 pts/h (16h a 0). Multiplicador simbiótico de bienestar (Pet Bliss): Bliss = (Hambre * 0.3 + Higiene * 0.2 + Humor * 0.3 + Energía * 0.2) / 100. Si Bliss >= 0.85 -> Multiplicador x3.0 ('Éxtasis'). Si 0.50 <= Bliss < 0.85 -> Multiplicador x1.5 ('Contento'). Si 0.20 <= Bliss < 0.50 -> Multiplicador x1.0 ('Neutral'). Si Bliss < 0.20 -> Multiplicador x0.25 ('Descuidado'). Si Hambre == 0 durante > 4 horas continuas -> Multiplicador x0.0 ('Hibernación/Enfermo', producción congelada).",
-      "acceptance_criteria": "Dado que transcurren 6 horas de ausencia de un usuario con mascota inicialmente al 100%, cuando el servidor procesa el cálculo offline, entonces el estado de Hambre se reduce exactamente a 25 pts, el factor Bliss modula las ganancias hora por hora en cortes discretos de integración y nunca produce balances inflados ni NaN.",
-      "developer_instructions": "Implementar `src/engine/biologicalDecay.js` con método `calculateDecayedStateAndEarnings(user, pet, assets, nowTimestamp)`. Añadir tests unitarios headless que simulen 12 horas de abandono y verifiquen el congelamiento al llegar a 0 de hambre."
-    },
-    {
-      "title": "Árbol de Evolución Ramificada (Branching Evolution: 5 Estadios de Linaje)",
-      "assigned_area": "Gameplay Mechanics",
-      "category": "Evolución & Progresión de Especies",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "HIGH",
-      "technical_spec": "Implementar sistema de evolución por estadios: 1. Huevo / Bebé (Nivel 1), 2. Infantil (Nivel 25), 3. Juvenil (Nivel 50), 4. Adulto (Nivel 100), 5. Mítico / Trascendente (Nivel 200). La ramificación evolutiva entre Infantil y Juvenil/Adulto depende de la ponderación de inversiones del jugador: Rama Combate / Alfa (si >60% del gasto fue en hábitats agresivos), Rama Armonía / Mística (si >60% del gasto fue en hábitats de bienestar/jardín), Rama Sintética / Cibernética (si balanceado con upgrades de automatización). Cada forma desbloquea una habilidad pasiva permanente exclusiva y transforma el sprite base.",
-      "acceptance_criteria": "Dado que una criatura 'mystic_cat' alcanza el nivel 50 habiendo invertido el 75% de sus fondos en hábitats de combate, cuando el motor evalúa el hito evolutivo, entonces transmuta a la variante 'Pantera del Vacío' con pasiva de daño crítico pasivo en lugar de la forma 'Felino Zen'.",
-      "developer_instructions": "Extender `content/species/species_catalog.json` con la propiedad `evolutionBranches` definiendo condiciones vectoriales de gasto (`combatWeight`, `harmonyWeight`, `techWeight`). Crear `src/engine/evolutionEngine.js` para computar y persistir el estadio en la tabla `pets`."
-    },
-    {
-      "title": "Sistema de Prestigio de Linaje Genético y Rasgos Hereditarios (Huevo de Reencarnación)",
-      "assigned_area": "Gameplay Mechanics",
-      "category": "Prestigio & Metajuego",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "CRITICAL",
-      "technical_spec": "Refactorizar la fórmula clásica de inversores de AdVenture Capitalist (150 * sqrt(Earnings / 10^12)) hacia una mecánica de 'Ascensión de Linaje'. Al alcanzar el estadio Adulto (Nivel 100+) o Mítico, la mascota asciende al panteón ancestral y deja un 'Huevo de Linaje'. El reset reinicia balances y niveles de hábitats a cero, pero transmite: 1. Puntos de ADN Ancestral (GenPoints = floor(100 * sqrt(TotalLifetimeEarnings / 10^10))), donde cada GenPoint aporta +2% de producción pasiva perpetua; 2. Un rasgo hereditario aleatorio acumulativo extraído de una tabla de mutaciones (ej. 'Metabolismo Lento': -20% decaimiento de hambre; 'Pelaje Conductor': +15% producción en hábitats eléctricos; 'Corazón Fiel': nunca congela producción al 0% de hambre).",
-      "acceptance_criteria": "Dado que el jugador ejecuta la acción 'ASCENDER LINAJE', el servidor reinicia los hábitats a nivel 0, incrementa el linaje genético a Generación N+1, persiste el rasgo heredado en `pet_lineage_traits` y aplica el multiplicador de ADN acumulativo a todas las compras subsiguientes.",
-      "developer_instructions": "Crear tabla `lineage_pedigree` en `src/database/schema.sql`. Implementar `src/services/prestigeLineage.js` encapsulando la transacción atómica SQLite con aislamiento serializable."
-    },
-    {
-      "title": "Diseño de Curvas Matemáticas Asimétricas y Árboles de Hábitats para 4 Especies Primarias",
-      "assigned_area": "Level Design",
-      "category": "Balance Económico & Curvas",
-      "phase": "FASE_1_ASIMETRIA_CORE",
-      "severity": "HIGH",
-      "technical_spec": "Modelar cuantitativamente las curvas de coste y producción para 4 especies: 1. Gatito Astral (Curva Suave Tradicional, r=1.07, baseCps moderado, ideal para principiantes); 2. Lobo Ártico (Curva de Impulso Agresivo, r=1.16, coste elevado, saltos masivos de CPS x4 en múltiplos de 25); 3. Dragón de Fuego (Curva de Acumulación Térmica, r=1.13, sinergia fuerte con toques manuales en diorama); 4. Droide Centinela (Curva de Frecuencia Binaria, r=1.10, hitos en potencias de 2: 16, 32, 64, 128). Calibrar el tiempo al primer prestigio para situarse exactamente entre 4.5 y 6 horas de juego activo intermitente.",
-      "acceptance_criteria": "Dado una simulación de 10,000 ticks en `tests/headless_simulation.test.js`, ninguna de las 4 especies entra en deadlock económico antes del nivel 50 ni genera inflación infinita (Infinity / NaN) antes del nivel 500.",
-      "developer_instructions": "Ajustar las matrices de `content/worlds/worlds_catalog.json`. Ejecutar el bot simulador headless y graficar los tiempos medios de adquisición para verificar que el ROI marginal decreciente cumpla la curva sigmoidea esperada."
-    },
-    {
-      "title": "Balance Económico de Retención y Pacing de Tamagotchi (Fricción vs Recompensa)",
-      "assigned_area": "Level Design",
-      "category": "Pacing & Retención Temporal",
-      "phase": "FASE_1_ASIMETRIA_CORE",
-      "severity": "MEDIUM",
-      "technical_spec": "Calibrar los costes de los consumibles de cuidado biológico en la moneda del juego para evitar que el cuidado sea trivial o prohibitivo: Alimentación básica: coste equivalente a 30 segundos de CPS actual; Alimentación gourmet (buff temporal): coste equivalente a 10 minutos de CPS; Sesión de cepillado/higiene: gratuita con cooldown de 15 minutos; Juguete estimulante: coste equivalente a 5 minutos de CPS. La ganancia generada por mantener a la mascota en Bliss (>85%) debe amortizar con un 300% de margen positivo el coste invertido en sus consumibles.",
-      "acceptance_criteria": "Dado que el usuario invierte el 10% de su producción horaria en alimentos y cuidados de la mascota, el retorno incremental generado por el multiplicador de Éxtasis (x3) supera en al menos un 250% el coste operativo de manutención.",
-      "developer_instructions": "Documentar la tabla de balance en `content/items/care_items.json` e integrar la validación en la suite de pruebas económicas."
-    },
-    {
-      "title": "Especificación Técnica y Pipeline de Spritesheets Pixel Art 32x32 y 64x64 con Paletas Hex",
-      "assigned_area": "Sprite & Asset Art",
-      "category": "Arte Gráfico & Sprites",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "HIGH",
-      "technical_spec": "Establecer la especificación dimensional y cromática para los spritesheets matriciales: Estados Bebé e Infantil: Grilla de 32x32 px por frame, hoja de 4 frames horizontales (Idle Respiración, Parpadeo, Alimentándose, Durmiendo zZ). Estados Juvenil, Adulto y Mítico: Grilla de 64x64 px por frame, hoja de 6 frames horizontales (Idle, Rugido/Poder, Salto Tap, Caricia, Durmiendo, Transmutación Evolutiva). Paleta Cálida Storybook: Base piel #d97706, Sombras #78350f, Iluminación #fef08a, Ojos #0284c7, Acentos mágicos #ec4899. Paleta 1-Bit Playdate: Fondo #e6e8d2, Tinta #2b2d24 (dithering estilo Bayer 4x4 para simular gradientes de pelaje sin tonos intermedios).",
-      "acceptance_criteria": "Los assets se entregan en formato PNG indexado sin compresión con pérdida y hojas de datos JSON compatibles con el atlas de renderizado del `PixelPetRenderer`.",
-      "developer_instructions": "Crear carpeta `webapp/assets/sprites/` con carpetas por especie (`mystic_cat`, `frost_wolf`, `fire_dragon`, `mecha_droid`). Definir `webapp/assets/sprites/atlas.json` mapeando coordenadas x, y, width, height y frameCount."
-    },
-    {
-      "title": "Animación Procedural de Etapas Evolutivas y Efectos Visuales Juiciness en Canvas",
-      "assigned_area": "Sprite & Asset Art",
-      "category": "Renderizado & Efectos Visuales",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "MEDIUM",
-      "technical_spec": "Evolucionar `webapp/pixelRenderer.js` para soportar renderizado dinámico por capas: Capa 0: Sombra elíptica procedural con deformación de respiración; Capa 1: Hábitat de fondo temático en pixel art; Capa 2: Donut bed o nido elemental adaptado a la especie; Capa 3: Sprite principal con interpolación de squash & stretch al recibir toques (escala x: 1.25, y: 0.75 rebotando con función elástica de amortiguación en 300ms); Capa 4: Partículas flotantes emitidas proceduralmente (corazones #ec4899 para afecto, monedas #fbbf24 para clics, chispas elementales según la especie, zZ en reposo). Soporte inmediato de inversión de paleta para el modo 1-Bit.",
-      "acceptance_criteria": "El canvas mantiene una tasa estable de 60 cuadros por segundo en navegadores móviles Safari y Chrome bajo iOS/Android con consumo de CPU < 5% en reposo.",
-      "developer_instructions": "Refactorizar la clase `PixelPetRenderer` en `webapp/pixelRenderer.js` para desacoplar el dibujo rígido del gato e incorporar soporte para spritesheet atlas y generador procedural de partículas con reciclaje en object pool."
-    },
-    {
-      "title": "Sintetizador Web Audio API 8-Bit Reactivo con Microtonalidad por Especie y Estado Anímico",
-      "assigned_area": "Audio",
-      "category": "Diseño de Sonido Procedural",
-      "phase": "FASE_3_UX_TELEGRAM",
-      "severity": "LOW",
-      "technical_spec": "Construir un subsistema de audio 8-bit determinista sin descarga de archivos mp3/wav (0 bytes de assets de audio) mediante Web Audio API `AudioContext`: 1. Toque cariñoso: Arpegio ascendente de onda triangular (frecuencias base 440Hz -> 660Hz -> 880Hz, envolvente ADSR corta de 120ms); 2. Ronroneo: Modulación LFO de onda senoidal a 25Hz aplicada al pitch de un oscilador de ruido marrón; 3. Grito/Alerta de Hambre: Onda cuadrada pulsada con caída exponencial (800Hz a 200Hz); 4. Transmutación Evolutiva: Fanfarria de 8 notas en escala pentatónica mayor con ligero vibrato. El sintetizador debe respetar el estado de `soundEnabled` y no reproducir audio antes del primer gesto del usuario para cumplir con las políticas de autoplay de navegadores.",
-      "acceptance_criteria": "Al tocar la mascota o evolucionar, el sistema genera el sonido procedural sintetizado en tiempo real sin latencia audible (<20ms) y sin lanzar advertencias de AudioContext bloqueado en consola.",
-      "developer_instructions": "Crear `webapp/soundSynthesizer.js` exportando métodos `playPetTap()`, `playPurr()`, `playEvolutionFanfare()`, `playHungerAlert()`, `playPurchaseChime()`. Conectar con los eventos de UI en `webapp/app.js`."
-    },
-    {
-      "title": "Integración de Haptic Feedback Multidimensional para Telegram WebApp SDK",
-      "assigned_area": "Engine Integration",
-      "category": "Integración Telegram & Móvil",
-      "phase": "FASE_3_UX_TELEGRAM",
-      "severity": "MEDIUM",
-      "technical_spec": "Instrumentar todas las interacciones físicas de la Mini App utilizando la API oficial `window.Telegram.WebApp.HapticFeedback`: 1. Toques de mimo a la mascota: `impactOccurred('light')`; 2. Compra de hábitats o upgrades: `impactOccurred('medium')`; 3. Hitos de producción (nivel 25, 50, 100): `notificationOccurred('success')`; 4. Crisis biológica (hambre <15% o sobreesfuerzo): `notificationOccurred('warning')`; 5. Ascensión de Linaje / Huevo Mítico: Patrón rítmico compuesto: `impactOccurred('heavy')` seguido de 150ms de pausa y `notificationOccurred('success')`. Proporcionar fallback no bloqueante para ejecución fuera del cliente Telegram (navegador estándar de escritorio o móvil local).",
-      "acceptance_criteria": "Al interactuar con cada control en un smartphone físico vía Telegram Mini App, el dispositivo responde con la respuesta háptica táctil correspondiente sin generar excepciones en entornos sin soporte.",
-      "developer_instructions": "Crear wrapper `webapp/haptics.js` con comprobación segura `window?.Telegram?.WebApp?.HapticFeedback` y método unificado `triggerHaptic(type, style)`."
-    },
-    {
-      "title": "Esquema Relacional SQLite/WAL y Capa de Persistencia para Linajes Genéticos y Estados de Especie",
-      "assigned_area": "Backend",
-      "category": "Persistencia & Datos Relacionales",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "CRITICAL",
-      "technical_spec": "Ampliar el esquema relacional en `src/database/schema.sql` con las siguientes entidades normalizadas: 1. Tabla `pets`: `id` TEXT PRIMARY KEY, `user_id` TEXT REFERENCES users(id), `species_id` TEXT NOT NULL, `current_stage` INTEGER DEFAULT 1, `branch_path` TEXT DEFAULT 'NEUTRAL', `hunger` REAL DEFAULT 100.0, `hygiene` REAL DEFAULT 100.0, `mood` REAL DEFAULT 100.0, `energy` REAL DEFAULT 100.0, `last_care_timestamp` INTEGER NOT NULL, `created_at` DATETIME; 2. Tabla `lineage_pedigree`: `id` TEXT PRIMARY KEY, `user_id` TEXT REFERENCES users(id), `generation_number` INTEGER NOT NULL, `ascended_species_id` TEXT NOT NULL, `inherited_traits_json` TEXT NOT NULL, `ancestral_dna_points` INTEGER NOT NULL, `ascended_at` DATETIME. Añadir índices sobre `user_id` y transacciones protegidas con bloqueo optimista mediante versión de fila.",
-      "acceptance_criteria": "Las migraciones se ejecutan de forma idempotente en el arranque del servidor, y la suite de pruebas unitarias verifica la creación, lectura y actualización transaccional de mascotas y genealogías sin pérdida de datos.",
-      "developer_instructions": "Actualizar `src/database/schema.sql` y extender los métodos de `src/database/db.js` (`getPetByUserId`, `updatePetVitals`, `createLineageRecord`, `getPedigreeHistory`)."
-    },
-    {
-      "title": "Endpoint Transaccional Atómico de Sincronización Biológica y Ascensión de Linaje",
-      "assigned_area": "Backend",
-      "category": "API REST & Transacciones Atómicas",
-      "phase": "FASE_2_EVOLUCION_LINAJE",
-      "severity": "CRITICAL",
-      "technical_spec": "Implementar en `src/server.js`: 1. `POST /api/pet/sync`: Calcula atómicamente el decaimiento biológico transcurrido desde el último timestamp, aplica el multiplicador de bienestar simbiótico sobre las ganancias offline y persiste el nuevo estado en una única transacción de SQLite; 2. `POST /api/pet/care`: Ejecuta una acción de cuidado (alimentar, limpiar, acariciar, jugar), valida los fondos requeridos en moneda temática, actualiza los atributos vitales e incrementa los contadores de tareas diarias; 3. `POST /api/pet/ascend`: Valida que la mascota cumpla el nivel y madurez requerida, calcula los puntos de ADN ancestral, genera el rasgo hereditario, reinicia los hábitats a nivel cero y retorna el nuevo Huevo de Linaje.",
-      "acceptance_criteria": "Peticiones concurrentes sobre `/api/pet/care` o `/api/pet/ascend` son procesadas de manera serializada sin colisión de saldos y devuelven código HTTP 200 con el payload estructurado de la mascota actualizada.",
-      "developer_instructions": "Agregar los manejadores de ruta en `src/server.js`. Conectar con `src/engine/biologicalDecay.js` y `src/services/prestigeLineage.js`. Escribir pruebas de integración en `tests/pet_lifecycle.test.js`."
-    },
-    {
-      "title": "Rediseño de la UI/UX de Hábitats Asimétricos y Visualizador de Linaje Evolutivo",
-      "assigned_area": "Frontend",
-      "category": "Interfaz de Usuario & Componentes",
-      "phase": "FASE_3_UX_TELEGRAM",
-      "severity": "HIGH",
-      "technical_spec": "Actualizar la interfaz de usuario en `webapp/index.html` y `webapp/style.css`: 1. Reemplazar la lista genérica de negocios por el panel 'HÁBITATS DE [NOMBRE DE ESPECIE]', mostrando la moneda temática activa (ej. ⚡ Chispas, 💧 Rocío) y barras de progreso con estilizado temático; 2. En la pestaña 'MASCOTA', construir el 'Árbol Genealógico y Linaje' mostrando las siluetas de las etapas evolutivas pasadas y futuras (Bebé -> Infantil -> Juvenil -> Adulto -> Mítico), el indicador de generación actual (ej. 'Generación III') y los rasgos genéticos activos heredados del Huevo de Linaje; 3. Mantener la regla de microcopia ultra-minimalista (1-2 palabras por botón: 'MEJORAR', 'CUIDAR', 'ASCENDER', 'RECLAMAR').",
-      "acceptance_criteria": "El cambio entre especies o el ascenso de linaje actualiza instantáneamente toda la iconografía, nombres de hábitats, colores de acento y árbol evolutivo sin recargar la página ni romper el layout responsivo.",
-      "developer_instructions": "Modificar `webapp/index.html` y `webapp/app.js` (`renderBusinessesList`, `renderPetProfile`, `renderLineageTree`). Añadir clases CSS dedicadas para las 4 temáticas en `webapp/style.css`."
-    },
-    {
-      "title": "Micro-Interacciones Táctiles y Teclado Inline Interactivo en Telegram Bot",
-      "assigned_area": "Frontend",
-      "category": "Interacciones Telegram & Teclado Bot",
-      "phase": "FASE_3_UX_TELEGRAM",
-      "severity": "MEDIUM",
-      "technical_spec": "Implementar en el bot de Telegram comandos interactivos y mensajes dinámicos con botones inline cuando el usuario interactúa desde el chat tradicional: 1. Comando `/pet`: Devuelve una tarjeta de estado en pixel art ASCII o tarjeta compacta con barras de estado [████░░░░░░] 40%, indicando el humor y la producción acumulada; 2. Botones inline rápidos: `[🥣 Alimentar]`, `[🎾 Jugar]`, `[💤 Dormir]`, `[🚀 Abrir Mini App]`; 3. Callback queries que ejecutan el cuidado en el backend y editan el mensaje del bot en tiempo real (evitando enviar mensajes nuevos spam); 4. Notificaciones push interactivas generadas por el broadcast worker con botón directo `[🐾 Reclamar $ 125.000 y Mimar]` que abre la Mini App en el hábitat correspondiente.",
-      "acceptance_criteria": "Al pulsar un botón inline en el chat de Telegram, el bot actualiza el mensaje en < 500ms reflejando el nuevo estado de vitalidad y responde a la callback query con una notificación flotante (toast) confirmatoria.",
-      "developer_instructions": "Extender `src/server.js` en `/webhook/telegram` para manejar `update.callback_query` con acciones `pet_feed`, `pet_play`, `pet_sleep`. Reutilizar `DatabaseAdapter` para persistir la mutación."
-    }
-  ]
+    "businessVision": "Mobile Vertical Survivor & Tower Defense Fungi-Roguelike",
+    "technicalNFRs": [
+      "Consumo de memoria en servidor < 25MB RSS en reposo y < 45MB bajo carga concurrente",
+      "Latencia de respuesta de API < 50ms para sincronización de estado y < 15ms en operaciones SQLite",
+      "Tasa de refresco cliente sostenida a 60 FPS en navegadores móviles (iOS Safari / Android Chrome)",
+      "Anti-cheat server-authoritative mediante marcas de tiempo Unix absolutas (rechazo de tiempo local de cliente)",
+      "Seguridad OWASP con validación estricta de initData vía HMAC-SHA256 y protección contra inyecciones SQL con queries parametrizadas",
+      "Idempotencia garantizada en micropagos de Telegram Stars y recompensas de Adsgram mediante claves con TTL de 24h",
+      "Despacho de notificaciones Telegram Bot API acotado estrictamente a < 30 peticiones por segundo con backoff exponencial"
+    ],
+    "art_style": "Macro-fotografía orgánica pixel art"
+  }
 }
