@@ -8,3 +8,7 @@ logs/
 scratch/
 dist/
 .DS_Store
+.foro_old/
+*.png
+*.jpg
+*.jpeg

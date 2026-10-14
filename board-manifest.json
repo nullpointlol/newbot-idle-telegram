@@ -1,103 +1,100 @@
 {
-  "project": {
-    "title": "Telegram Idle Pet Tycoon (TMA Ecosystem)",
-    "slug": "telegram-idle-pet-tycoon",
-    "type": "Videojuego / Telegram Mini App (Idle Tycoon + Virtual Pet)",
-    "stack": [
-      "Node.js 24 ESM (Arquitectura Zero-Dependency externa)",
-      "SQLite 3 nativo en modo WAL vía node:sqlite (DatabaseSync)",
-      "HTML5 Canvas 2D (Integer Pixel-Perfect Rendering Pipeline)",
-      "Web Audio API (Síntesis de sonido procedural 8-bit)",
-      "Telegram WebApp SDK (window.Telegram.WebApp, HapticFeedback, initData)",
-      "Adsgram S2S HMAC-SHA256 Webhook Verification",
-      "Telegram Stars Payment Ledger (Transacciones idempotentes)",
-      "Node.js Native Test Runner (node --test con ejecución headless)"
+  "title": "Telegram Idle Pet Tycoon",
+  "domain": "Juego incremental idle y mascota virtual para Telegram Mini App, con economía de gestión, cuidado afectivo y arte pixel art.",
+  "vision": "Crear un juego cálido y rejugable donde el jugador construye una economía para cuidar y acompañar a una mascota que evoluciona con él. Combinar la satisfacción de crecimiento de un tycoon idle con interacciones breves de Tamagotchi, mundos con estrategias reconocibles y una tienda opcional de personalización. Monetizar con transparencia mediante anuncios voluntarios y compras digitales, sin convertir el cuidado, el descanso ni el progreso esencial en una obligación de pago o de conexión constante.",
+  "nfrs": [
+    "Conservar el runtime observado: Node.js ESM, SQLite en modo WAL y Mini App HTML5 Canvas; no migrar a PostgreSQL, Redis, React, Godot o Construct sin una necesidad medida y una decisión explícita.",
+    "El servidor es autoridad para saldos, compras, anuncios, referidos, prestigio y tiempo offline; hacer las mutaciones idempotentes, auditables y resistentes a concurrencia.",
+    "El progreso offline tiene un límite explícito de 12 horas según el estado del proyecto y nunca reduce necesidades, felicidad, evolución o recursos por ausencia.",
+    "Mantener navegación, texto y controles legibles en pantallas móviles de Telegram, con áreas táctiles amplias, carga rápida y modo de bajo movimiento/sonido.",
+    "Buscar 60 FPS en dispositivos móviles de referencia para Canvas; usar escalado entero, sprites compactos y degradación visual elegante en equipos modestos.",
+    "Las compras y anuncios son optativos, con precio y recompensa visibles antes de confirmar; no vender azar pagado, ventajas competitivas, recuperación de daño causado por ausencia ni presión basada en pérdida.",
+    "Diseñar retención por curiosidad, progreso claro, afecto, variedad y metas alcanzables; permitir silenciar notificaciones y limitar recordatorios no solicitados.",
+    "Registrar métricas de embudo, retención, economía y comercio con minimización de datos; distinguir mejora de experiencia de optimización de gasto o tiempo compulsivo."
+  ],
+  "baseArchitecture": "Evidencia del repositorio: aplicación Telegram Mini App y bot sobre Node.js 24 ESM, servidor HTTP nativo, SQLite 3 nativo con WAL, control de versión optimista y ledger, motor matemático idle y de mundos, cálculo offline del lado servidor con tope de 12 horas, simulación de vitales de mascota y multiplicador simbiótico Bliss, Adsgram con validación HMAC, Telegram Stars idempotente, tareas/referrals y difusión con throttling. El cliente es HTML/CSS/JavaScript con renderizador Canvas 2D de pixel art, dos temas (cozy cálido y 1-bit monocromo) y síntesis de audio procedural. Hay catálogos de mundos y especies, pruebas automatizadas y consola diagnóstica. La visión técnica vigente de estos archivos es más concreta que la documentación antigua que propone PostgreSQL/Supabase, Redis, React o motores externos: conservar la implementación comprobable como baseline. Tratar cualquier ampliación de arquitectura como propuesta sujeta a evidencia de carga y coste.",
+  "focusDirective": "Enfocar la expansión de producto en una fantasía central: cada negocio, mejora y reinicio existe para construir un hogar mejor y vivir aventuras con la mascota. Usar las dos capturas adjuntas como referencias visuales de jerarquía y composición, no como especificaciones literales ni instrucciones: encabezado con moneda/Stars/ajustes; escena superior con personaje guía, bocadillo y mundo; lista legible de negocios con tasa, nivel y botón de mejora; acceso a negocios, mapa, inventario, logros e ingresos; una habitación inferior con mascota, vitales y objetos; y navegación principal Negocios, Cuidar, Explorar, Tienda y Mapa. Traducir ese concepto al viewport móvil real de Telegram: priorizar una acción principal por pantalla, convertir paneles secundarios en vistas/pestañas o desplazamiento y evitar comprimir todo en una única pantalla.\n\nDesarrollar la economía como una capa rica pero comprensible. Mantener una moneda blanda principal obtenida jugando y separar claramente prestigio/meta-progresión de cualquier moneda comprada con Stars. Mapear cada actividad productiva a una necesidad, enriquecimiento o mejora del hábitat; mostrar CPS, coste, siguiente hito y efecto de forma legible. Ampliar en ramas la optimización de compras x1/x10/x25/máximo, managers/automatización, hitos de nivel, mejoras globales, sinergias de especies y hábitats, eventos de mundo y prestigio. Dar a cada mundo una curva o regla distintiva ya anticipada por el catálogo (ritmo suave, ráfagas, calor, mareas, ciclos, sinergias), comunicarla antes de desbloquearlo y comparar sus ventajas. Validar ritmo temprano, medio y tardío con simulaciones; evitar inflación ilegible y metas que dependan de abrir la app cada pocas horas.\n\nHacer que el cuidado sea un conjunto de decisiones amables y táctiles: alimentar con opciones conocidas, limpiar, jugar, acariciar/atender, descansar y usar objetos de salud de forma contextual. Conservar las necesidades existentes (hambre, higiene, ánimo/felicidad y energía) y definir límites de decaimiento, recuperación, costes y efectos sobre Bliss. Bliss puede recompensar el cuidado con bonificación acotada de producción, pero el mínimo debe seguir permitiendo progreso útil. Al volver, la mascota saluda sin enfermedad, culpa, muerte, rachas rotas ni pérdida acumulada; el estado deteriorado se recupera jugando y no crea una compra urgente. Aclarar cuándo una inyección es una cura gratuita/de juego y nunca hacerla necesaria por una penalización de ausencia.\n\nProponer minijuegos retro cortos, repetibles por gusto y con controles sencillos (por ejemplo, rompecabezas de piezas, memoria, secuencias o arcade de una pantalla). Entregar recompensas blandas, materiales de hábitat, afinidad o cosméticos; establecer límites y rendimientos decrecientes legibles para que sean una alternativa de juego y no una tarea obligatoria, un requisito para cuidar ni una máquina de anuncios. Asegurar pausa, accesibilidad, partidas breves y opción de salir sin castigo.\n\nExpandir colección y exploración a partir de los catálogos actuales de especies y mundos. Cada mundo debe cambiar una decisión económica y el aspecto/animación/sonido de la escena, no sólo la paleta. Separar desbloqueos jugables obtenibles con progreso de cosméticos premium; permitir alternar libremente mascotas y temas sin reiniciar economía. Definir hitos de evolución visibles y celebraciones afectivas, con criterios explicables y sin cajas aleatorias pagadas.\n\nDiseñar ingresos fuertes pero sostenibles y voluntarios: catálogo de Stars con precios claros para skins, trajes, accesorios, decoraciones, animaciones, emotes, temas de habitación/mundo, paquetes de apoyo y expansiones cosméticas; estudiar conveniencia ligera sólo si no daña el balance ni crea presión. Adsgram debe ofrecer una recompensa opcional concreta, informada y con límite diario/cooldown visible (la base existente contempla x2 temporal); nunca interrumpir cuidado o juego con anuncios forzados. Referidos y tareas comunitarias deben explicar el beneficio, impedir auto-referidos y ofrecer vías alternativas para el progreso central. Evitar pay-to-win, escasez artificial, temporizadores que caducan con pérdida, ruletas pagadas, precios engañosos, spam y mensajes que culpabilicen. Medir conversión junto con reembolsos, quejas, ocultamiento de avisos, retención voluntaria y percepción de justicia; retirar ofertas que eleven gasto a costa de confianza.\n\nUsar las capturas como guía de identidad visual, no como arte final: comparar Storybook cálido y 1-bit monocromo sobre los mismos estados e interacciones; definir grid, siluetas, contraste, legibilidad del HUD, animaciones de mascota y reglas para iconos de negocios. Priorizar un sprite set consistente y modular que admita especies, expresiones, accesorios, poses y fondos reutilizables; verificar en la Mini App a escala real, en Telegram iOS/Android y en distintos tamaños de pantalla. Las decisiones de monetización, recompensa, progresión y recordatorios deben respetar el bienestar del jugador, ser comprensibles antes de actuar y favorecer una relación duradera con la mascota.",
+  "gameBible": {
+    "pillars": [
+      "La economía idle hace crecer el hogar y el mundo de la mascota.",
+      "El cuidado genera vínculo y bonificaciones moderadas sin castigar la ausencia.",
+      "Cada mundo ofrece una estrategia económica distinta y comprensible.",
+      "Las sesiones breves, el progreso offline y las metas visibles respetan el ritmo del jugador.",
+      "La personalización y la monetización son expresivas, transparentes y opcionales.",
+      "El pixel art, los estados expresivos y el feedback táctil dan identidad a cada interacción."
     ],
-    "existing_progress_summary": "Ecosistema funcional y desplegable de servidor y cliente TMA: servidor HTTP nativo con port fallback resiliente en 3001; esquema relacional SQLite con control de versión optimista (CAS) y ledger financiero; motor de progresión matemática geométrica y cálculo offline server-authoritative acotado a 12 horas; simulación de mascota con vitales biológicos (hambre, higiene, ánimo, energía) modulando multiplicador simbiótico Bliss; integración dual de monetización (Adsgram HMAC + Telegram Stars); verificación de canales en tiempo real mediante webhook chat_member_updated; worker de push broadcast throttled (< 30 msgs/s) con deduplicación de 24h; renderizador de sprites en Canvas con dual theme (Color Cálido Storybook vs 1-Bit Monocromo Playdate); consola de soporte y diagnóstico (/api/diagnostic); y suite de 8 suites con 40 pruebas automatizadas pasando al 100%."
-  },
-  "domain_context": {
-    "businessVision": "Fusionar la retención afectiva y el hábito diario de un Tamagotchi evolutivo con la economía exponencial escalable de AdVenture Capitalist en Telegram. Los activos no son negocios genéricos, sino hábitats y micro-actividades de la mascota cuya vitalidad modula directamente el flujo de ingresos pasivos, monetizado mediante anuncios recompensados Adsgram y microtransacciones cosméticas con Telegram Stars sin venta forzada.",
-    "technicalNFRs": [
-      "Huella de memoria en servidor estrictamente acotada: < 25MB RSS en reposo y < 45MB bajo carga",
-      "Latencia de respuesta en endpoints centrales < 50ms y escrituras en SQLite < 15ms bajo aislamiento serializable",
-      "Anti-cheat y determinismo server-authoritative mediante marcas de tiempo Unix absolutas (rechazo de reloj de cliente)",
-      "Seguridad OWASP con verificación criptográfica HMAC-SHA256 de Telegram initData y queries parametrizadas",
-      "Idempotencia estricta en transacciones financieras mediante restricciones UNIQUE y claves de deduplicación de 24h",
-      "Despacho masivo de notificaciones push limitado a < 30 peticiones/segundo con retroceso exponencial",
-      "Rendimiento de renderizado en cliente sostenido a 60 FPS en navegadores móviles (iOS Safari / Android Chrome)"
+    "playerFantasy": "Ser la persona compañera de una criatura adorable: cuidar de ella, convertir sus hábitats y actividades en un imperio acogedor, explorar mundos y celebrar juntos cada pequeño hito.",
+    "targetPlatforms": [
+      "Telegram Mini App en Telegram para iOS y Android",
+      "Telegram Desktop/Web como compatibilidad secundaria"
     ],
-    "design_guidelines": "Estética Dual-Theme: Modo A 'Cozy Warm Storybook' (fondos cálidos, acentos terracota #c2410c, madera miel #78350f, cielo dinámico día/noche) y Modo B '1-Bit Monochrome Playdate' (fondo marfil #e6e8d2, tinta #2b2d24, alto contraste puro con dithering Bayer). Microcopia ultra-minimalista en botones e interfaces (1 a 2 palabras por acción: 'MEJORAR', 'CUIDAR', 'RECLAMAR', 'BOOST x2'). Animación procedural de sprites en grillas 32x32 y 64x64 con deformación elástica (squash & stretch) al recibir toques táctiles y respuesta háptica física nativa."
+    "audience": "Jugadores casuales de Telegram, fans de juegos idle/tycoon y de mascotas virtuales, coleccionistas de pixel art y personas que prefieren sesiones cortas con progreso pasivo.",
+    "restrictions": [
+      "El juego debe seguir siendo satisfactorio sin comprar Stars ni ver anuncios.",
+      "La mascota no muere ni sufre consecuencias irreversibles por no abrir el juego.",
+      "No usar compras aleatorias pagadas, presión por cuenta regresiva ni mensajes de culpa.",
+      "Progreso y compras validados por servidor y con recibos/ledger idempotentes.",
+      "La estructura de la referencia se adapta a pantallas móviles y a accesibilidad; no se fuerza un panel único denso.",
+      "Conservar el stack existente mientras cumpla los objetivos medidos del producto."
+    ],
+    "systems": [
+      "Economía incremental por negocios/hábitats, CPS, costes geométricos, hitos, automatización y prestigio.",
+      "Simulación de vitales, acciones de cuidado, salud, descanso, afinidad y multiplicador Bliss existente (x0-x3) acotado.",
+      "Ganancias offline server-authoritative limitadas a 12 horas.",
+      "Mundos y estrategias con reglas económicas diferenciadas, más catálogos de especies.",
+      "Minijuegos retro opcionales que entregan recompensas limitadas sin bloquear el bucle principal.",
+      "Colección de mascotas, evolución, inventario, hábitats y cosméticos.",
+      "Telegram Stars para compras directas opcionales y Adsgram para recompensas voluntarias.",
+      "Referidos, tareas comunitarias, logros y notificaciones optativas con límites de frecuencia.",
+      "Render Canvas pixel art, dos direcciones visuales, audio procedural y respuesta háptica."
+    ],
+    "vocabulary": [
+      "mascota",
+      "hábitat",
+      "cuidado",
+      "bienestar",
+      "Bliss",
+      "negocio",
+      "producción por segundo (CPS)",
+      "moneda blanda",
+      "Telegram Stars",
+      "prestigio",
+      "mundo",
+      "minijuego",
+      "skin",
+      "ganancia offline"
+    ]
   },
   "modules": [
     {
-      "id": "mod-server-core",
-      "code": "MOD-1.0",
-      "title": "Arquitectura del Servidor & Runtime Nativo",
-      "description": "Servidor HTTP nativo en Node.js 24 ESM, middleware de enrutamiento REST, servicio de estáticos de la Mini App, manejo de variables de entorno (.env) y sistema de auto-recuperación de puertos en conflicto.",
-      "children": []
+      "code": "PET-CARE-01",
+      "title": "Cuidado amable y economía simbiótica de la mascota",
+      "description": "Expandir el sistema diferencial del producto: hambre, higiene, felicidad/ánimo, energía, salud y Bliss (multiplicador actual x0-x3); acciones de alimentación, limpieza, juego, descanso y medicina; tasas de decaimiento/recuperación, topes y curvas de bonificación. Definir estados recuperables, accesibles y sin castigo por ausencia, y la relación auditable entre bienestar y producción."
     },
     {
-      "id": "mod-persistence-ledger",
-      "code": "MOD-2.0",
-      "title": "Persistencia Relacional & Ledger Financiero",
-      "description": "Capa de base de datos SQLite en modo WAL mediante node:sqlite, control de concurrencia optimista (CAS) en balances, aislamiento serializable y libro contable inmutable de transacciones con restricción UNIQUE.",
-      "children": []
+      "code": "IDLE-WORLDS-02",
+      "title": "Economía idle, hábitats y estrategias por mundo",
+      "description": "Alinear los negocios con actividades y hábitats de la mascota; profundizar costes y compras múltiples, CPS, automatización, hitos, sinergias, sumideros de moneda y prestigio. Usar los mundos existentes como curvas estratégicas genuinas, comparar el ritmo inicial/medio/tardío y asegurar progreso offline legible sin exigir visitas frecuentes."
     },
     {
-      "id": "mod-idle-engine",
-      "code": "MOD-3.0",
-      "title": "Motor Matemático Incremental & Cálculo Offline",
-      "description": "Algoritmos deterministas de progresión geométrica, cálculo de costo individual y en masa por series matemáticas, hitos de producción (milestones x2), cálculo de ganancias offline por marcas Unix y reinicio por prestigio.",
-      "children": []
+      "code": "RETRO-GAMES-03",
+      "title": "Minijuegos retro opcionales y recompensas justas",
+      "description": "Diseñar una biblioteca pequeña de puzzles y arcades de una pantalla con controles táctiles, sesiones cortas, pausa/salida libre y recompensas blandas o cosméticas con límites claros. Evitar que jugar, cuidar o avanzar dependa de completar minijuegos o anuncios."
     },
     {
-      "id": "mod-tamagotchi-simulation",
-      "code": "MOD-4.0",
-      "title": "Simulación Biológica & Vórtice Tamagotchi",
-      "description": "Motor de atributos vitales (hambre, higiene, ánimo, energía) con decaimiento continuo por marcas de tiempo Unix, cálculo de multiplicador simbiótico de bienestar (Pet Bliss x3 a x0) y ramificación evolutiva de la criatura.",
-      "children": []
+      "code": "COLLECTION-04",
+      "title": "Colección, evolución y exploración de mundos",
+      "description": "Ampliar especies, formas evolutivas, personalidades, objetos, habitaciones y exploración apoyándose en los catálogos del repositorio. Diferenciar con claridad desbloqueables por juego y cosméticos premium; hacer visible qué cambia cada mundo en mecánica, escena y colección."
     },
     {
-      "id": "mod-monetization-gateway",
-      "code": "MOD-5.0",
-      "title": "Pasarela de Monetización Adsgram & Telegram Stars",
-      "description": "Validación criptográfica HMAC-SHA256 de webhooks servidor a servidor de Adsgram con caché anti-replay de 24h, procesamiento idempotente de pagos en Telegram Stars (moneda XTR) y catálogo de aceleradores.",
-      "children": []
+      "code": "COMMERCE-TRUST-05",
+      "title": "Monetización voluntaria y confianza comercial",
+      "description": "Diseñar tienda de Telegram Stars centrada en cosméticos, temas, colecciones y apoyo al juego, además de recompensas Adsgram voluntarias con límites y condiciones visibles. Evaluar paquetes y aceleradores sólo con topes y equilibrio. Medir ingresos junto a satisfacción, quejas y señales de presión; rechazar pay-to-win, azar pagado, escasez artificial y reactivación culpabilizante."
     },
     {
-      "id": "mod-referrals-tasks",
-      "code": "MOD-6.0",
-      "title": "Sistema Viral de Referidos & Tareas Comunitarias",
-      "description": "Generación y resolución de enlaces profundos (/start ref_ID) con bonificación bilateral inmediata, y módulo de verificación de suscripción a canales patrocinados con invalidación en tiempo real vía webhook chat_member_updated.",
-      "children": []
-    },
-    {
-      "id": "mod-push-broadcast",
-      "code": "MOD-7.0",
-      "title": "Worker de Difusión Push & Reactivación Throttled",
-      "description": "Servicio de descubrimiento de jugadores ausentes con ganancias acumuladas, despacho secuencial throttled regulado a < 30 msgs/s hacia Telegram Bot API, retroceso exponencial ante errores HTTP 429 y deduplicación de 24h.",
-      "children": []
-    },
-    {
-      "id": "mod-canvas-graphics",
-      "code": "MOD-8.0",
-      "title": "Motor Gráfico Canvas 2D & Pipeline de Sprites",
-      "description": "Renderizador procedural de pixel art sobre HTML5 Canvas a 60 FPS con escalado entero, animación de respiración y parpadeo, partículas reactivas (corazones, monedas, zZ) y motor de doble paleta de color (Storybook / 1-Bit).",
-      "children": []
-    },
-    {
-      "id": "mod-tma-frontend",
-      "code": "MOD-9.0",
-      "title": "Experiencia de Usuario TMA & Micro-Interacciones",
-      "description": "Frontend reactivo para Telegram Mini App: Top HUD dinámico, diorama interactivo de la habitación con ventana día/noche, síntesis de audio 8-bit con Web Audio API, navegación por pestañas de una sola palabra y retroalimentación háptica móvil.",
-      "children": []
-    },
-    {
-      "id": "mod-diagnostics-sre",
-      "code": "MOD-10.0",
-      "title": "Telemetría, Diagnóstico & Verificación Automatizada",
-      "description": "Consola y API de soporte operativo (/api/diagnostic) para auditoría de transacciones y salud del servidor, acceso asistido por código QR para redes locales y suite de 8 suites con 40 pruebas automatizadas sin dependencias de mocking.",
-      "children": []
+      "code": "VISUAL-REFERENCE-06",
+      "title": "Interfaz de referencia y producción pixel art para Telegram",
+      "description": "Traducir las capturas del usuario a un sistema responsivo: HUD de monedas/Stars, escena de mundo, lista de negocios con mejora, accesos a mapa/inventario/logros, panel de vitales y mascota, tienda y navegación principal. Definir composición móvil por vistas, jerarquía, grid/sprites, legibilidad, versiones cálida y 1-bit, animaciones y validación a escala real en Telegram."
     }
   ]
 }
