@@ -5,17 +5,14 @@
  * via Telegram Bot API without manual BotFather command loops.
  */
 
-const botToken = process.env.TELEGRAM_BOT_TOKEN;
-const appUrl = process.env.WEBHOOK_URL || process.env.APP_URL;
+const targetToken = process.argv[2] || process.env.TELEGRAM_BOT_TOKEN;
+const targetUrl = process.argv[3] || process.env.WEBHOOK_URL || process.env.APP_URL;
 
-if (!botToken || botToken.includes('ExampleToken')) {
+if (!targetToken || targetToken.includes('ExampleToken')) {
   console.error('❌ Error: Se requiere TELEGRAM_BOT_TOKEN válido en las variables de entorno o argumento.');
   console.error('Uso: node scripts/telegram_setup.js <BOT_TOKEN> <APP_URL_HTTPS>');
   process.exit(1);
 }
-
-const targetUrl = process.argv[3] || appUrl;
-const targetToken = process.argv[2] || botToken;
 
 const API_BASE = `https://api.telegram.org/bot${targetToken}`;
 
